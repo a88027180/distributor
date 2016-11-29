@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"      
+ "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+ <mapper namespace="zn.dao.UserDao">
+	<resultMap type="zn.entity.User" id="User">
+		<result property="userId" column="userId"/>
+		<result property="userName" column="userName"/>
+		<result property="telephone" column="telephone"/>
+		<result property="password" column="password"/>
+		<result property="information" column="information"/>
+		<result property="loadState" column="loadState"/>
+		<result property="lastLoadTime" column="lastLoadTime"/>
+		<result property="orgId" column="orgId"/>
+		<result property="orgName" column="orgName"/>
+		<result property="limitsId" column="limitsIde"/>
+		<result property="limitsName" column="limitsName"/>
+		
+	</resultMap> 
+
+	
+ <!-- 检查账号是否存在 -->
+ 	<select id="checkTel" parameterType="String" resultType="int">
+ select count(userId) from user where telephone=#{telephone}
+ 	</select>
+ 
+ <!-- 检查账号，密码是否正确	 -->
+ 	<select id="checkLogin"  parameterType="String"  resultType="int">
+ 	 select count(userId) from user where telephone=#{telephone} and password=#{password}
+ 	</select>	
+ 	
+ 	
+ <!-- 通过用户账号查询用户id	 -->
+ 	<select id="selectIdByTel" parameterType="String" resultType="Integer">	
+ 	select userId from user where telephone=#{telephone}
+ 	</select>
+ 	
+ <!-- 更改用户登陆状态	 -->
+ 	<update id="changeUserState">
+ 	update user set loadState=1,lastLoadTime=#{lastLoadTime}  where userId=#{userId}
+ 	</update>
+ 	
+	<!-- 添加用户得到主键 -->
+ 	<insert id="addUserAndGetId" parameterType="zn.entity.User" useGeneratedKeys="true" keyProperty="userId">	
+	insert  into user(userName,telephone,password,information) values(#{userName},#{telephone},#{password},#{information}) 	
+ 	</insert>
+	
+	<!-- 添加用户的组织 -->
+	<insert id="addUserAndOrg" parameterType="zn.entity.User">
+	insert into user_org(userId,orgId) values(#{userId},#{orgId}) 
+	</insert>
+	
+		<!-- 给用户添加权限 -->
+	<insert id="userAddLimits">
+	insert into user_limits(limitsId,userId) values (#{limitsId},#{userId}); 
+	</insert>
+ 	
+ 	<!-- 删除用户权限 -->
+ 	<delete id="userDeleteLimits" parameterType="int">
+ 	delete from user_limits where userId=#{userId}
+ 	</delete>
+	
+	
+	<!-- 根据id查询用户信息 -->
+	<select id="selectUserById" parameterType="int" resultMap="User">
+	select * from userview where userId=#{userId};
+	</select>
+	
+	<!-- 根据id删除用户信息 -->
+	<delete id="deleteUser"  parameterType="int">
+    delete from User where userId=#{userId};
+	</delete>
+	
+	<!-- 更改用户信息 -->
+	<update id="changeUserInfo">
+	update User  <set>
+	<if test="information!=null">information=#{information},</if>
+	<if test="userName!=null">userName=#{userName}</if>
+	</set>   where userId=#{userId};
+	</update>
+	
+	<!-- 根据组织查询用户 -->
+	<select id="selectUserByOrg" parameterType="int" resultMap="User">
+	  select * from userview where orgId=#{orgId}  
+	</select>	
+	<!-- 更改用户密码 -->
+	<update id="changePassword">
+	update user set password=#{password} where userId=#{userId}	
+	</update>
+	
+	<!-- 用户选择设备 -->
+	<insert id="userAddMon"   >
+	insert    into  user_monitor(userId,monId) values
+	<foreach collection="monList" separator="," index="index" item="monId">
+		(#{userId},#{monId})	
+	</foreach>                             
+	</insert>
+	
+	<!-- 删除用户的关联设备 -->
+	<delete id="userDelteMon" parameterType="int">
+	delete from user_monitor where userId=#{userId};
+	</delete>
+	
+	<!-- 查询指定设备下的用户信息 -->
+	<select id="seleteUserByMonId" parameterType="int" resultMap="User">
+    select a.* from userview a,monitor b,user_monitor c where a.userId=c.userId 
+    and b.monId=c.monId and c.monId=#{monId}
+	
+	</select>
+	
+	<!-- 查询指定用户的权限 -->
+	<select id="seleteUserLimitsById" parameterType="int" resultType="Integer">
+	select limitsId from userview where userId=#{userId}
+	</select>
+	
+	
+	
+	
+</mapper>
