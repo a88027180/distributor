@@ -24,31 +24,30 @@ import zn.until.NoteResult;
 @Transactional
 public class MonFirstListServiceImpl implements MonFirstListService {
 	
-	
-	@Resource//×¢Èë
+	@Resource//æ³¨å…¥
 	private MonFirstListDao  monFirstListDao; 
 	
-	@Resource//×¢Èë
+	@Resource//æ³¨å…¥
 	private MonitorDao monitorDao;
 	
 	/**
-	 * Ìí¼ÓÒ»¼¶ÁĞ±í
+	 * æ·»åŠ ä¸€çº§åˆ—è¡¨
 	 */
 	public NoteResult addFirstList(String firstListName) {
 			NoteResult note=new NoteResult();
 		
 			 if(firstListName==null){
 				 	note.setStatus(1);
-					note.setMsg("²ÎÊı²»ÄÜÎª¿Õ");
+					note.setMsg("å‚æ•°ä¸èƒ½ä¸ºç©º");
 					note.setData("");
 			 } else if(monFirstListDao.selectIsExist(firstListName)!=0){
 				 	note.setStatus(2);
-					note.setMsg("ÁĞ±íÒÑ´æÔÚ");
+					note.setMsg("åˆ—è¡¨å·²å­˜åœ¨");
 					note.setData("");
 			 }else{
 				 	monFirstListDao.addFirstList(firstListName);
 				 	note.setStatus(0);
-					note.setMsg("Ìí¼ÓÁĞ±í³É¹¦");
+					note.setMsg("æ·»åŠ åˆ—è¡¨æˆåŠŸ");
 					note.setData("");
 			 }
 		return note;
@@ -56,18 +55,18 @@ public class MonFirstListServiceImpl implements MonFirstListService {
 
 	
 	/**
-	 * ¸ü¸ÄÒ»¼¶ÁĞ±í
+	 * æ›´æ”¹ä¸€çº§åˆ—è¡¨
 	 */
 	public NoteResult changeFirstList(String firstListName, Integer firstListId) {
 		NoteResult note=new NoteResult();
 		
 		 if(firstListName==null||firstListId==null){
 			 	note.setStatus(1);
-				note.setMsg("²ÎÊı²»ÄÜÎª¿Õ");
+				note.setMsg("å‚æ•°ä¸èƒ½ä¸ºç©º");
 				note.setData("");
 		 }else if(monFirstListDao.selectIsExist(firstListName)!=0){
 			 	note.setStatus(2);
-				note.setMsg("ÁĞ±íÒÑ´æÔÚ");
+				note.setMsg("åˆ—è¡¨å·²å­˜åœ¨");
 				note.setData("");
 		 }else{
 			 MonFirstList mon=monFirstListDao.selectListById(firstListId);
@@ -76,20 +75,20 @@ public class MonFirstListServiceImpl implements MonFirstListService {
 			 	}
 			 	monFirstListDao.changeFirstList(firstListName, firstListId);
 			 	note.setStatus(0);
-				note.setMsg("¸ü¸Ä³É¹¦");
+				note.setMsg("æ›´æ”¹æˆåŠŸ");
 				note.setData("");
 		 }
 		return note;
 	}
 
 	/**
-	 * É¾³ıÒ»¼¶ÁĞ±í
+	 * åˆ é™¤ä¸€çº§åˆ—è¡¨
 	 */
 	public NoteResult deleteFirstList(Integer firstListId) {
 		NoteResult note=new NoteResult();	
 		 if(firstListId==null){
 			 	note.setStatus(1);
-				note.setMsg("²ÎÊı²»ÄÜÎª¿Õ");
+				note.setMsg("å‚æ•°ä¸èƒ½ä¸ºç©º");
 				note.setData("");
 		 }else{
 			 MonFirstList mon=monFirstListDao.selectListById(firstListId);
@@ -98,20 +97,20 @@ public class MonFirstListServiceImpl implements MonFirstListService {
 		 }
 			 	monFirstListDao.deleteFirstList(firstListId);
 				note.setStatus(0);
-				note.setMsg("É¾³ı³É¹¦");
+				note.setMsg("åˆ é™¤æˆåŠŸ");
 				note.setData("");
 		 }
 		return note;
 	}
 
 	/**
-	 * ²éÑ¯ËùÓĞÒ»¼¶ÁĞ±í
+	 * æŸ¥è¯¢æ‰€æœ‰ä¸€çº§åˆ—è¡¨
 	 */
 	public NoteResult findAllFirstlist() {
 		NoteResult note=new NoteResult();
 		List<MonFirstList> list  =monFirstListDao.findAllFirstlist();
 		note.setStatus(0);
-		note.setMsg("²éÑ¯³É¹¦");
+		note.setMsg("æŸ¥è¯¢æˆåŠŸ");
 		note.setData(list);
 		return note;
 	}

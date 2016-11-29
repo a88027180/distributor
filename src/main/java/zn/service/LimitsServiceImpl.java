@@ -24,24 +24,24 @@ import zn.until.NoteResult;
 public class LimitsServiceImpl implements LimitsService {
 	
 	
-	@Resource//×¢Èë
+	@Resource//æ³¨å…¥
 	private LimitsDao  limitsDao;  
 	
 	/**
-	 * ÎªÓÃ»§Ìí¼ÓÈ¨ÏŞ
+	 * ä¸ºç”¨æˆ·æ·»åŠ æƒé™
 	 */
 	public NoteResult userAddLimits(Integer limitsId, Integer userId) {
 		NoteResult note=new NoteResult();
 		if(limitsId==null||userId==null){
 			note.setStatus(1);
-			note.setMsg("²ÎÊı²»ÄÜÎª¿Õ");
+			note.setMsg("å‚æ•°ä¸èƒ½ä¸ºç©º");
 			note.setData("");
 		
 		}else{
 			limitsDao.userDeleteLimits(userId);
 			limitsDao.userAddLimits(limitsId, userId);
 			note.setStatus(0);
-			note.setMsg("²Ù×÷³É¹¦");
+			note.setMsg("æ“ä½œæˆåŠŸ");
 			note.setData("");
 		}
 			return note;
@@ -49,33 +49,33 @@ public class LimitsServiceImpl implements LimitsService {
 
 	
 	/**
-	 * ²éÑ¯Ö¸¶¨È¨ÏŞÏÂµÄÓÃ»§ĞÅÏ¢
+	 * æŸ¥è¯¢æŒ‡å®šæƒé™ä¸‹çš„ç”¨æˆ·ä¿¡æ¯
 	 */
 	public NoteResult selectUserByLimitsId(Integer limitsId) {
 		NoteResult note=new NoteResult();
 		if(limitsId==null){
 			note.setStatus(1);
-			note.setMsg("²ÎÊı²»ÄÜÎª¿Õ");
+			note.setMsg("å‚æ•°ä¸èƒ½ä¸ºç©º");
 			note.setData("");
 		
 		}else{
 			List<User> list=  limitsDao.selectUserByLimitsId(limitsId);
 			note.setStatus(0);
-			note.setMsg("²Ù×÷³É¹¦");
+			note.setMsg("æ“ä½œæˆåŠŸ");
 			note.setData(list);
 		}
 		return note;
 	}
 
 	/**
-	 * »ñÈ¡È¨ÏŞÁĞ±í
+	 * è·å–æƒé™åˆ—è¡¨
 	 */
 	public NoteResult selectLimitsList() {
 		NoteResult note=new NoteResult();
 	
 			List<Limits> list=  limitsDao.selectLimitsList();
 			note.setStatus(0);
-			note.setMsg("²Ù×÷³É¹¦");
+			note.setMsg("æ“ä½œæˆåŠŸ");
 			note.setData(list);
 		
 		return note;

@@ -3,13 +3,13 @@ package zn.until;
 import java.io.Serializable;
 
 /**
- * ×÷ÎªËùÓĞÇëÇóµÄÏìÓ¦¶ÔÏó
+ * ï¿½ï¿½Îªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ó¦ï¿½ï¿½ï¿½ï¿½
  *
  */
 public class NoteResult implements Serializable{
-	private int status;//×´Ì¬
-	private String msg;//ÌáÊ¾ÏûÏ¢
-	private Object data;//·µ»ØµÄÊı¾İ
+	private int status;//çŠ¶æ€
+	private String msg;//æç¤ºæ¶ˆæ¯
+	private Object data;//è¿”å›çš„æ•°æ®
 	
 	public int getStatus() {
 		return status;

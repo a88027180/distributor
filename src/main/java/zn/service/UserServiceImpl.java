@@ -24,28 +24,28 @@ import zn.until.NoteUtil;
 @Transactional
 public class UserServiceImpl implements UserService{
 
-	@Resource//×¢Èë
+	@Resource//æ³¨å…¥
 	private UserDao userDao;
 	
 	@Resource
 	private LoginDao loginDao;
 	
 	/**
-	 * ¼ì²âÓÃ»§µÇÂ½
+	 * æ£€æµ‹ç”¨æˆ·ç™»é™†
 	 */
 	public NoteResult checkLogin(String telephone,String password){
 		SimpleDateFormat format=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		Date date=new Date((new Date()).getTime()-2*60*60*1000);
 		String agoTime=format.format(date);
-		loginDao.deleteOutModedCount(agoTime);//Çå³ş³¬¹ı2Ğ¡Ê±µÄµÇÂ½¼ÇÂ¼
+		loginDao.deleteOutModedCount(agoTime);//æ¸…æ¥šè¶…è¿‡2å°æ—¶çš„ç™»é™†è®°å½•
 		NoteResult note=new NoteResult();
 		int state=userDao.checkTel(telephone);	
-		if(state==0){          					//¼ì²éÓÃ»§µÄÕËºÅÊÇ·ñÕıÈ·    
+		if(state==0){          					//æ£€æŸ¥ç”¨æˆ·çš„è´¦å·æ˜¯å¦æ­£ç¡®    
 		note.setStatus(1);
-		note.setMsg("ÕËºÅ´íÎó");
+		note.setMsg("è´¦å·é”™è¯¯");
 		note.setData("");
 		}else{
-			String pass=NoteUtil.md5(password);   //¶ÔÃÜÂë¼ÓÃÜ
+			String pass=NoteUtil.md5(password);   //å¯¹å¯†ç åŠ å¯†
 			int userState=userDao.checkLogin(telephone, pass);  
 			int userId=userDao.selectIdByTel(telephone);
 			if(userState==0){
@@ -53,16 +53,16 @@ public class UserServiceImpl implements UserService{
 				if(loginState==null){
 					loginDao.addCount(userId);
 					note.setStatus(2);
-					note.setMsg("ÃÜÂë´íÎó");
+					note.setMsg("å¯†ç é”™è¯¯");
 					note.setData("");
 				}else if(loginState>=4){
 					note.setStatus(3);
-					note.setMsg("ÃÜÂë´íÎó³¬¹ı5´Î");
+					note.setMsg("å¯†ç é”™è¯¯è¶…è¿‡5æ¬¡");
 					note.setData("");		
 				}else{
 					loginDao.autoAddCount(userId);
 				note.setStatus(2);
-				note.setMsg("ÃÜÂë´íÎó");
+				note.setMsg("å¯†ç é”™è¯¯");
 				note.setData("");	
 				}
 			}else{
@@ -70,7 +70,7 @@ public class UserServiceImpl implements UserService{
 				String lastLoadTime=format.format(new Date());
 				userDao.changeUserState(userId,lastLoadTime);
 				note.setStatus(1);
-				note.setMsg("µÇÂ½³É¹¦");
+				note.setMsg("ç™»é™†æˆåŠŸ");
 				note.setData(userId);				
 			}
 		}		
@@ -79,18 +79,18 @@ public class UserServiceImpl implements UserService{
 	
 	  
 	/**
-	 * ¼ìÑéÕËºÅÊÇ·ñ´æÔÚ
+	 * æ£€éªŒè´¦å·æ˜¯å¦å­˜åœ¨
 	 */
 	public NoteResult checkTel(String checkTel) {
 		NoteResult note=new NoteResult();
 		int state=userDao.checkTel(checkTel);	
 		if(state!=0){
 		note.setStatus(1);
-		note.setMsg("ÕËºÅ´æÔÚ");
+		note.setMsg("è´¦å·å­˜åœ¨");
 		note.setData("");
 		}else{
 			note.setStatus(0);
-			note.setMsg("ÕËºÅ²»´æÔÚ");
+			note.setMsg("è´¦å·ä¸å­˜åœ¨");
 			note.setData("");	
 
 		}	
@@ -99,19 +99,19 @@ public class UserServiceImpl implements UserService{
 
 
 	/**
-	 * ´´½¨ÕËºÅ
+	 * åˆ›å»ºè´¦å·
 	 */
 	public NoteResult creatUser(String userStr,Integer userId) {
 		NoteResult note=new NoteResult();
 	    Integer a= 	userDao.seleteUserLimitsById(userId);
 		if(userId==null){
 			note.setStatus(5);
-			note.setMsg("²ÎÊıÎª¿Õ");
+			note.setMsg("å‚æ•°ä¸ºç©º");
 			note.setData("");
 			return note;
 		}else if(a!=1||a==null){
 			note.setStatus(6);
-			note.setMsg("È¨ÏŞ²»×ã");
+			note.setMsg("æƒé™ä¸è¶³");
 			note.setData("");
 			return note;
 		}
@@ -119,7 +119,7 @@ public class UserServiceImpl implements UserService{
 		User user=JSON.parseObject(userStr, User.class);
 		if(user==null){
 			note.setStatus(5);
-			note.setMsg("²ÎÊıÎª¿Õ");
+			note.setMsg("å‚æ•°ä¸ºç©º");
 			note.setData("");
 			return note;
 		}
@@ -129,31 +129,31 @@ public class UserServiceImpl implements UserService{
 		Integer limitsId=user.getLimitsId();
 		if(telephone==null){
 			note.setStatus(1);
-			note.setMsg("ÊÖ»úºÅ²»ÄÜÎª¿Õ");
+			note.setMsg("æ‰‹æœºå·ä¸èƒ½ä¸ºç©º");
 			note.setData("");	
 		}else if(!telephone.matches("^[1]\\d{10}$")){
 			note.setStatus(1);
-			note.setMsg("ÊÖ»úºÅ¸ñÊ½²»ÕıÈ·");
+			note.setMsg("æ‰‹æœºå·æ ¼å¼ä¸æ­£ç¡®");
 			note.setData("");	
 		}else if(userDao.checkTel(telephone)!=0){
 			note.setStatus(1);
-			note.setMsg("ÊÖ»úºÅÒÑ±»×¢²á");
+			note.setMsg("æ‰‹æœºå·å·²è¢«æ³¨å†Œ");
 			note.setData("");	
 		}else if(password==null){
 			note.setStatus(2);
-			note.setMsg("ÃÜÂë²»ÄÜÎª¿Õ");
+			note.setMsg("å¯†ç ä¸èƒ½ä¸ºç©º");
 			note.setData("");	
 		}else if(!password.matches("^\\w{6,16}$")){
 			note.setStatus(2);
-			note.setMsg("ÃÜÂë¸ñÊ½²»¶Ô,ÃÜÂëÎª´óÓÚ6Î»Ğ¡ÓÚ16Î»µÄ´¿Êı×Ö»ò×ÖÄ¸");
+			note.setMsg("å¯†ç æ ¼å¼ä¸å¯¹,å¯†ç ä¸ºå¤§äº6ä½å°äº16ä½çš„çº¯æ•°å­—æˆ–å­—æ¯");
 			note.setData("");		
 		}else if(limitsId==0){
 			note.setStatus(5);
-			note.setMsg("È¨ÏŞid²»ÄÜÎª¿Õ");
+			note.setMsg("æƒé™idä¸èƒ½ä¸ºç©º");
 			note.setData("");	
 		}else if(userName==null){
 			note.setStatus(3);
-			note.setMsg("ÓÃ»§Ãû²»ÄÜÎª¿Õ");
+			note.setMsg("ç”¨æˆ·åä¸èƒ½ä¸ºç©º");
 			note.setData("");	
 		}else{
 				
@@ -163,17 +163,17 @@ public class UserServiceImpl implements UserService{
 			userDao.userDeleteLimits(user.getUserId());
 			userDao.userAddLimits(user.getLimitsId(), user.getUserId());
 			note.setStatus(0);
-			note.setMsg("´´½¨ÓÃ»§³É¹¦");
+			note.setMsg("åˆ›å»ºç”¨æˆ·æˆåŠŸ");
 			note.setData("");
 		}	
 		
 		} catch (JSONException e) {
 			note.setStatus(4);
-			note.setMsg("²ÎÊı¸ñÊ½´íÎó");
+			note.setMsg("å‚æ•°æ ¼å¼é”™è¯¯");
 			note.setData("");
 		}catch(ClassCastException c){
 			note.setStatus(4);
-			note.setMsg("²ÎÊı¸ñÊ½´íÎó");
+			note.setMsg("å‚æ•°æ ¼å¼é”™è¯¯");
 			note.setData("");
 		}
 		return note;
@@ -181,13 +181,13 @@ public class UserServiceImpl implements UserService{
 
 
 	/**
-	 * ¸ü¸ÄÓÃ»§ĞÅÏ¢.
+	 * æ›´æ”¹ç”¨æˆ·ä¿¡æ¯.
 	 */
 	public NoteResult changeUserInfo( String information, String userName,Integer userId,Integer orgId) {
 		NoteResult note=new NoteResult();
 		if(userName==null||userId==null||orgId==null){
 			note.setStatus(1);
-			note.setMsg("²ÎÊı²»ÄÜÎª¿Õ");
+			note.setMsg("å‚æ•°ä¸èƒ½ä¸ºç©º");
 			note.setData("");	
 		}else{
 		User user=new User();
@@ -196,7 +196,7 @@ public class UserServiceImpl implements UserService{
 		userDao.addUserAndOrg(user);
 		userDao.changeUserInfo(information, userName,userId);
 		note.setStatus(0);
-		note.setMsg("¸ü¸Ä³É¹¦");
+		note.setMsg("æ›´æ”¹æˆåŠŸ");
 		note.setData("");
 		}
 		return note;
@@ -204,18 +204,18 @@ public class UserServiceImpl implements UserService{
 
 
 	/**
-	 * ¸ù¾İ×éÖ¯²éÑ¯ÓÃ»§
+	 * æ ¹æ®ç»„ç»‡æŸ¥è¯¢ç”¨æˆ·
 	 */
 	public NoteResult selectUserByOrg(Integer orgId) {
 		NoteResult note=new NoteResult();
 		if(orgId==0){
 			note.setStatus(1);
-			note.setMsg("²ÎÊı²»ÄÜÎª¿Õ");
+			note.setMsg("å‚æ•°ä¸èƒ½ä¸ºç©º");
 			note.setData("");	
 		}else{
 		List<User> list=userDao.selectUserByOrg(orgId);
 			note.setStatus(0);
-			note.setMsg("²éÑ¯³É¹¦");
+			note.setMsg("æŸ¥è¯¢æˆåŠŸ");
 			note.setData(list);	
 		}
 		return note;
@@ -223,18 +223,18 @@ public class UserServiceImpl implements UserService{
 
 
 	/**
-	 * ¸ù¾İÓÃ»§id²éÑ¯ÓÃ»§
+	 * æ ¹æ®ç”¨æˆ·idæŸ¥è¯¢ç”¨æˆ·
 	 */
 	public NoteResult selectUserById(Integer userId) {
 		NoteResult note=new NoteResult();
 		if(userId==null){
 			note.setStatus(1);
-			note.setMsg("²ÎÊı²»ÄÜÎª¿Õ");
+			note.setMsg("å‚æ•°ä¸èƒ½ä¸ºç©º");
 			note.setData("");	
 		}else{
 		User list=userDao.selectUserById(userId);
 			note.setStatus(0);
-			note.setMsg("²éÑ¯³É¹¦");
+			note.setMsg("æŸ¥è¯¢æˆåŠŸ");
 			note.setData(list);	
 		}
 		return note;
@@ -242,40 +242,40 @@ public class UserServiceImpl implements UserService{
 
 
 	/**
-	 * ¸ü¸ÄÓÃ»§ÃÜÂë
+	 * æ›´æ”¹ç”¨æˆ·å¯†ç 
 	 */
 	public NoteResult changePassword(String oldPassword,String nowFirstPassword,String nowTwoPassword,Integer userId) {
 		NoteResult note=new NoteResult();
 		User  user=userDao.selectUserById(userId);
 		if(oldPassword==null||userId==null||nowFirstPassword==null||nowTwoPassword==null){
 			note.setStatus(1);
-			note.setMsg("²ÎÊı²»ÄÜÎª¿Õ");
+			note.setMsg("å‚æ•°ä¸èƒ½ä¸ºç©º");
 			note.setData("");	
 		}else if(user.getLimitsId()!=1){
 			note.setStatus(6);
-			note.setMsg("È¨ÏŞ²»×ã");
+			note.setMsg("æƒé™ä¸è¶³");
 			note.setData("");
 		}else if(!user.getPassword().equals(NoteUtil.md5(oldPassword))){
 			note.setStatus(3);
-			note.setMsg("Ô­ÃÜÂëÊäÈë´íÎó");
+			note.setMsg("åŸå¯†ç è¾“å…¥é”™è¯¯");
 			note.setData("");	
 		}else if((!nowFirstPassword.matches("^\\w{6,16}$"))||(!nowTwoPassword.matches("^\\w{6,16}$"))){
 			note.setStatus(2);
-			note.setMsg("ÃÜÂë¸ñÊ½²»¶Ô,ÃÜÂëÎª´óÓÚ6Î»Ğ¡ÓÚ16Î»µÄ´¿Êı×Ö»ò×ÖÄ¸");
+			note.setMsg("å¯†ç æ ¼å¼ä¸å¯¹,å¯†ç ä¸ºå¤§äº6ä½å°äº16ä½çš„çº¯æ•°å­—æˆ–å­—æ¯");
 			note.setData("");
 		}else if(!nowFirstPassword.equals(nowTwoPassword)){
 			note.setStatus(4);
-			note.setMsg("Á½´ÎÊäÈëÃÜÂë²»Ò»ÖÂ");
+			note.setMsg("ä¸¤æ¬¡è¾“å…¥å¯†ç ä¸ä¸€è‡´");
 			note.setData("");
 		}else if(oldPassword.equals(nowTwoPassword)){
 			note.setStatus(5);
-			note.setMsg("ĞŞ¸ÄÃÜÂëºÍ³õÊ¼ÃÜÂëÏàÍ¬");
+			note.setMsg("ä¿®æ”¹å¯†ç å’Œåˆå§‹å¯†ç ç›¸åŒ");
 			note.setData("");
 		}
 		else{
 			userDao.changePassword(NoteUtil.md5(nowFirstPassword), userId);
 			note.setStatus(0);
-			note.setMsg("¸ü¸ÄÃÜÂë³É¹¦");
+			note.setMsg("æ›´æ”¹å¯†ç æˆåŠŸ");
 			note.setData("");
 		}
 		return note;
@@ -283,18 +283,18 @@ public class UserServiceImpl implements UserService{
 
 
 	/**
-	 * ¸ù¾İidÉ¾³ıÓÃ»§
+	 * æ ¹æ®idåˆ é™¤ç”¨æˆ·
 	 */
 	public NoteResult deleteUser(Integer userId) {
 		NoteResult note=new NoteResult();
 		if(userId==null){
 			note.setStatus(1);
-			note.setMsg("²ÎÊı²»ÄÜÎª¿Õ");
+			note.setMsg("å‚æ•°ä¸èƒ½ä¸ºç©º");
 			note.setData("");	
 		}else{
 			userDao.deleteUser(userId);
 			note.setStatus(0);
-			note.setMsg("É¾³ıÓÃ»§³É¹¦");
+			note.setMsg("åˆ é™¤ç”¨æˆ·æˆåŠŸ");
 			note.setData("");	
 		}
 		return note;
@@ -302,13 +302,13 @@ public class UserServiceImpl implements UserService{
 
 
 	/**
-	 * ÓÃ»§Ìí¼ÓÉè±¸¹ØÁª
+	 * ç”¨æˆ·æ·»åŠ è®¾å¤‡å…³è”
 	 */
 	public NoteResult userAddMon(String jsonStr) {
 		NoteResult note=new NoteResult();
 		if(jsonStr==null||"".equals(jsonStr)){
 			note.setStatus(5);
-			note.setMsg("²ÎÊıÎª¿Õ");
+			note.setMsg("å‚æ•°ä¸ºç©º");
 			note.setData("");
 			return note;
 		}
@@ -316,34 +316,34 @@ public class UserServiceImpl implements UserService{
 			Map<String,Object> map=JSON.parseObject(jsonStr);
 		if(map==null||map.isEmpty()){				
 			note.setStatus(5);
-			note.setMsg("²ÎÊıÎª¿Õ");
+			note.setMsg("å‚æ•°ä¸ºç©º");
 			note.setData("");
 			return note;
 		}else if(map.get("userId")==null){
 			note.setStatus(2);
-			note.setMsg("ÓÃ»§idÎª¿Õ");
+			note.setMsg("ç”¨æˆ·idä¸ºç©º");
 			note.setData("");
 			
 		}else if(map.get("monList")==null||"".equals(map.get("monList"))){
 			userDao.userDelteMon((Integer)map.get("userId"));
 			note.setStatus(0);
-			note.setMsg("Çå¿ÕÓÃ»§Éè±¸ÁĞ±í³É¹¦");
+			note.setMsg("æ¸…ç©ºç”¨æˆ·è®¾å¤‡åˆ—è¡¨æˆåŠŸ");
 			note.setData("");
 			
 		}else{
 			userDao.userDelteMon((Integer)map.get("userId"));
 			userDao.userAddMon(map);
 			note.setStatus(0);
-			note.setMsg("²Ù×÷³É¹¦");
+			note.setMsg("æ“ä½œæˆåŠŸ");
 			note.setData("");
 		}
 		} catch (JSONException e) {
 			note.setStatus(4);
-			note.setMsg("²ÎÊı¸ñÊ½´íÎó");
+			note.setMsg("å‚æ•°æ ¼å¼é”™è¯¯");
 			note.setData("");
 		}catch(ClassCastException c){
 			note.setStatus(4);
-			note.setMsg("²ÎÊı¸ñÊ½´íÎó");
+			note.setMsg("å‚æ•°æ ¼å¼é”™è¯¯");
 			note.setData("");
 		}
 		return note;
@@ -351,20 +351,20 @@ public class UserServiceImpl implements UserService{
 
 
 	/**
-	 * ²éÑ¯Ö¸¶¨Éè±¸ÏÂµÄËùÓĞÓÃ»§
+	 * æŸ¥è¯¢æŒ‡å®šè®¾å¤‡ä¸‹çš„æ‰€æœ‰ç”¨æˆ·
 	 */
 	public NoteResult seleteUserByMonId(Integer monId) {
 		NoteResult note=new NoteResult();
 		
 		if(monId==null){
 			note.setStatus(5);
-			note.setMsg("²ÎÊıÎª¿Õ");
+			note.setMsg("å‚æ•°ä¸ºç©º");
 			note.setData("");
 			
 		}else{
 		List<User> list=userDao.seleteUserByMonId(monId);
 			note.setStatus(5);
-			note.setMsg("²Ù×÷³É¹¦");
+			note.setMsg("æ“ä½œæˆåŠŸ");
 			note.setData(list);
 		}
 		return note;

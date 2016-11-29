@@ -12,15 +12,15 @@ import java.util.List;
 public class MonShow {
 	private int monId;
 	private String monName;
-	private String monAlias;						//Éè±¸±ğÃû
-	private String monInstall;						//Éè±¸°²×°Î»ÖÃ
-	private String monIP;							//Éè±¸IP
-	private String monModel;						//Éè±¸ĞÍºÅ
-	private String monPlace;						//Éè±¸¹éÊôµØ
-	private int monPlaceLevel;					//Éè±¸¹éÊôµØ¼¶±ğ
-	private String monType;							//Éè±¸ÀàĞÍ
-	private String monNumber;                       //Éè±¸±àºÅ
-	private int monRoute;                           //Éè±¸Â·Êı
+	private String monAlias;						//è®¾å¤‡åˆ«å
+	private String monInstall;						//è®¾å¤‡å®‰è£…ä½ç½®
+	private String monIP;							//è®¾å¤‡IP
+	private String monModel;						//è®¾å¤‡å‹å·
+	private String monPlace;						//è®¾å¤‡å½’å±åœ°
+	private int monPlaceLevel;					//è®¾å¤‡å½’å±åœ°çº§åˆ«
+	private String monType;							//è®¾å¤‡ç±»å‹
+	private String monNumber;                       //è®¾å¤‡ç¼–å·
+	private int monRoute;                           //è®¾å¤‡è·¯æ•°
 	private String allAV;
 	private String allBV;
 	private String allCV;

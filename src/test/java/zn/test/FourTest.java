@@ -48,10 +48,10 @@ public class FourTest {
 				String monAlarmsTM=EncodeUtils.getLong(mes, 16)+"-"+EncodeUtils.getLong(mes, 20)+"-"+EncodeUtils.getLong(mes, 24)+" "+EncodeUtils.getLong(mes, 28)+":"+EncodeUtils.getLong(mes, 32)+":"+EncodeUtils.getLong(mes, 36);
 				mon.setMonAlarmsTM(monAlarmsTM);
 				mon.setMonAlarmsType(Long.toHexString(EncodeUtils.getLong(mes, 12)));
-				//Ö÷¶¯ÉÏ´«ÎÂ¶È¸æ¾¯ĞÅÏ¢
+				//ä¸»åŠ¨ä¸Šä¼ æ¸©åº¦å‘Šè­¦ä¿¡æ¯
 				if(mes[12]==16){	
-					mon.setMonAlarmsInfo("Ö÷¶¯ÉÏ´«ÎÂ¶È¸æ¾¯,ÎÂ¶ÈÖµÎª"+EncodeUtils.byte2float(mes, 56));					
-				}else if(mes[12]==19){             //µçÁ÷¹ıÔØĞÅÏ¢				
+					mon.setMonAlarmsInfo("ä¸»åŠ¨ä¸Šä¼ æ¸©åº¦å‘Šè­¦,æ¸©åº¦å€¼ä¸º"+EncodeUtils.byte2float(mes, 56));					
+				}else if(mes[12]==19){             //ç”µæµè¿‡è½½ä¿¡æ¯				
 					long monV=EncodeUtils.getLong(mes, 44);
 					long p=EncodeUtils.getLong(mes, 48);
 					String mov="";
@@ -68,7 +68,7 @@ public class FourTest {
 					}else if(p==18){
 						pv="C";
 					}	
-					mon.setMonAlarmsInfo("Í¨µÀ"+EncodeUtils.getLong(mes, 40)+"Ö÷¶¯ÉÏ´«µçÁ÷¹ıÔØ±¨¾¯,¸ÃÂ·µçÑ¹Îª"+mov+","+pv+"Ïà,µçÁ÷ÖµÎª"+EncodeUtils.byte2float(mes, 56));			
+					mon.setMonAlarmsInfo("é€šé“"+EncodeUtils.getLong(mes, 40)+"ä¸»åŠ¨ä¸Šä¼ ç”µæµè¿‡è½½æŠ¥è­¦,è¯¥è·¯ç”µå‹ä¸º"+mov+","+pv+"ç›¸,ç”µæµå€¼ä¸º"+EncodeUtils.byte2float(mes, 56));			
 				}else if(mes[12]==21){
 					String pv="";
 					long p=EncodeUtils.getLong(mes, 48);
@@ -79,7 +79,7 @@ public class FourTest {
 					}else if(p==18){
 						pv="C";
 					}
-					mon.setMonAlarmsInfo("Ö÷¶¯ÉÏ´«×ÜµçÑ¹¹ı¸ß¸æ¾¯,"+pv+"Ïà,µçÑ¹ÖµÎª"+EncodeUtils.byte2float(mes, 56));
+					mon.setMonAlarmsInfo("ä¸»åŠ¨ä¸Šä¼ æ€»ç”µå‹è¿‡é«˜å‘Šè­¦,"+pv+"ç›¸,ç”µå‹å€¼ä¸º"+EncodeUtils.byte2float(mes, 56));
 				}else if(mes[12]==20){
 					String pv="";
 					long p=EncodeUtils.getLong(mes, 48);
@@ -90,7 +90,7 @@ public class FourTest {
 					}else if(p==18){
 						pv="C";
 					}
-					mon.setMonAlarmsInfo("Ö÷¶¯ÉÏ´«×ÜµçÁ÷¹ıÔØ¸æ¾¯,"+pv+"Ïà,µçÁ÷ÖµÎª"+EncodeUtils.byte2float(mes, 56));
+					mon.setMonAlarmsInfo("ä¸»åŠ¨ä¸Šä¼ æ€»ç”µæµè¿‡è½½å‘Šè­¦,"+pv+"ç›¸,ç”µæµå€¼ä¸º"+EncodeUtils.byte2float(mes, 56));
 				}else if(mes[12]==22){
 					String pv="";
 					long p=EncodeUtils.getLong(mes, 48);
@@ -101,11 +101,11 @@ public class FourTest {
 					}else if(p==18){
 						pv="C";
 					}
-					mon.setMonAlarmsInfo("Ö÷¶¯ÉÏ´«×ÜµçÑ¹¹ıµÍ¸æ¾¯,"+pv+"Ïà,µçÑ¹ÖµÎª"+EncodeUtils.byte2float(mes, 56));
+					mon.setMonAlarmsInfo("ä¸»åŠ¨ä¸Šä¼ æ€»ç”µå‹è¿‡ä½å‘Šè­¦,"+pv+"ç›¸,ç”µå‹å€¼ä¸º"+EncodeUtils.byte2float(mes, 56));
 				}else if(mes[12]==24){
-					mon.setMonAlarmsInfo("Ö÷¶¯ÉÏ´«Êª¶È¹ı¸ß¸æ¾¯,Êª¶ÈÖµÎª"+EncodeUtils.byte2float(mes, 56));
+					mon.setMonAlarmsInfo("ä¸»åŠ¨ä¸Šä¼ æ¹¿åº¦è¿‡é«˜å‘Šè­¦,æ¹¿åº¦å€¼ä¸º"+EncodeUtils.byte2float(mes, 56));
 				}else if(mes[12]==55){
-					mon.setMonAlarmsInfo("Í£µç±¨¾¯");				
+					mon.setMonAlarmsInfo("åœç”µæŠ¥è­¦");				
 				}else if(mes[12]==25){
 					long monV=EncodeUtils.getLong(mes, 44);
 					long p=EncodeUtils.getLong(mes, 48);
@@ -123,34 +123,34 @@ public class FourTest {
 					}else if(p==18){
 						pv="C";
 					}	
-					mon.setMonAlarmsInfo("Í¨µÀ"+EncodeUtils.getLong(mes, 40)+"Ö÷¶¯ÉÏ´«µ¥Â·Â©µç±¨¾¯,¸ÃÂ·µçÑ¹Îª"+mov+","+pv+"Ïà,Â©µçÁ÷ÖµÎª"+EncodeUtils.byte2float(mes, 56));			
+					mon.setMonAlarmsInfo("é€šé“"+EncodeUtils.getLong(mes, 40)+"ä¸»åŠ¨ä¸Šä¼ å•è·¯æ¼ç”µæŠ¥è­¦,è¯¥è·¯ç”µå‹ä¸º"+mov+","+pv+"ç›¸,æ¼ç”µæµå€¼ä¸º"+EncodeUtils.byte2float(mes, 56));			
 				}else if(mes[12]==32){
 					long monV=EncodeUtils.getLong(mes, 44);
 					long p=EncodeUtils.getLong(mes, 48);
 					long mT=EncodeUtils.getLong(mes, 40);
 					String mov="";
 					if(monV==16){
-						mov="µ¥Ïà";
+						mov="å•ç›¸";
 					}else if(monV==17){
-						mov="ÈıÏà";
+						mov="ä¸‰ç›¸";
 					}
 					String pv="";
 					if(p==16){
-						pv="AÏà,";
+						pv="Aç›¸,";
 					}else if(p==17){
-						pv="BÏà,";					
+						pv="Bç›¸,";					
 					}else if(p==18){
-						pv="CÏà,";
+						pv="Cç›¸,";
 					}else if(p==19){
-						pv="ÁãÏß,";
+						pv="é›¶çº¿,";
 					}
 					String T="";
 					if(mT==4294967295L){
-						T="ÊäÈëÏß";
+						T="è¾“å…¥çº¿";
 					}else{
-						T="Í¨µÀ"+mT;
+						T="é€šé“"+mT;
 					}
-					mon.setMonAlarmsInfo("Í¨µÀ"+T+"Ö÷¶¯ÉÏ´«ÏßÂ·ÉÏÎÂ¶È¹ı¸ß±¨¾¯,¸ÃÂ·Îª"+mov+","+pv+"ÎÂ¶ÈÖµÎª"+EncodeUtils.byte2float(mes, 56));	
+					mon.setMonAlarmsInfo("é€šé“"+T+"ä¸»åŠ¨ä¸Šä¼ çº¿è·¯ä¸Šæ¸©åº¦è¿‡é«˜æŠ¥è­¦,è¯¥è·¯ä¸º"+mov+","+pv+"æ¸©åº¦å€¼ä¸º"+EncodeUtils.byte2float(mes, 56));	
 				}else if(mes[12]==33){
 					long monV=EncodeUtils.getLong(mes, 44);
 					long p=EncodeUtils.getLong(mes, 48);
@@ -168,7 +168,7 @@ public class FourTest {
 					}else if(p==18){
 						pv="C";
 					}	
-					mon.setMonAlarmsInfo("Í¨µÀ"+EncodeUtils.getLong(mes, 40)+"´ò»ğ±¨¾¯,¸ÃÂ·µçÑ¹Îª"+mov+","+pv+"Ïà");			
+					mon.setMonAlarmsInfo("é€šé“"+EncodeUtils.getLong(mes, 40)+"æ‰“ç«æŠ¥è­¦,è¯¥è·¯ç”µå‹ä¸º"+mov+","+pv+"ç›¸");			
 				}else if(mes[12]==34){
 					long monV=EncodeUtils.getLong(mes, 44);
 					long p=EncodeUtils.getLong(mes, 48);
@@ -186,7 +186,7 @@ public class FourTest {
 					}else if(p==18){
 						pv="C";
 					}	
-					mon.setMonAlarmsInfo("Í¨µÀ"+EncodeUtils.getLong(mes, 40)+"µ¥Â·µçÁ÷¹ı¸ß±¨¾¯,¸ÃÂ·µçÑ¹Îª"+mov+","+pv+"Ïà,µçÁ÷ÖµÎª"+EncodeUtils.byte2float(mes, 56));			
+					mon.setMonAlarmsInfo("é€šé“"+EncodeUtils.getLong(mes, 40)+"å•è·¯ç”µæµè¿‡é«˜æŠ¥è­¦,è¯¥è·¯ç”µå‹ä¸º"+mov+","+pv+"ç›¸,ç”µæµå€¼ä¸º"+EncodeUtils.byte2float(mes, 56));			
 					
 				}else if(mes[12]==35){
 					long monV=EncodeUtils.getLong(mes, 44);
@@ -194,27 +194,27 @@ public class FourTest {
 					long mT=EncodeUtils.getLong(mes, 40);
 					String mov="";
 					if(monV==16){
-						mov="µ¥Ïà";
+						mov="å•ç›¸";
 					}else if(monV==17){
-						mov="ÈıÏà";
+						mov="ä¸‰ç›¸";
 					}
 					String pv="";
 					if(p==16){
-						pv="AÏà,";
+						pv="Aç›¸,";
 					}else if(p==17){
-						pv="BÏà,";					
+						pv="Bç›¸,";					
 					}else if(p==18){
-						pv="CÏà,";
+						pv="Cç›¸,";
 					}else if(p==19){
-						pv="ÁãÏß,";
+						pv="é›¶çº¿,";
 					}
 					String T="";
 					if(mT==4294967295L){
-						T="ÊäÈëÏß";
+						T="è¾“å…¥çº¿";
 					}else{
-						T="Í¨µÀ"+mT;
+						T="é€šé“"+mT;
 					}
-					mon.setMonAlarmsInfo(T+"ÏßÂ·ÉÏÎÂ¶È¹ı¸ß±¨¾¯,¸ÃÂ·Îª"+mov+","+pv+"ÎÂ¶ÈÖµÎª"+EncodeUtils.byte2float(mes, 56));	
+					mon.setMonAlarmsInfo(T+"çº¿è·¯ä¸Šæ¸©åº¦è¿‡é«˜æŠ¥è­¦,è¯¥è·¯ä¸º"+mov+","+pv+"æ¸©åº¦å€¼ä¸º"+EncodeUtils.byte2float(mes, 56));	
 					
 				}
 				

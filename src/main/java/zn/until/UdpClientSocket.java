@@ -13,96 +13,96 @@ import java.net.InetAddress;
  *
  */
 public class UdpClientSocket {
-	 private byte[] buffer = new byte[1024];    
-	    
-	    private DatagramSocket ds = null;    
-	    
-	    /**  
-	     * ¹¹Ôìº¯Êı£¬´´½¨UDP¿Í»§¶Ë  
-	     * @throws Exception  
-	     */    
-	    public UdpClientSocket() throws Exception {    
-	        ds = new DatagramSocket();    
-	    }    
-	        
-	    /**  
-	     * ÉèÖÃ³¬Ê±Ê±¼ä£¬¸Ã·½·¨±ØĞëÔÚbind·½·¨Ö®ºóÊ¹ÓÃ.  
-	     * @param timeout ³¬Ê±Ê±¼ä  
-	     * @throws Exception  
-	     */    
-	    public final void setSoTimeout(final int timeout) throws Exception {    
-	        ds.setSoTimeout(timeout);    
-	    }    
-	    
-	    /**  
-	     * »ñµÃ³¬Ê±Ê±¼ä.  
-	     * @return ·µ»Ø³¬Ê±Ê±¼ä  
-	     * @throws Exception  
-	     */    
-	    public final int getSoTimeout() throws Exception {    
-	        return ds.getSoTimeout();    
-	    }    
-	    
-	    public final DatagramSocket getSocket() {    
-	        return ds;    
-	    }    
-	    
-	    /**  
-	     * ÏòÖ¸¶¨µÄ·şÎñ¶Ë·¢ËÍÊı¾İĞÅÏ¢.  
-	     * @param host ·şÎñÆ÷Ö÷»úµØÖ·  
-	     * @param port ·şÎñ¶Ë¶Ë¿Ú  
-	     * @param bytes ·¢ËÍµÄÊı¾İĞÅÏ¢  
-	     * @return ·µ»Ø¹¹Ôìºó¶íÊı¾İ±¨  
-	     * @throws IOException  
-	     */    
-	    public final DatagramPacket send(final String host, final int port,    
-	            final byte[] bytes) throws IOException {    
-	        DatagramPacket dp = new DatagramPacket(bytes, bytes.length, InetAddress    
-	                .getByName(host), port);    
-	        ds.send(dp);    
-	        return dp;    
-	    }    
-	    
-	    /**  
-	     * ½ÓÊÕ´ÓÖ¸¶¨µÄ·şÎñ¶Ë·¢»ØµÄÊı¾İ.  
-	     * @param lhost ·şÎñ¶ËÖ÷»ú  
-	     * @param lport ·şÎñ¶Ë¶Ë¿Ú  
-	     * @return ·µ»Ø´ÓÖ¸¶¨µÄ·şÎñ¶Ë·¢»ØµÄÊı¾İ.  
-	     * @throws Exception  
-	     */    
-	    public final String receive(final String lhost, final int lport)    
-	            throws Exception {    
-	        DatagramPacket dp = new DatagramPacket(buffer, buffer.length);    
-	        ds.receive(dp);    
-	        String info = new String(dp.getData(), 0, dp.getLength());    
-	        return info;    
-	    }    
-	    
-	    /**  
-	     * ¹Ø±ÕudpÁ¬½Ó.  
-	     */    
-	    public final void close() {    
-	        try {    
-	            ds.close();    
-	        } catch (Exception ex) {    
-	            ex.printStackTrace();    
-	        }    
-	    }    
-	    
-	    /**  
-	     * ²âÊÔ¿Í»§¶Ë·¢°üºÍ½ÓÊÕ»ØÓ¦ĞÅÏ¢µÄ·½·¨.  
-	     * @param args  
-	     * @throws Exception  
-	     */    
-	    public static void main(String[] args) throws Exception {    
-	        UdpClientSocket client = new UdpClientSocket();    
-	        String serverHost = "192.168.2.8";    
-	        int serverPort = 8080;    
-	        client.send(serverHost, serverPort, ("ÄãºÃ!").getBytes()); 
-//	        client.setSoTimeout(2000);
-//	        client.send(serverHost, serverPort, ("ÄãºÜºÃ!").getBytes());
-//	        String info = client.receive(serverHost, serverPort);    
-//	        System.out.println("·şÎñ¶Ë»ØÓ¦Êı¾İ£º" + info);    
-	    }    
+	private byte[] buffer = new byte[1024];    
+    
+    private DatagramSocket ds = null;    
+    
+    /**  
+     * æ„é€ å‡½æ•°ï¼Œåˆ›å»ºUDPå®¢æˆ·ç«¯  
+     * @throws Exception  
+     */    
+    public UdpClientSocket() throws Exception {    
+        ds = new DatagramSocket();    
+    }    
+        
+    /**  
+     * è®¾ç½®è¶…æ—¶æ—¶é—´ï¼Œè¯¥æ–¹æ³•å¿…é¡»åœ¨bindæ–¹æ³•ä¹‹åä½¿ç”¨.  
+     * @param timeout è¶…æ—¶æ—¶é—´  
+     * @throws Exception  
+     */    
+    public final void setSoTimeout(final int timeout) throws Exception {    
+        ds.setSoTimeout(timeout);    
+    }    
+    
+    /**  
+     * è·å¾—è¶…æ—¶æ—¶é—´.  
+     * @return è¿”å›è¶…æ—¶æ—¶é—´  
+     * @throws Exception  
+     */    
+    public final int getSoTimeout() throws Exception {    
+        return ds.getSoTimeout();    
+    }    
+    
+    public final DatagramSocket getSocket() {    
+        return ds;    
+    }    
+    
+    /**  
+     * å‘æŒ‡å®šçš„æœåŠ¡ç«¯å‘é€æ•°æ®ä¿¡æ¯.  
+     * @param host æœåŠ¡å™¨ä¸»æœºåœ°å€  
+     * @param port æœåŠ¡ç«¯ç«¯å£  
+     * @param bytes å‘é€çš„æ•°æ®ä¿¡æ¯  
+     * @return è¿”å›æ„é€ åä¿„æ•°æ®æŠ¥  
+     * @throws IOException  
+     */    
+    public final DatagramPacket send(final String host, final int port,    
+            final byte[] bytes) throws IOException {    
+        DatagramPacket dp = new DatagramPacket(bytes, bytes.length, InetAddress    
+                .getByName(host), port);    
+        ds.send(dp);    
+        return dp;    
+    }    
+    
+    /**  
+     * æ¥æ”¶ä»æŒ‡å®šçš„æœåŠ¡ç«¯å‘å›çš„æ•°æ®.  
+     * @param lhost æœåŠ¡ç«¯ä¸»æœº  
+     * @param lport æœåŠ¡ç«¯ç«¯å£  
+     * @return è¿”å›ä»æŒ‡å®šçš„æœåŠ¡ç«¯å‘å›çš„æ•°æ®.  
+     * @throws Exception  
+     */    
+    public final String receive(final String lhost, final int lport)    
+            throws Exception {    
+        DatagramPacket dp = new DatagramPacket(buffer, buffer.length);    
+        ds.receive(dp);    
+        String info = new String(dp.getData(), 0, dp.getLength());    
+        return info;    
+    }    
+    
+    /**  
+     * å…³é—­udpè¿æ¥.  
+     */    
+    public final void close() {    
+        try {    
+            ds.close();    
+        } catch (Exception ex) {    
+            ex.printStackTrace();    
+        }    
+    }    
+    
+    /**  
+     * æµ‹è¯•å®¢æˆ·ç«¯å‘åŒ…å’Œæ¥æ”¶å›åº”ä¿¡æ¯çš„æ–¹æ³•.  
+     * @param args  
+     * @throws Exception  
+     */    
+    public static void main(String[] args) throws Exception {    
+        UdpClientSocket client = new UdpClientSocket();    
+        String serverHost = "192.168.2.8";    
+        int serverPort = 8080;    
+        client.send(serverHost, serverPort, ("ä½ å¥½!").getBytes()); 
+//        client.setSoTimeout(2000);
+//        client.send(serverHost, serverPort, ("ä½ å¾ˆå¥½!").getBytes());
+//        String info = client.receive(serverHost, serverPort);    
+//        System.out.println("æœåŠ¡ç«¯å›åº”æ•°æ®ï¼š" + info);    
+    }    
 
 }

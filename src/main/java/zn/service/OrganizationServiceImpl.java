@@ -24,20 +24,20 @@ import zn.until.NoteResult;
 public class OrganizationServiceImpl implements OrganizationService {
 
 	
-	@Resource//×¢Èë
+	@Resource//æ³¨å…¥
 	private OrganizationDao organizationDao;
 	
 	
 	
 	
 	/**
-	 * Ìí¼Ó×éÖ¯
+	 * æ·»åŠ ç»„ç»‡
 	 */
 	public NoteResult addOrg(String orgName) {
 		NoteResult note=new NoteResult();
 		if(null==orgName){
 			note.setStatus(2);
-			note.setMsg("×éÖ¯Ãû³Æ²»ÄÜÎª¿Õ");
+			note.setMsg("ç»„ç»‡åç§°ä¸èƒ½ä¸ºç©º");
 			note.setData("");
 			return note;
 		}
@@ -45,11 +45,11 @@ public class OrganizationServiceImpl implements OrganizationService {
 		if(a==0){
 			organizationDao.addOrg(orgName);                             
 			note.setStatus(0);
-			note.setMsg("Ìí¼Ó×éÖ¯³É¹¦");
+			note.setMsg("æ·»åŠ ç»„ç»‡æˆåŠŸ");
 			note.setData(""); 
 		}else{
 			note.setStatus(1);
-			note.setMsg("×éÖ¯ÒÑ´æÔÚ");
+			note.setMsg("ç»„ç»‡å·²å­˜åœ¨");
 			note.setData(""); 	
 		}
 		            
@@ -57,52 +57,52 @@ public class OrganizationServiceImpl implements OrganizationService {
 	}
 
 		/**
-		 * ¸Ä±ä×éÖ¯Ãû³Æ
+		 * æ”¹å˜ç»„ç»‡åç§°
 		 */
 	public NoteResult changeOrgName(String oldOrgName, String nowOrgName) {
 		NoteResult note=new NoteResult();
 		if(null==oldOrgName||null==nowOrgName){
 			note.setStatus(2);
-			note.setMsg("×éÖ¯Ãû³Æ²»ÄÜÎª¿Õ");
+			note.setMsg("ç»„ç»‡åç§°ä¸èƒ½ä¸ºç©º");
 			note.setData("");
 			return note;
 		}
 		organizationDao.changeOrgName(oldOrgName, nowOrgName);
 		
 		note.setStatus(0);
-		note.setMsg("¸ü¸Ä×éÖ¯Ãû³Æ³É¹¦");
+		note.setMsg("æ›´æ”¹ç»„ç»‡åç§°æˆåŠŸ");
 		note.setData(""); 
 		return note;
 	}
 
 	/**
-	 * É¾³ı×éÖ¯
+	 * åˆ é™¤ç»„ç»‡
 	 */
 	public NoteResult deleteOrg(String orgName) {
 		
 		NoteResult note=new NoteResult();
 		if(null==orgName){
 			note.setStatus(2);
-			note.setMsg("×éÖ¯Ãû³Æ²»ÄÜÎª¿Õ");
+			note.setMsg("ç»„ç»‡åç§°ä¸èƒ½ä¸ºç©º");
 			note.setData("");
 			return note;
 		}
 		organizationDao.deleteOrg(orgName);
 		note.setStatus(0);
-		note.setMsg("É¾³ı×éÖ¯³É¹¦");
+		note.setMsg("åˆ é™¤ç»„ç»‡æˆåŠŸ");
 		note.setData(""); 
 		return note;
 	}
 
 
 	/**
-	 * ²éÑ¯×éÖ¯ÁĞ±í
+	 * æŸ¥è¯¢ç»„ç»‡åˆ—è¡¨
 	 */
 	public NoteResult selectOrg() {
 		NoteResult note=new NoteResult();
 	    List<Organization> list=organizationDao.selectOrg();
 	    note.setStatus(0);
-		note.setMsg("²éÑ¯³É¹¦");
+		note.setMsg("æŸ¥è¯¢æˆåŠŸ");
 		note.setData(list); 
 		return note;
 		

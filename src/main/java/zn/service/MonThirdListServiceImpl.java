@@ -25,31 +25,31 @@ import zn.until.NoteResult;
 @Transactional
 public class MonThirdListServiceImpl implements MonThirdListService {
 	
-	@Resource//×¢Èë
+	@Resource//æ³¨å…¥
 	private MonitorDao monitorDao;
 	
-	@Resource//×¢Èë
+	@Resource//æ³¨å…¥
 	private MonSecondListDao  monSecondListDao; 
 	
-	@Resource//×¢Èë
+	@Resource//æ³¨å…¥
 	private MonThirdListDao  monThirdListDao; 
 
 		/**
-		 * ²éÑ¯ËùÓĞÈı¼¶ÁĞ±í
+		 * æŸ¥è¯¢æ‰€æœ‰ä¸‰çº§åˆ—è¡¨
 		 */
 	public NoteResult findAllThirdList() {
 		
 			NoteResult note=new NoteResult();
 			List<MonThirdList>		list=monThirdListDao.findAllThirdlist()	;
 			note.setStatus(0);
-			note.setMsg("²éÑ¯³É¹¦");
+			note.setMsg("æŸ¥è¯¢æˆåŠŸ");
 			note.setData(list);
 			return note;
 
 	}
 
 	/**
-	 * Ìí¼ÓÈı¼¶ÁĞ±í
+	 * æ·»åŠ ä¸‰çº§åˆ—è¡¨
 	 */
 	public NoteResult addThirdList(String thirdListName, Integer secondListId) {
 		
@@ -57,27 +57,27 @@ public class MonThirdListServiceImpl implements MonThirdListService {
 			
 			 if(thirdListName==null||secondListId==null){
 				 	note.setStatus(1);
-					note.setMsg("²ÎÊı²»ÄÜÎª¿Õ");
+					note.setMsg("å‚æ•°ä¸èƒ½ä¸ºç©º");
 					note.setData("");
 			 } else if(monSecondListDao.selectIsExistById(secondListId)==0){
 				 note.setStatus(3);
-					note.setMsg("ÉÏ¼¶ÁĞ±í²»´æÔÚ");
+					note.setMsg("ä¸Šçº§åˆ—è¡¨ä¸å­˜åœ¨");
 					note.setData("");
 			 }else if(monThirdListDao.selectIsExist(thirdListName)!=0){ 
 				 	note.setStatus(2);
-					note.setMsg("ÁĞ±íÒÑ´æÔÚ");
+					note.setMsg("åˆ—è¡¨å·²å­˜åœ¨");
 					note.setData("");
 			 }else{
 				 	monThirdListDao.addThirdList(thirdListName, secondListId);
 				 	note.setStatus(0);
-					note.setMsg("Ìí¼ÓÁĞ±í³É¹¦");
+					note.setMsg("æ·»åŠ åˆ—è¡¨æˆåŠŸ");
 					note.setData("");
 			 }
 		return note;	
 	}
 
 	/**
-		 * É¾³ıÈı¼¶ÁĞ±í
+		 * åˆ é™¤ä¸‰çº§åˆ—è¡¨
 		 */
 	public NoteResult deleteThirdList(Integer thirdListId) {
 		
@@ -85,7 +85,7 @@ public class MonThirdListServiceImpl implements MonThirdListService {
 			NoteResult note=new NoteResult();	
 			 if(thirdListId==null){
 				 	note.setStatus(1);
-					note.setMsg("²ÎÊı²»ÄÜÎª¿Õ");
+					note.setMsg("å‚æ•°ä¸èƒ½ä¸ºç©º");
 					note.setData("");
 			 }else{
 				 	MonThirdList mon=monThirdListDao.selectListById(thirdListId);
@@ -94,7 +94,7 @@ public class MonThirdListServiceImpl implements MonThirdListService {
 				 	}
 				 	monThirdListDao.deleteThirdList(thirdListId);
 					note.setStatus(0);
-					note.setMsg("É¾³ı³É¹¦");
+					note.setMsg("åˆ é™¤æˆåŠŸ");
 					note.setData("");
 			 }
 			return note;
@@ -102,7 +102,7 @@ public class MonThirdListServiceImpl implements MonThirdListService {
 	}
 
 	/**
-	 * ¸ü¸ÄÈı¼¶ÁĞ±í
+	 * æ›´æ”¹ä¸‰çº§åˆ—è¡¨
 	 */
 	public NoteResult changeThirdList(String thirdListName, Integer secondListId, Integer thirdListId) {
 		
@@ -111,15 +111,15 @@ public class MonThirdListServiceImpl implements MonThirdListService {
 			
 			 if(thirdListName==null||secondListId==null||thirdListId==null){
 				 	note.setStatus(1);
-					note.setMsg("²ÎÊı²»ÄÜÎª¿Õ");
+					note.setMsg("å‚æ•°ä¸èƒ½ä¸ºç©º");
 					note.setData("");
 			 } else if(monSecondListDao.selectIsExistById(secondListId)==0){
 				 note.setStatus(3);
-					note.setMsg("ÉÏ¼¶ÁĞ±í²»´æÔÚ");
+					note.setMsg("ä¸Šçº§åˆ—è¡¨ä¸å­˜åœ¨");
 					note.setData("");
 			 }else if(monThirdListDao.selectIsExist(thirdListName)!=0){ 
 				 	note.setStatus(2);
-					note.setMsg("ÁĞ±íÒÑ´æÔÚ");
+					note.setMsg("åˆ—è¡¨å·²å­˜åœ¨");
 					note.setData("");
 			 }else{
 				 	MonThirdList mon=monThirdListDao.selectListById(thirdListId);
@@ -128,7 +128,7 @@ public class MonThirdListServiceImpl implements MonThirdListService {
 				 	}
 				 	monThirdListDao.changeThirdList(thirdListName, secondListId, thirdListId);
 				 	note.setStatus(0);
-					note.setMsg("¸ü¸Ä³É¹¦");
+					note.setMsg("æ›´æ”¹æˆåŠŸ");
 					note.setData("");
 			 }
 			return note;

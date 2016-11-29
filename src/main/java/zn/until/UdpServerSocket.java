@@ -26,15 +26,15 @@ public class UdpServerSocket {
 	    private String orgIp;    
 	    
 	    /**  
-	     * ¹¹Ôìº¯Êı£¬°ó¶¨Ö÷»úºÍ¶Ë¿Ú.  
-	     * @param host Ö÷»ú  
-	     * @param port ¶Ë¿Ú  
+	     * æ„é€ å‡½æ•°ï¼Œç»‘å®šä¸»æœºå’Œç«¯å£.  
+	     * @param host ä¸»æœº  
+	     * @param port ç«¯å£  
 	     * @throws Exception  
 	     */    
 	    public UdpServerSocket(String host, int port) throws Exception {    
 	        socketAddress = new InetSocketAddress(host, port);    
 	        ds = new DatagramSocket(socketAddress);    
-	        System.out.println("·şÎñ¶ËÆô¶¯!");    
+	        System.out.println("æœåŠ¡ç«¯å¯åŠ¨!");    
 	    }    
 	        
 	    public final String getOrgIp() {    
@@ -42,8 +42,8 @@ public class UdpServerSocket {
 	    }    
 	    
 	    /**  
-	     * ÉèÖÃ³¬Ê±Ê±¼ä£¬¸Ã·½·¨±ØĞëÔÚbind·½·¨Ö®ºóÊ¹ÓÃ.  
-	     * @param timeout ³¬Ê±Ê±¼ä  
+	     * è®¾ç½®è¶…æ—¶æ—¶é—´ï¼Œè¯¥æ–¹æ³•å¿…é¡»åœ¨bindæ–¹æ³•ä¹‹åä½¿ç”¨.  
+	     * @param timeout è¶…æ—¶æ—¶é—´  
 	     * @throws Exception  
 	     */    
 	    public final void setSoTimeout(int timeout) throws Exception {    
@@ -51,8 +51,8 @@ public class UdpServerSocket {
 	    }    
 	    
 	    /**  
-	     * »ñµÃ³¬Ê±Ê±¼ä.  
-	     * @return ·µ»Ø³¬Ê±Ê±¼ä.  
+	     * è·å¾—è¶…æ—¶æ—¶é—´.  
+	     * @return è¿”å›è¶…æ—¶æ—¶é—´.  
 	     * @throws Exception  
 	     */    
 	    public final int getSoTimeout() throws Exception {    
@@ -60,9 +60,9 @@ public class UdpServerSocket {
 	    }    
 	    
 	    /**  
-	     * °ó¶¨¼àÌıµØÖ·ºÍ¶Ë¿Ú.  
-	     * @param host Ö÷»úIP  
-	     * @param port ¶Ë¿Ú  
+	     * ç»‘å®šç›‘å¬åœ°å€å’Œç«¯å£.  
+	     * @param host ä¸»æœºIP  
+	     * @param port ç«¯å£  
 	     * @throws SocketException  
 	     */    
 	    public final void bind(String host, int port) throws SocketException {    
@@ -72,8 +72,8 @@ public class UdpServerSocket {
 	    
 	    
 	    /**  
-	     * ½ÓÊÕÊı¾İ°ü£¬¸Ã·½·¨»áÔì³ÉÏß³Ì×èÈû.  
-	     * @return ·µ»Ø½ÓÊÕµÄÊı¾İ´®ĞÅÏ¢  
+	     * æ¥æ”¶æ•°æ®åŒ…ï¼Œè¯¥æ–¹æ³•ä¼šé€ æˆçº¿ç¨‹é˜»å¡.  
+	     * @return è¿”å›æ¥æ”¶çš„æ•°æ®ä¸²ä¿¡æ¯  
 	     * @throws IOException   
 	     */    
 	    public final String receive() throws IOException {    
@@ -82,17 +82,17 @@ public class UdpServerSocket {
 	        orgIp = packet.getAddress().getHostAddress(); 
 	       
 	        String info = new String(packet.getData(), 0, packet.getLength());    
-	        System.out.println("½ÓÊÕĞÅÏ¢£º" + info);    
+	        System.out.println("æ¥æ”¶ä¿¡æ¯ï¼š" + info);    
 	        return info; 
 	    }
 	    /**  
-	     * ½«ÏìÓ¦°ü·¢ËÍ¸øÇëÇó¶Ë.  
-	     * @param bytes »ØÓ¦±¨ÎÄ  
+	     * å°†å“åº”åŒ…å‘é€ç»™è¯·æ±‚ç«¯.  
+	     * @param bytes å›åº”æŠ¥æ–‡  
 	     * @throws IOException  
 	     */    
 	    public final void response(String info) throws IOException {    
-	        System.out.println("¿Í»§¶ËµØÖ· : " + packet.getAddress().getHostAddress()    
-	                + ",¶Ë¿Ú£º" + packet.getPort());    
+	        System.out.println("å®¢æˆ·ç«¯åœ°å€ : " + packet.getAddress().getHostAddress()    
+	                + ",ç«¯å£ï¼š" + packet.getPort());    
 	        DatagramPacket dp = new DatagramPacket(buffer, buffer.length, packet    
 	                .getAddress(), packet.getPort());    
 	        dp.setData(info.getBytes());    
@@ -100,31 +100,31 @@ public class UdpServerSocket {
 	    }    
 	    
 	    /**  
-	     * ÉèÖÃ±¨ÎÄµÄ»º³å³¤¶È.  
-	     * @param bufsize »º³å³¤¶È  
+	     * è®¾ç½®æŠ¥æ–‡çš„ç¼“å†²é•¿åº¦.  
+	     * @param bufsize ç¼“å†²é•¿åº¦  
 	     */    
 	    public final void setLength(int bufsize) {    
 	        packet.setLength(bufsize);    
 	    }    
 	    
 	    /**  
-	     * »ñµÃ·¢ËÍ»ØÓ¦µÄIPµØÖ·.  
-	     * @return ·µ»Ø»ØÓ¦µÄIPµØÖ·  
+	     * è·å¾—å‘é€å›åº”çš„IPåœ°å€.  
+	     * @return è¿”å›å›åº”çš„IPåœ°å€  
 	     */    
 	    public final InetAddress getResponseAddress() {    
 	        return packet.getAddress();    
 	    }    
 	    
 	    /**  
-	     * »ñµÃ»ØÓ¦µÄÖ÷»úµÄ¶Ë¿Ú.  
-	     * @return ·µ»Ø»ØÓ¦µÄÖ÷»úµÄ¶Ë¿Ú.  
+	     * è·å¾—å›åº”çš„ä¸»æœºçš„ç«¯å£.  
+	     * @return è¿”å›å›åº”çš„ä¸»æœºçš„ç«¯å£.  
 	     */    
 	    public final int getResponsePort() {    
 	        return packet.getPort();    
 	    }    
 	    
 	    /**  
-	     * ¹Ø±Õudp¼àÌı¿Ú.  
+	     * å…³é—­udpç›‘å¬å£.  
 	     */    
 	    public final void close() {    
 	        try {    
@@ -135,7 +135,7 @@ public class UdpServerSocket {
 	    }    
 	    
 	    /**  
-	     * ²âÊÔ·½·¨.  
+	     * æµ‹è¯•æ–¹æ³•.  
 	     * @param args  
 	     * @throws Exception  
 	     */    
@@ -148,7 +148,7 @@ public class UdpServerSocket {
 	        while (true) {    
 	            udpServerSocket.receive();
 	            System.out.println(udpServerSocket.orgIp);
-	            udpServerSocket.response("ÄãºÃ,sterning!");    
+	            udpServerSocket.response("ä½ å¥½,sterning!");    
 	                
 	        }    
 	    }    

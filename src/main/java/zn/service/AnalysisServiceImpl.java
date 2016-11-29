@@ -28,13 +28,13 @@ import zn.until.UdpServerSocket;
 public class AnalysisServiceImpl implements AnalysisService{
 			
 	
-	@Resource//×¢Èë
+	@Resource//æ³¨å…¥
 	private	MonAlarmsDao monAlarmsDao; 
 	
-	@Resource//×¢Èë
+	@Resource//æ³¨å…¥
 	private	MonDateDao monDateDao; 
 	
-	@Resource//×¢Èë
+	@Resource//æ³¨å…¥
 	private	MonitorDao monitorDao; 
 	
 	@Async
@@ -60,7 +60,7 @@ public class AnalysisServiceImpl implements AnalysisService{
 	}
 	
 	/**
-	 * ½âÎö²¢´¢´æhexÎÄ¼ş
+	 * è§£æå¹¶å‚¨å­˜hexæ–‡ä»¶
 	 * @Title: analysisHex 
 	 * @Description: TODO
 	 * @param hex
@@ -81,49 +81,49 @@ public class AnalysisServiceImpl implements AnalysisService{
 		
 
 		
-	//¶ÁÈ¡µçÑ¹µçÁ÷ÊµÊ±Öµ
-	if(mes[8]==3){	
-		if(mes[12]==6){	//µ¥Â·»òÕß6Â·
-			//AÏà×ÜµçÑ¹
-			mon.setAllAV(EncodeUtils.byte2float(mes, 16)+"");
-			//BÏà×ÜµçÑ¹
-			mon.setAllBV(EncodeUtils.byte2float(mes, 20)+"");
-			//CÏà×ÜµçÑ¹
-			mon.setAllCV(EncodeUtils.byte2float(mes, 24)+"");
-			//AÏà×ÜµçÁ÷
-			mon.setAllAA(EncodeUtils.byte2float(mes, 28)+"");
-			//BÏà×ÜµçÁ÷
-			mon.setAllBA(EncodeUtils.byte2float(mes, 32)+"");
-			//CÏà×ÜµçÁ÷
-			mon.setAllCA(EncodeUtils.byte2float(mes, 36)+"");
-			//Êª¶ÈÖµ
-			mon.setHumidity(EncodeUtils.byte2float(mes, 40)+"");
-			//µÚÒ»Â·µçÁ÷
-			mon.setA1(EncodeUtils.byte2float(mes, 44)+","+EncodeUtils.byte2float(mes, 48)+","+EncodeUtils.byte2float(mes, 52)+","+EncodeUtils.byte2float(mes, 116));
-			//µÚ¶şÂ·µçÁ÷
-			mon.setA2(EncodeUtils.byte2float(mes, 56)+","+EncodeUtils.byte2float(mes, 60)+","+EncodeUtils.byte2float(mes, 64)+","+EncodeUtils.byte2float(mes, 120));
-			//µÚÈıÂ·µçÁ÷
-			mon.setA3(EncodeUtils.byte2float(mes, 68)+","+EncodeUtils.byte2float(mes, 72)+","+EncodeUtils.byte2float(mes, 76)+","+EncodeUtils.byte2float(mes, 124));
-			//µÚËÄÂ·µçÁ÷
-			mon.setA4(EncodeUtils.byte2float(mes, 80)+","+EncodeUtils.byte2float(mes, 84)+","+EncodeUtils.byte2float(mes, 88)+","+EncodeUtils.byte2float(mes, 128));
-			//µÚÎåÂ·µçÁ÷
-			mon.setA5(EncodeUtils.byte2float(mes, 92)+","+EncodeUtils.byte2float(mes, 96)+","+EncodeUtils.byte2float(mes, 100)+","+EncodeUtils.byte2float(mes, 132));
-			//µÚÁùÂ·µçÁ÷
-			mon.setA6(EncodeUtils.byte2float(mes, 104)+","+EncodeUtils.byte2float(mes, 108)+","+EncodeUtils.byte2float(mes, 112)+","+EncodeUtils.byte2float(mes, 136));				
-		}else if(mes[12]==12){       //12Â·
-			//µÚÆßÂ·µçÁ÷
-			mon.setA7(EncodeUtils.byte2float(mes, 20)+","+EncodeUtils.byte2float(mes, 24)+","+EncodeUtils.byte2float(mes, 28)+","+EncodeUtils.byte2float(mes, 92));
-			//µÚ°ËµçÁ÷
-			mon.setA8(EncodeUtils.byte2float(mes, 32)+","+EncodeUtils.byte2float(mes, 36)+","+EncodeUtils.byte2float(mes, 40)+","+EncodeUtils.byte2float(mes, 96));
-			//µÚ¾ÅÂ·µçÁ÷
-			mon.setA9(EncodeUtils.byte2float(mes, 44)+","+EncodeUtils.byte2float(mes, 48)+","+EncodeUtils.byte2float(mes, 52)+","+EncodeUtils.byte2float(mes, 100));
-			//µÚÊ®Â·µçÁ÷
-			mon.setA10(EncodeUtils.byte2float(mes, 56)+","+EncodeUtils.byte2float(mes, 60)+","+EncodeUtils.byte2float(mes, 64)+","+EncodeUtils.byte2float(mes, 104));
-			//µÚÊ®Ò»Â·µçÁ÷
-			mon.setA11(EncodeUtils.byte2float(mes, 68)+","+EncodeUtils.byte2float(mes, 72)+","+EncodeUtils.byte2float(mes, 76)+","+EncodeUtils.byte2float(mes, 108));
-			//µÚÊ®¶şÂ·µçÁ÷
-			mon.setA12(EncodeUtils.byte2float(mes, 80)+","+EncodeUtils.byte2float(mes, 84)+","+EncodeUtils.byte2float(mes, 88)+","+EncodeUtils.byte2float(mes, 112));					
-		}		
+		//è¯»å–ç”µå‹ç”µæµå®æ—¶å€¼
+		if(mes[8]==3){	
+			if(mes[12]==6){	//å•è·¯æˆ–è€…6è·¯
+				//Aç›¸æ€»ç”µå‹
+				mon.setAllAV(EncodeUtils.byte2float(mes, 16)+"");
+				//Bç›¸æ€»ç”µå‹
+				mon.setAllBV(EncodeUtils.byte2float(mes, 20)+"");
+				//Cç›¸æ€»ç”µå‹
+				mon.setAllCV(EncodeUtils.byte2float(mes, 24)+"");
+				//Aç›¸æ€»ç”µæµ
+				mon.setAllAA(EncodeUtils.byte2float(mes, 28)+"");
+				//Bç›¸æ€»ç”µæµ
+				mon.setAllBA(EncodeUtils.byte2float(mes, 32)+"");
+				//Cç›¸æ€»ç”µæµ
+				mon.setAllCA(EncodeUtils.byte2float(mes, 36)+"");
+				//æ¹¿åº¦å€¼
+				mon.setHumidity(EncodeUtils.byte2float(mes, 40)+"");
+				//ç¬¬ä¸€è·¯ç”µæµ
+				mon.setA1(EncodeUtils.byte2float(mes, 44)+","+EncodeUtils.byte2float(mes, 48)+","+EncodeUtils.byte2float(mes, 52)+","+EncodeUtils.byte2float(mes, 116));
+				//ç¬¬äºŒè·¯ç”µæµ
+				mon.setA2(EncodeUtils.byte2float(mes, 56)+","+EncodeUtils.byte2float(mes, 60)+","+EncodeUtils.byte2float(mes, 64)+","+EncodeUtils.byte2float(mes, 120));
+				//ç¬¬ä¸‰è·¯ç”µæµ
+				mon.setA3(EncodeUtils.byte2float(mes, 68)+","+EncodeUtils.byte2float(mes, 72)+","+EncodeUtils.byte2float(mes, 76)+","+EncodeUtils.byte2float(mes, 124));
+				//ç¬¬å››è·¯ç”µæµ
+				mon.setA4(EncodeUtils.byte2float(mes, 80)+","+EncodeUtils.byte2float(mes, 84)+","+EncodeUtils.byte2float(mes, 88)+","+EncodeUtils.byte2float(mes, 128));
+				//ç¬¬äº”è·¯ç”µæµ
+				mon.setA5(EncodeUtils.byte2float(mes, 92)+","+EncodeUtils.byte2float(mes, 96)+","+EncodeUtils.byte2float(mes, 100)+","+EncodeUtils.byte2float(mes, 132));
+				//ç¬¬å…­è·¯ç”µæµ
+				mon.setA6(EncodeUtils.byte2float(mes, 104)+","+EncodeUtils.byte2float(mes, 108)+","+EncodeUtils.byte2float(mes, 112)+","+EncodeUtils.byte2float(mes, 136));				
+			}else if(mes[12]==12){       //12è·¯
+				//ç¬¬ä¸ƒè·¯ç”µæµ
+				mon.setA7(EncodeUtils.byte2float(mes, 20)+","+EncodeUtils.byte2float(mes, 24)+","+EncodeUtils.byte2float(mes, 28)+","+EncodeUtils.byte2float(mes, 92));
+				//ç¬¬å…«ç”µæµ
+				mon.setA8(EncodeUtils.byte2float(mes, 32)+","+EncodeUtils.byte2float(mes, 36)+","+EncodeUtils.byte2float(mes, 40)+","+EncodeUtils.byte2float(mes, 96));
+				//ç¬¬ä¹è·¯ç”µæµ
+				mon.setA9(EncodeUtils.byte2float(mes, 44)+","+EncodeUtils.byte2float(mes, 48)+","+EncodeUtils.byte2float(mes, 52)+","+EncodeUtils.byte2float(mes, 100));
+				//ç¬¬åè·¯ç”µæµ
+				mon.setA10(EncodeUtils.byte2float(mes, 56)+","+EncodeUtils.byte2float(mes, 60)+","+EncodeUtils.byte2float(mes, 64)+","+EncodeUtils.byte2float(mes, 104));
+				//ç¬¬åä¸€è·¯ç”µæµ
+				mon.setA11(EncodeUtils.byte2float(mes, 68)+","+EncodeUtils.byte2float(mes, 72)+","+EncodeUtils.byte2float(mes, 76)+","+EncodeUtils.byte2float(mes, 108));
+				//ç¬¬åäºŒè·¯ç”µæµ
+				mon.setA12(EncodeUtils.byte2float(mes, 80)+","+EncodeUtils.byte2float(mes, 84)+","+EncodeUtils.byte2float(mes, 88)+","+EncodeUtils.byte2float(mes, 112));					
+			}			
 	}else if(mes[8]==10){
            String T1="";
            String T2="";
@@ -229,10 +229,10 @@ public class AnalysisServiceImpl implements AnalysisService{
 	
 	
 	/**
-	 * ·ÖÎö±¨¾¯ĞÅÏ¢
+	 * åˆ†ææŠ¥è­¦ä¿¡æ¯
 	 * @Title: analysisWarningHex 
 	 * @Description: TODO
-	 * @param  byte[]Êı×é
+	 * @param  byte[]æ•°ç»„
 	 * @return   MonAlarms
 	 * @throws
 	 */
@@ -242,10 +242,10 @@ public class AnalysisServiceImpl implements AnalysisService{
 		String monAlarmsTM=EncodeUtils.getLong(mes, 16)+"-"+EncodeUtils.getLong(mes, 20)+"-"+EncodeUtils.getLong(mes, 24)+" "+EncodeUtils.getLong(mes, 28)+":"+EncodeUtils.getLong(mes, 32)+":"+EncodeUtils.getLong(mes, 36);
 		mon.setMonAlarmsTM(monAlarmsTM);
 		mon.setMonAlarmsType(Long.toHexString(EncodeUtils.getLong(mes, 12)));
-		//Ö÷¶¯ÉÏ´«ÎÂ¶È¸æ¾¯ĞÅÏ¢
+		//ä¸»åŠ¨ä¸Šä¼ æ¸©åº¦å‘Šè­¦ä¿¡æ¯
 		if(mes[12]==16){	
-			mon.setMonAlarmsInfo("ÏäÄÚÎÂ¶È¹ı¸ß¸æ¾¯,ÎÂ¶ÈÖµÎª"+EncodeUtils.byte2float(mes, 56));					
-		}else if(mes[12]==19){             //µçÁ÷¹ıÔØĞÅÏ¢				
+			mon.setMonAlarmsInfo("ç®±å†…æ¸©åº¦è¿‡é«˜å‘Šè­¦,æ¸©åº¦å€¼ä¸º"+EncodeUtils.byte2float(mes, 56));					
+		}else if(mes[12]==19){              //ç”µæµè¿‡è½½ä¿¡æ¯					
 			long monV=EncodeUtils.getLong(mes, 44);
 			long p=EncodeUtils.getLong(mes, 48);
 			String mov="";
@@ -262,7 +262,7 @@ public class AnalysisServiceImpl implements AnalysisService{
 			}else if(p==18){
 				pv="C";
 			}	
-			mon.setMonAlarmsInfo("Í¨µÀ"+EncodeUtils.getLong(mes, 40)+"Ö÷¶¯ÉÏ´«µçÁ÷¹ıÔØ±¨¾¯,¸ÃÂ·µçÑ¹Îª"+mov+","+pv+"Ïà,µçÁ÷ÖµÎª"+EncodeUtils.byte2float(mes, 56));			
+			mon.setMonAlarmsInfo("Í¨é€šé“"+EncodeUtils.getLong(mes, 40)+"ä¸»åŠ¨ä¸Šä¼ ç”µæµè¿‡è½½æŠ¥è­¦,è¯¥è·¯ç”µå‹ä¸º"+mov+","+pv+"ç›¸,ç”µæµå€¼ä¸ºÖµÎª"+EncodeUtils.byte2float(mes, 56));			
 		}else if(mes[12]==21){
 			String pv="";
 			long p=EncodeUtils.getLong(mes, 48);
@@ -273,7 +273,7 @@ public class AnalysisServiceImpl implements AnalysisService{
 			}else if(p==18){
 				pv="C";
 			}
-			mon.setMonAlarmsInfo("Ö÷¶¯ÉÏ´«×ÜµçÑ¹¹ı¸ß¸æ¾¯,"+pv+"Ïà,µçÑ¹ÖµÎª"+EncodeUtils.byte2float(mes, 56));
+			mon.setMonAlarmsInfo("ä¸»åŠ¨ä¸Šä¼ æ€»ç”µå‹è¿‡é«˜å‘Šè­¦,"+pv+"ç›¸,ç”µå‹å€¼ä¸º"+EncodeUtils.byte2float(mes, 56));
 		}else if(mes[12]==20){
 			String pv="";
 			long p=EncodeUtils.getLong(mes, 48);
@@ -284,7 +284,7 @@ public class AnalysisServiceImpl implements AnalysisService{
 			}else if(p==18){
 				pv="C";
 			}
-			mon.setMonAlarmsInfo("Ö÷¶¯ÉÏ´«×ÜµçÁ÷¹ıÔØ¸æ¾¯,"+pv+"Ïà,µçÁ÷ÖµÎª"+EncodeUtils.byte2float(mes, 56));
+			mon.setMonAlarmsInfo("ä¸»åŠ¨ä¸Šä¼ æ€»ç”µæµè¿‡è½½å‘Šè­¦,"+pv+"ç›¸,ç”µæµå€¼ä¸º"+EncodeUtils.byte2float(mes, 56));
 		}else if(mes[12]==22){
 			String pv="";
 			long p=EncodeUtils.getLong(mes, 48);
@@ -295,11 +295,11 @@ public class AnalysisServiceImpl implements AnalysisService{
 			}else if(p==18){
 				pv="C";
 			}
-			mon.setMonAlarmsInfo("Ö÷¶¯ÉÏ´«×ÜµçÑ¹¹ıµÍ¸æ¾¯,"+pv+"Ïà,µçÑ¹ÖµÎª"+EncodeUtils.byte2float(mes, 56));
-		}else if(mes[12]==24){
-			mon.setMonAlarmsInfo("Ö÷¶¯ÉÏ´«Êª¶È¹ı¸ß¸æ¾¯,Êª¶ÈÖµÎª"+EncodeUtils.byte2float(mes, 56));
-		}else if(mes[12]==55){
-			mon.setMonAlarmsInfo("Í£µç±¨¾¯");				
+			mon.setMonAlarmsInfo("ä¸»åŠ¨ä¸Šä¼ æ€»ç”µå‹è¿‡ä½å‘Šè­¦,"+pv+"ç›¸,ç”µå‹å€¼ä¸º"+EncodeUtils.byte2float(mes, 56));
+			}else if(mes[12]==24){
+				mon.setMonAlarmsInfo("ä¸»åŠ¨ä¸Šä¼ æ¹¿åº¦è¿‡é«˜å‘Šè­¦,æ¹¿åº¦å€¼ä¸º"+EncodeUtils.byte2float(mes, 56));
+			}else if(mes[12]==55){
+				mon.setMonAlarmsInfo("åœç”µæŠ¥è­¦");					
 		}else if(mes[12]==25){
 			long monV=EncodeUtils.getLong(mes, 44);
 			
@@ -310,34 +310,34 @@ public class AnalysisServiceImpl implements AnalysisService{
 				mov="380V";
 			}
 				
-			mon.setMonAlarmsInfo("Í¨µÀ"+EncodeUtils.getLong(mes, 40)+"Ö÷¶¯ÉÏ´«µ¥Â·Â©µç±¨¾¯,¸ÃÂ·µçÑ¹Îª"+mov+",Â©µçÁ÷ÖµÎª"+EncodeUtils.byte2float(mes, 56));			
+			mon.setMonAlarmsInfo("é€šé“"+EncodeUtils.getLong(mes, 40)+"ä¸»åŠ¨ä¸Šä¼ å•è·¯æ¼ç”µæŠ¥è­¦,è¯¥è·¯ç”µå‹ä¸º"+mov+",æ¼ç”µæµå€¼ä¸º"+EncodeUtils.byte2float(mes, 56));			
 		}else if(mes[12]==32){
 			long monV=EncodeUtils.getLong(mes, 44);
 			long p=EncodeUtils.getLong(mes, 48);
 			long mT=EncodeUtils.getLong(mes, 40);
 			String mov="";
 			if(monV==16){
-				mov="µ¥Ïà";
+				mov="å•ç›¸";
 			}else if(monV==17){
-				mov="ÈıÏà";
+				mov="ä¸‰ç›¸";
 			}
 			String pv="";
 			if(p==16){
-				pv="AÏà,";
+				pv="Aç›¸,";
 			}else if(p==17){
-				pv="BÏà,";					
+				pv="Bç›¸,";					
 			}else if(p==18){
-				pv="CÏà,";
+				pv="Cç›¸,";
 			}else if(p==19){
-				pv="ÁãÏß,";
+				pv="é›¶çº¿,";
 			}
 			String T="";
 			if(mT==4294967295L){
-				T="ÊäÈëÏß";
+				T="è¾“å…¥çº¿";
 			}else{
-				T="Í¨µÀ"+mT;
+				T="é€šé“"+mT;
 			}
-			mon.setMonAlarmsInfo("Í¨µÀ"+T+"Ö÷¶¯ÉÏ´«ÏßÂ·ÉÏÎÂ¶È¹ı¸ß±¨¾¯,¸ÃÂ·Îª"+mov+","+pv+"ÎÂ¶ÈÖµÎª"+EncodeUtils.byte2float(mes, 56));	
+			mon.setMonAlarmsInfo("é€šé“"+T+"ä¸»åŠ¨ä¸Šä¼ çº¿è·¯ä¸Šæ¸©åº¦è¿‡é«˜æŠ¥è­¦,è¯¥è·¯ä¸º"+mov+","+pv+"æ¸©åº¦å€¼ä¸º"+EncodeUtils.byte2float(mes, 56));	
 		}else if(mes[12]==33){
 			long monV=EncodeUtils.getLong(mes, 44);
 			long p=EncodeUtils.getLong(mes, 48);
@@ -355,7 +355,7 @@ public class AnalysisServiceImpl implements AnalysisService{
 			}else if(p==18){
 				pv="C";
 			}	
-			mon.setMonAlarmsInfo("Í¨µÀ"+EncodeUtils.getLong(mes, 40)+"´ò»ğ±¨¾¯,¸ÃÂ·µçÑ¹Îª"+mov+","+pv+"Ïà");			
+			mon.setMonAlarmsInfo("é€šé“"+EncodeUtils.getLong(mes, 40)+"æ‰“ç«æŠ¥è­¦,è¯¥è·¯ç”µå‹ä¸º"+mov+","+pv+"ç›¸");			
 		}else if(mes[12]==34){
 			long monV=EncodeUtils.getLong(mes, 44);
 			long p=EncodeUtils.getLong(mes, 48);
@@ -373,7 +373,7 @@ public class AnalysisServiceImpl implements AnalysisService{
 			}else if(p==18){
 				pv="C";
 			}	
-			mon.setMonAlarmsInfo("Í¨µÀ"+EncodeUtils.getLong(mes, 40)+"µ¥Â·µçÁ÷¹ı¸ß±¨¾¯,¸ÃÂ·µçÑ¹Îª"+mov+","+pv+"Ïà,µçÁ÷ÖµÎª"+EncodeUtils.byte2float(mes, 56));			
+			mon.setMonAlarmsInfo("é€šé“"+EncodeUtils.getLong(mes, 40)+"å•è·¯ç”µæµè¿‡é«˜æŠ¥è­¦,è¯¥è·¯ç”µå‹ä¸º"+mov+","+pv+"ç›¸,ç”µæµå€¼ä¸º"+EncodeUtils.byte2float(mes, 56));			
 			
 		}else if(mes[12]==35){
 			long monV=EncodeUtils.getLong(mes, 44);
@@ -381,27 +381,27 @@ public class AnalysisServiceImpl implements AnalysisService{
 			long mT=EncodeUtils.getLong(mes, 40);
 			String mov="";
 			if(monV==16){
-				mov="µ¥Ïà";
+				mov="å•ç›¸";
 			}else if(monV==17){
-				mov="ÈıÏà";
+				mov="ä¸‰ç›¸";
 			}
 			String pv="";
 			if(p==16){
-				pv="AÏà,";
+				pv="Aç›¸,";
 			}else if(p==17){
-				pv="BÏà,";					
+				pv="Bç›¸,";					
 			}else if(p==18){
-				pv="CÏà,";
+				pv="Cç›¸,";
 			}else if(p==19){
-				pv="ÁãÏß,";
+				pv="é›¶çº¿,";
 			}
 			String T="";
 			if(mT==4294967295L){
-				T="ÊäÈëÏß";
+				T="è¾“å…¥çº¿";
 			}else{
-				T="Í¨µÀ"+mT;
+				T="é€šé“"+mT;
 			}
-			mon.setMonAlarmsInfo(T+"ÏßÂ·ÉÏÎÂ¶È¹ı¸ß±¨¾¯,¸ÃÂ·Îª"+mov+","+pv+"ÎÂ¶ÈÖµÎª"+EncodeUtils.byte2float(mes, 56));		
+			mon.setMonAlarmsInfo(T+"çº¿è·¯ä¸Šæ¸©åº¦è¿‡é«˜æŠ¥è­¦,è¯¥è·¯ä¸º"+mov+","+pv+"æ¸©åº¦å€¼ä¸º"+EncodeUtils.byte2float(mes, 56));		
 		}		
 		return mon;
 	}

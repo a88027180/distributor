@@ -60,7 +60,7 @@ public class newTest {
 //	
 //			NoteResult note=new NoteResult();
 //			note.setStatus(1);
-//			note.setMsg("ºÏ—È’À∫≈≥…π¶");
+//			note.setMsg("Ê£ÄÈ™åË¥¶Âè∑ÊàêÂäü");
 //			note.setData("");
 //			String json=JSON.toJSONString(note);
 //			System.out.println(json);
@@ -74,7 +74,7 @@ public class newTest {
 //	           User user=new User();
 //	           user.setInformation("aa");
 //	           user.setTelephone("13123456889");
-//	           user.setUserName("∞°–‹");
+//	           user.setUserName("ÂïäÁÜä");
 //	           user.setPassword("as123");
 //	           int a=dao.addUser(user);
 //	           System.out.println(a);
@@ -93,10 +93,10 @@ public class newTest {
 //	    	 User user=new User();
 //	    	     user.setInformation("fei");
 //	    	     user.setOrgId(2);
-//	    	     user.setOrgName("ÃÏ");
+//	    	     user.setOrgName("Â§©");
 //	    	     user.setTelephone("12123456789");
 //	    	     user.setPassword(NoteUtil.md5("123456"));
-//	    	     user.setUserName("∞°ø”");
+//	    	     user.setUserName("ÂïäÂùë");
 //	    	     user.setUserId(1);
 //	    	     dao.addUserAndGetId(user);
 //	    	     dao.addUserAndOrg(user);
@@ -132,12 +132,12 @@ public class newTest {
 //			 MonitorDao dao = ac.getBean("monitorDao",MonitorDao.class);
 //			 Monitor monitor=new Monitor();      
 //			 monitor.setMonAlias("whe");
-//			 monitor.setMonInstall("±±");
+//			 monitor.setMonInstall("Âåó");
 //			 monitor.setMonIP("192.195.145");
 //			 monitor.setMonModel("8");
-//			 monitor.setMonName("∞°");
+//			 monitor.setMonName("Âïä");
 //			 monitor.setMonNumber("12356");
-//			 monitor.setMonPlace("∏£");
+//			 monitor.setMonPlace("Á¶è");
 //			 monitor.setMonType("4321");
 //			 monitor.setMonRoute(1);
 //			 monitor.setMonPlaceLevel(2);

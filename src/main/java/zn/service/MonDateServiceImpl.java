@@ -39,22 +39,22 @@ import zn.until.UdpClientSocket;
 @Transactional
 public class MonDateServiceImpl implements MonDateService{
 
-	@Resource//×¢Èë
+	@Resource//æ³¨å…¥
 	private MonDateDao  monDateDao; 
 	
 
-	@Resource//×¢Èë
+	@Resource//æ³¨å…¥
 	private MonitorDao monitorDao; 
 	
 	
-	@Resource//×¢Èë
+	@Resource//æ³¨å…¥
 	private UserDao userDao; 
 	
 	public NoteResult selectMonDateById(Integer monId) {
 		NoteResult note=new NoteResult();
 		if(monId==null){
 			note.setStatus(1);
-			note.setMsg("²ÎÊı²»ÄÜÎª¿Õ");
+			note.setMsg("å‚æ•°ä¸èƒ½ä¸ºç©º");
 			note.setData("");		
 		}else{
 			MonDate	mon	=monDateDao.selectMonDateById(monId);
@@ -87,7 +87,7 @@ public class MonDateServiceImpl implements MonDateService{
 			 monShow.setMonRoute(monitor.getMonRoute());
 			 monShow.setMonType(monitor.getMonType());
 			note.setStatus(0);
-			note.setMsg("²éÑ¯³É¹¦");
+			note.setMsg("æŸ¥è¯¢æˆåŠŸ");
 			note.setData(monShow);	
 		}
 		return note;
@@ -95,7 +95,7 @@ public class MonDateServiceImpl implements MonDateService{
 	
 	
 	/**
-	 * Ìí¼ÓÉè±¸µÄ×ÓÁĞ±í
+	 * æ·»åŠ è®¾å¤‡çš„å­åˆ—è¡¨
 	 * @Title: addMonSonList 
 	 * @Description: TODO
 	 * @param monsonList
@@ -107,7 +107,7 @@ public class MonDateServiceImpl implements MonDateService{
 	public  List<MonSon>   addMonSonList(List<MonSon> monsonList,MonDate  mon,int monRoute){
 
 				
-		//µÚÒ»Â·
+		//ç¬¬ä¸€è·¯
 		 MonSon monson1=new MonSon();
 		 monson1.setWay(1);
 		 monson1.setName(mon.getName1());
@@ -128,7 +128,7 @@ public class MonDateServiceImpl implements MonDateService{
 		 if(monRoute==1){
 				return monsonList; 
 		 }
-		 //µÚ¶şÂ·
+		 //ç¬¬äºŒè·¯
 		 MonSon monson2=new MonSon();
 		 monson2.setWay(2);
 		 monson2.setName(mon.getName2());
@@ -146,7 +146,7 @@ public class MonDateServiceImpl implements MonDateService{
 			 monson2.setT(JSON.parseObject("{"+mon.getT2().substring(0,mon.getT2().length()-1)+"}", MonT.class));
 		 }
 		 monsonList.add(monson2);
-		 //µÚÈıÂ·
+		 //ç¬¬ä¸‰è·¯
 		 MonSon monson3=new MonSon();
 		 monson3.setWay(3);
 		 monson3.setName(mon.getName3());
@@ -164,7 +164,7 @@ public class MonDateServiceImpl implements MonDateService{
 			 monson3.setT(JSON.parseObject("{"+mon.getT3().substring(0,mon.getT3().length()-1)+"}", MonT.class));
 		 }
 		 monsonList.add(monson3);
-		 //µÚËÄÂ·
+		 //ç¬¬å››è·¯
 		 MonSon monson4=new MonSon();
 		 monson4.setWay(4);
 		 monson4.setName(mon.getName4());
@@ -182,7 +182,7 @@ public class MonDateServiceImpl implements MonDateService{
 			 monson4.setT(JSON.parseObject("{"+mon.getT4().substring(0,mon.getT4().length()-1)+"}", MonT.class));
 		 }
 		 monsonList.add(monson4);
-		 //µÚÎåÂ·
+		 //ç¬¬äº”è·¯
 		 MonSon monson5=new MonSon();
 		 monson5.setWay(5);
 		 monson5.setName(mon.getName5());
@@ -200,7 +200,7 @@ public class MonDateServiceImpl implements MonDateService{
 			 monson5.setT(JSON.parseObject("{"+mon.getT5().substring(0,mon.getT5().length()-1)+"}", MonT.class));
 		 }
 		 monsonList.add(monson5);
-		 //µÚÁùÂ·
+		 //ç¬¬å…­è·¯
 		 MonSon monson6=new MonSon();
 		 monson6.setWay(6);
 		 monson6.setName(mon.getName6());
@@ -221,7 +221,7 @@ public class MonDateServiceImpl implements MonDateService{
 		 if(monRoute==6){
 			return monsonList; 
 		 }
-		 //µÚÆßÂ·
+		 //ç¬¬ä¸ƒè·¯
 		 MonSon monson7=new MonSon();
 		 monson7.setWay(7);
 		 monson7.setName(mon.getName7());
@@ -239,7 +239,7 @@ public class MonDateServiceImpl implements MonDateService{
 			 monson7.setT(JSON.parseObject("{"+mon.getT7().substring(0,mon.getT7().length()-1)+"}", MonT.class));
 		 }
 		 monsonList.add(monson7);
-		 //µÚ°ËÂ·
+		 //ç¬¬å…«è·¯
 		 MonSon monson8=new MonSon();
 		 monson8.setWay(8);
 		 monson8.setName(mon.getName8());
@@ -257,7 +257,7 @@ public class MonDateServiceImpl implements MonDateService{
 			 monson8.setT(JSON.parseObject("{"+mon.getT8().substring(0,mon.getT8().length()-1)+"}", MonT.class));
 		 }
 		 monsonList.add(monson8);
-		 //µÚ¾ÅÂ·
+		 //ç¬¬ä¹è·¯
 		 MonSon monson9=new MonSon();
 		 monson9.setWay(9);
 		 monson9.setName(mon.getName9());
@@ -275,7 +275,7 @@ public class MonDateServiceImpl implements MonDateService{
 			 monson9.setT(JSON.parseObject("{"+mon.getT9().substring(0,mon.getT9().length()-1)+"}", MonT.class));
 		 }
 		 monsonList.add(monson9);
-		 //µÚÊ®Â·
+		 //ç¬¬åè·¯
 		 MonSon monson10=new MonSon();
 		 monson10.setWay(10);
 		 monson10.setName(mon.getName10());
@@ -293,7 +293,7 @@ public class MonDateServiceImpl implements MonDateService{
 			 monson10.setT(JSON.parseObject("{"+mon.getT10().substring(0,mon.getT10().length()-1)+"}", MonT.class));
 		 }
 		 monsonList.add(monson10);
-		 //µÚÊ®Ò»Â·
+		 //ç¬¬åä¸€è·¯
 		 MonSon monson11=new MonSon();
 		 monson11.setWay(11);
 		 monson11.setName(mon.getName11());
@@ -311,7 +311,7 @@ public class MonDateServiceImpl implements MonDateService{
 			 monson11.setT(JSON.parseObject("{"+mon.getT11().substring(0,mon.getT11().length()-1)+"}", MonT.class));
 		 }
 		 monsonList.add(monson11);
-		 //µÚÊ®¶şÂ·
+		 //ç¬¬åäºŒè·¯
 		 MonSon monson12=new MonSon();
 		 monson12.setWay(12);
 		 monson12.setName(mon.getName12());
@@ -336,22 +336,22 @@ public class MonDateServiceImpl implements MonDateService{
 	
 	
 	/**
-	 * ÉèÖÃÉè±¸¿ª¹Ø
+	 * è®¾ç½®è®¾å¤‡å¼€å…³
 	 */
 	public NoteResult setMonSwitch(String  switchState,Integer way , String password,Integer monId,Integer userId) {
 		NoteResult note=new NoteResult();
 		User user=userDao.selectUserById(userId);
 		if(monId==null||switchState==null||password==null||userId==null||way==null){
 			note.setStatus(1);
-			note.setMsg("²ÎÊı²»ÄÜÎª¿Õ");
+			note.setMsg("å‚æ•°ä¸èƒ½ä¸ºç©º");
 			note.setData("");		
 		}else if(!NoteUtil.md5(password).equals(user.getPassword())){
 			note.setStatus(2);
-			note.setMsg("ÃÜÂë´íÎó");
+			note.setMsg("å¯†ç é”™è¯¯");
 			note.setData("");	
 		}else if(!switchState.matches("^[01]$")){
 			note.setStatus(3);
-			note.setMsg("²ÎÊı´íÎó");
+			note.setMsg("å‚æ•°é”™è¯¯");
 			note.setData("");	
 		}else{
 			Map<String,Object> map=  monDateDao.selectSwitchAndNumber(monId);
@@ -370,14 +370,14 @@ public class MonDateServiceImpl implements MonDateService{
 				 client.send(serverHost, serverPort, (json).getBytes()); 
 			} catch (Exception e) {
 				note.setStatus(4);
-				note.setMsg("²Ù×÷Ê§°Ü");
+				note.setMsg("æ“ä½œå¤±è´¥");
 				note.setData("");
 				e.printStackTrace();
 				return note;
 			}    
 			monDateDao.changeMonSwitch(monSwitch.replace(12-way+1, 12-way+2,switchState ).toString(), monId);
 			note.setStatus(0);
-			note.setMsg("²Ù×÷³É¹¦");
+			note.setMsg("æ“ä½œæˆåŠŸ");
 			note.setData("");
 		}
 		
@@ -386,13 +386,13 @@ public class MonDateServiceImpl implements MonDateService{
 
 
 	/**
-	 * ĞŞ¸Ä×ÓÉè±¸µÄÃû×Ö
+	 * ä¿®æ”¹å­è®¾å¤‡çš„åå­—
 	 */
 	public NoteResult setMonDateName(String monDateName,Integer route, Integer monId) {
 		NoteResult note=new NoteResult();
 		if(monId==null||monDateName==null||route==null){
 			note.setStatus(1);
-			note.setMsg("²ÎÊı²»ÄÜÎª¿Õ");
+			note.setMsg("å‚æ•°ä¸èƒ½ä¸ºç©º");
 			note.setData("");
 		}else{
 			MonDate mondate=new MonDate();
@@ -424,7 +424,7 @@ public class MonDateServiceImpl implements MonDateService{
 			}
 			monDateDao.changeMonDate(mondate);
 			note.setStatus(0);
-			note.setMsg("¸ü¸Ä³É¹¦");
+			note.setMsg("æ›´æ”¹æˆåŠŸ");
 			note.setData("");
 		}
 			return note;

@@ -23,10 +23,10 @@ import zn.until.NoteResult;
 @Service("monSecondListService")
 @Transactional
 public class MonSecondListServiceImpl implements MonSecondListService {
-	@Resource//×¢Èë
+	@Resource//æ³¨å…¥
 	private MonitorDao monitorDao;
 	
-	@Resource//×¢Èë
+	@Resource//æ³¨å…¥
 	private MonSecondListDao  monSecondListDao; 
 	
 	@Resource
@@ -34,27 +34,27 @@ public class MonSecondListServiceImpl implements MonSecondListService {
 	
 	
 	/**
-	 * Ìí¼Ó¶ş¼¶ÁĞ±í
+	 * æ·»åŠ äºŒçº§åˆ—è¡¨
 	 */
 	public NoteResult addSecondList(String secondListName, Integer firstListId) {
 		NoteResult note=new NoteResult();
 		
 		 if(secondListName==null||firstListId==null){
 			 	note.setStatus(1);
-				note.setMsg("²ÎÊı²»ÄÜÎª¿Õ");
+				note.setMsg("å‚æ•°ä¸èƒ½ä¸ºç©º");
 				note.setData("");
 		 } else if(monFirstListDao.selectIsExistById(firstListId)==0){
 			 note.setStatus(3);
-				note.setMsg("ÉÏ¼¶ÁĞ±í²»´æÔÚ");
+				note.setMsg("ä¸Šçº§åˆ—è¡¨ä¸å­˜åœ¨");
 				note.setData("");
 		 }else if(monSecondListDao.selectIsExist(secondListName)!=0){ 
 			 	note.setStatus(2);
-				note.setMsg("ÁĞ±íÒÑ´æÔÚ");
+				note.setMsg("åˆ—è¡¨å·²å­˜åœ¨");
 				note.setData("");
 		 }else{
 			 	monSecondListDao.addSecondList(secondListName, firstListId);
 			 	note.setStatus(0);
-				note.setMsg("Ìí¼ÓÁĞ±í³É¹¦");
+				note.setMsg("æ·»åŠ åˆ—è¡¨æˆåŠŸ");
 				note.setData("");
 		 }
 	return note;
@@ -62,13 +62,13 @@ public class MonSecondListServiceImpl implements MonSecondListService {
 	}
 
 	/**
-	 * É¾³ı¶ş¼¶ÁĞ±í
+	 * åˆ é™¤äºŒçº§åˆ—è¡¨
 	 */
 	public NoteResult deleteSecondList(Integer secondListId) {
 		NoteResult note=new NoteResult();	
 		 if(secondListId==null){
 			 	note.setStatus(1);
-				note.setMsg("²ÎÊı²»ÄÜÎª¿Õ");
+				note.setMsg("å‚æ•°ä¸èƒ½ä¸ºç©º");
 				note.setData("");
 		 }else{
 			 	MonSecondList mon=monSecondListDao.selectListById(secondListId);
@@ -77,7 +77,7 @@ public class MonSecondListServiceImpl implements MonSecondListService {
 			 	}
 			 	monSecondListDao.deleteSecondList(secondListId);
 				note.setStatus(0);
-				note.setMsg("É¾³ı³É¹¦");
+				note.setMsg("åˆ é™¤æˆåŠŸ");
 				note.setData("");
 		 }
 		return note;
@@ -85,22 +85,22 @@ public class MonSecondListServiceImpl implements MonSecondListService {
 	}
 
 	/**
-	 * ¸ü¸Ä¶ş¼¶ÁĞ±í
+	 * æ›´æ”¹äºŒçº§åˆ—è¡¨
 	 */
 	public NoteResult changeSecondList(String secondListName, Integer firstListId, Integer secondListId) {
 		NoteResult note=new NoteResult();
 		
 		 if(secondListName==null||firstListId==null||secondListId==null){
 			 	note.setStatus(1);
-				note.setMsg("²ÎÊı²»ÄÜÎª¿Õ");
+				note.setMsg("å‚æ•°ä¸èƒ½ä¸ºç©º");
 				note.setData("");
 		 } else if(monFirstListDao.selectIsExistById(firstListId)==0){
 			 note.setStatus(3);
-				note.setMsg("ÉÏ¼¶ÁĞ±í²»´æÔÚ");
+				note.setMsg("ä¸Šçº§åˆ—è¡¨ä¸å­˜åœ¨");
 				note.setData("");
 		 }else if(monSecondListDao.selectIsExist(secondListName)!=0){ 
 			 	note.setStatus(2);
-				note.setMsg("ÁĞ±íÒÑ´æÔÚ");
+				note.setMsg("åˆ—è¡¨å·²å­˜åœ¨");
 				note.setData("");
 		 }else{
 			 	MonSecondList mon=monSecondListDao.selectListById(secondListId);
@@ -111,20 +111,20 @@ public class MonSecondListServiceImpl implements MonSecondListService {
 
 			 	monSecondListDao.changeSecondList(secondListName, firstListId, secondListId);
 			 	note.setStatus(0);
-				note.setMsg("¸ü¸Ä³É¹¦");
+				note.setMsg("æ›´æ”¹æˆåŠŸ");
 				note.setData("");
 		 }
 		return note;
 	}
 
 	/**
-	 * ²éÑ¯ËùÓĞ¶ş¼¶ÁĞ±í
+	 * æŸ¥è¯¢æ‰€æœ‰äºŒçº§åˆ—è¡¨
 	 */
 	public NoteResult findAllSecondList() {
 		NoteResult note=new NoteResult();
 		List<MonSecondList>		list=	monSecondListDao.findAllSecondlist();
 		note.setStatus(0);
-		note.setMsg("²éÑ¯³É¹¦");
+		note.setMsg("æŸ¥è¯¢æˆåŠŸ");
 		note.setData(list);
 		return note;
 	}

@@ -13,13 +13,13 @@ import org.apache.commons.codec.binary.Hex;
 public class EncodeUtils {
 	 private static final String DEFAULT_URL_ENCODING = "UTF-8";
 	 /**
-	  * Hex����.
+	  * Hex编码.
 	  */
 	 public static String hexEncode(byte[] input) {
 	  return Hex.encodeHexString(input);
 	 }
 	 /**
-	  * Hex����.
+	  * Hex解码.
 	  */
 	 public static byte[] hexDecode(String input) {
 	  try {
@@ -31,7 +31,7 @@ public class EncodeUtils {
 	 
 	 
 		/**
-		 * ��byteת��Ϊ��λ�������ַ���
+		 * 将byte转换为八位二进制字符串
 		 * @Title: byte2bits 
 		 * @Description: TODO
 		 * @param b
@@ -46,14 +46,14 @@ public class EncodeUtils {
 			}
 
 	 /** 
-	  * ����ת��Ϊ�ֽ� 
+	  * 浮点转换为字节 
 	  *  
 	  * @param f 
 	  * @return 
 	  */  
 	 public static byte[] float2byte(float f) {  
 	       
-	     // ��floatת��Ϊbyte[]  
+	     // 把float转换为byte[]  
 	     int fbit = Float.floatToIntBits(f);  
 	       
 	     byte[] b = new byte[4];    
@@ -61,14 +61,14 @@ public class EncodeUtils {
 	         b[i] = (byte) (fbit >> (24 - i * 8));    
 	     }   
 	       
-	     // ��ת����  
+	     // 翻转数组  
 	     int len = b.length;  
-	     // ����һ����Դ����Ԫ��������ͬ������  
+	     // 建立一个与源数组元素类型相同的数组  
 	     byte[] dest = new byte[len];  
-	     // Ϊ�˷�ֹ�޸�Դ���飬��Դ���鿽��һ�ݸ���  
+	     // 为了防止修改源数组，将源数组拷贝一份副本  
 	     System.arraycopy(b, 0, dest, 0, len);  
 	     byte temp;  
-	     // ��˳λ��i���뵹����i������  
+	     // 将顺位第i个与倒数第i个交换  
 	     for (int i = 0; i < len / 2; ++i) {  
 	         temp = dest[i];  
 	         dest[i] = dest[len - i - 1];  
@@ -78,10 +78,10 @@ public class EncodeUtils {
 	 }  
 	   
 	 /** 
-	  * �ֽ�ת��Ϊ���� 
+	  * 字节转换为浮点 
 	  *  
-	  * @param b �ֽڣ�����4���ֽڣ� 
-	  * @param index ��ʼλ�� 
+	  * @param b 字节（至少4个字节） 
+	  * @param index 开始位置 
 	  * @return 
 	  */  
 	 public static float byte2float(byte[] b, int index) {    
@@ -98,7 +98,7 @@ public class EncodeUtils {
 	 
 	
 	 /**
-	  * ��C/C++���޷��� DWORD����ת��Ϊjava��long��
+	  * 将C/C++的无符号 DWORD类型转换为java的long型
 	  * @Title: getLong 
 	  * @Description: TODO
 	  * @param buf

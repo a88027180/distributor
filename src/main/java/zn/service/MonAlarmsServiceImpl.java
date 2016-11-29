@@ -24,16 +24,16 @@ import zn.until.NoteResult;
 public class MonAlarmsServiceImpl implements MonAlarmsService {
 	
 	
-	@Resource//×¢Èë
+	@Resource//æ³¨å…¥
 	private MonAlarmsDao  monAlarmsDao; 
 	/**
-	 * ²éÑ¯ËùÓĞÉè±¸¾¯Ê¾ĞÅÏ¢
+	 * æŸ¥è¯¢æ‰€æœ‰è®¾å¤‡è­¦ç¤ºä¿¡æ¯
 	 */
 	public NoteResult selectAllMonAlarms() {
 		NoteResult note=new NoteResult();
 		List<MonAlarms>    list= monAlarmsDao.selectAllMonAlarms();
 		note.setStatus(0);
-		note.setMsg("²éÑ¯³É¹¦");
+		note.setMsg("æŸ¥è¯¢æˆåŠŸ");
 		note.setData(list);
 		return note;
 	}
@@ -43,13 +43,13 @@ public class MonAlarmsServiceImpl implements MonAlarmsService {
 		NoteResult note=new NoteResult();
 		if(monId==null){
 			note.setStatus(1);
-			note.setMsg("²ÎÊı²»ÄÜÎª¿Õ");
+			note.setMsg("å‚æ•°ä¸èƒ½ä¸ºç©º");
 			note.setData("");
 		
 		}else{
 			monAlarmsDao.deleteMonAlarms(monId);
 			note.setStatus(0);
-			note.setMsg("É¾³ı³É¹¦");
+			note.setMsg("åˆ é™¤æˆåŠŸ");
 			note.setData("");
 			return note;
 		}

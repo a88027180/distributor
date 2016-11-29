@@ -7,7 +7,7 @@ import org.apache.commons.codec.binary.Base64;
 
 public class NoteUtil {
 	/**
-	 * Éú³ÉÒ»¸öÁîÅÆºÅ
+	 * ç”Ÿæˆä¸€ä¸ªä»¤ç‰Œå·
 	 * @return
 	 */
 	public static String createToken(){
@@ -16,8 +16,8 @@ public class NoteUtil {
 	}
 	
 	/**
-	 * ²ÉÓÃUUIDËã·¨Éú³ÉÒ»¸öÎ¨Ò»ĞÔµÄ×Ö·û´®
-	 * @return Ö÷¼üÖµid
+	 * é‡‡ç”¨UUIDç®—æ³•ç”Ÿæˆä¸€ä¸ªå”¯ä¸€æ€§çš„å­—ç¬¦ä¸²
+	 * @return ä¸»é”®å€¼id
 	 */
 	public static String createId(){
 		UUID uuid = UUID.randomUUID();
@@ -26,23 +26,23 @@ public class NoteUtil {
 	}
 	
 	/**
-	 * ½«msg²ÉÓÃMD5Ëã·¨´¦Àí,·µ»ØÒ»¸öString½á¹û
-	 * @param msg Ã÷ÎÄ
-	 * @return ÃÜÎÄ
+	 * å°†msgé‡‡ç”¨MD5ç®—æ³•å¤„ç†,è¿”å›ä¸€ä¸ªStringç»“æœ
+	 * @param msg æ˜æ–‡
+	 * @return å¯†æ–‡
 	 */
 	public static String md5(String msg){
 		try{
 			MessageDigest md = 
 				MessageDigest.getInstance("MD5");
-			//Ô­Ê¼ĞÅÏ¢input
+			//åŸå§‹ä¿¡æ¯input
 			byte[] input = msg.getBytes();
-			//¼ÓÃÜĞÅÏ¢output
-			byte[] output = md.digest(input);//¼ÓÃÜ´¦Àí
-			//²ÉÓÃBase64½«¼ÓÃÜÄÚÈİoutput×ª³ÉString×Ö·û´®
+			//åŠ å¯†ä¿¡æ¯output
+			byte[] output = md.digest(input);//åŠ å¯†å¤„ç†
+			//é‡‡ç”¨Base64å°†åŠ å¯†å†…å®¹outputè½¬æˆStringå­—ç¬¦ä¸²
 			String s = Base64.encodeBase64String(output);
 			return s;
 		}catch(Exception ex){
-			System.out.println("md5¼ÓÃÜÊ§°Ü");
+			System.out.println("md5åŠ å¯†å¤±è´¥");
 			return null;
 		}
 	}

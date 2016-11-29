@@ -28,14 +28,14 @@ import zn.until.NoteResult;
 @Transactional
 public class MonitorServiceImpl implements  MonitorService{
 	
-	@Resource//×¢Èë
+	@Resource//æ³¨å…¥
 	private MonitorDao monitorDao;
 	
-	@Resource//×¢Èë
+	@Resource//æ³¨å…¥
 	private MonDateDao monDateDao;
 
 	/**
-	 * Ìí¼ÓÉè±¸
+	 * æ·»åŠ è®¾å¤‡
 	 */
 	public NoteResult addMon(String monStr) {
 		NoteResult note=new NoteResult();
@@ -44,73 +44,73 @@ public class MonitorServiceImpl implements  MonitorService{
 			Monitor mon=JSON.parseObject(monStr, Monitor.class);
 			if(mon==null){
 				note.setStatus(1);
-				note.setMsg("²ÎÊıÎª¿Õ");
+				note.setMsg("å‚æ•°ä¸ºç©º");
 				note.setData("");
 			
 			}else if(mon.getMonNumber()==null){
 				note.setStatus(2);
-				note.setMsg("Éè±¸±àºÅÎª¿Õ");
+				note.setMsg("è®¾å¤‡ç¼–å·ä¸ºç©º");
 				note.setData("");
 				
 			}else if(monitorDao.monIsExist(mon.getMonNumber())!=0){
 				note.setStatus(3);
-				note.setMsg("Éè±¸±àºÅÒÑ´æÔÚ");
+				note.setMsg("è®¾å¤‡ç¼–å·å·²å­˜åœ¨");
 				note.setData("");
 				
 			}else{
 				monitorDao.addMon(mon);
 				monDateDao.addMonDateId(mon.getMonId());
 				note.setStatus(0);
-				note.setMsg("Ìí¼ÓÉè±¸³É¹¦");
+				note.setMsg("æ·»åŠ è®¾å¤‡æˆåŠŸ");
 				note.setData("");
 			}
 			
 		} catch (JSONException e) {
 			note.setStatus(4);
-			note.setMsg("²ÎÊı¸ñÊ½´íÎó");
+			note.setMsg("å‚æ•°æ ¼å¼é”™è¯¯");
 			note.setData("");
 		}catch(ClassCastException c){
 			note.setStatus(4);
-			note.setMsg("²ÎÊı¸ñÊ½´íÎó");
+			note.setMsg("å‚æ•°æ ¼å¼é”™è¯¯");
 			note.setData("");
 		} 
 		return note;
 	}
 
 	/**
-	 * ²éÑ¯ËùÓĞÉè±¸ĞÅÏ¢
+	 * æŸ¥è¯¢æ‰€æœ‰è®¾å¤‡ä¿¡æ¯
 	 */
 	public NoteResult findAllMon() {
 		NoteResult note=new NoteResult();
 		List<Monitor> list=monitorDao.findAllMon();
 		note.setStatus(0);
-		note.setMsg("²éÑ¯³É¹¦");
+		note.setMsg("æŸ¥è¯¢æˆåŠŸ");
 		note.setData(list);
 		
 		return note;
 	}
 
 	/**
-	 * É¾³ıÉè±¸³É¹¦
+	 * åˆ é™¤è®¾å¤‡æˆåŠŸ
 	 */
 	public NoteResult deleteMon(Integer monId) {
 		NoteResult note=new NoteResult();
 		if(monId==null){
 			note.setStatus(1);
-			note.setMsg("²ÎÊıÎª¿Õ");
+			note.setMsg("å‚æ•°ä¸ºç©º");
 			note.setData("");
 		}else{
 		
 		monitorDao.deleteMon(monId);
 		note.setStatus(0);
-		note.setMsg("É¾³ı³É¹¦");
+		note.setMsg("åˆ é™¤æˆåŠŸ");
 		note.setData("");
 		}
 		return note;
 	}
 
 	/**
-	 * ¸ü¸ÄÉè±¸ĞÅÏ¢
+	 * æ›´æ”¹è®¾å¤‡ä¿¡æ¯
 	 */
 	public NoteResult changeMon(String monStr) {
 		NoteResult note=new NoteResult();
@@ -118,34 +118,34 @@ public class MonitorServiceImpl implements  MonitorService{
 			Monitor mon=JSON.parseObject(monStr, Monitor.class);
 			if(mon==null){
 				note.setStatus(1);
-				note.setMsg("²ÎÊıÎª¿Õ");
+				note.setMsg("å‚æ•°ä¸ºç©º");
 				note.setData("");
 			}else{
 				monitorDao.changeMon(mon);
 				note.setStatus(0);
-				note.setMsg("¸ü¸ÄÉè±¸ĞÅÏ¢³É¹¦");
+				note.setMsg("æ›´æ”¹è®¾å¤‡ä¿¡æ¯æˆåŠŸ");
 				note.setData("");
 			}
 		} catch (JSONException e) {
 			note.setStatus(4);
-			note.setMsg("²ÎÊı¸ñÊ½´íÎó");
+			note.setMsg("å‚æ•°æ ¼å¼é”™è¯¯");
 			note.setData("");
 		}catch(ClassCastException c){
 			note.setStatus(4);
-			note.setMsg("²ÎÊı¸ñÊ½´íÎó");
+			note.setMsg("å‚æ•°æ ¼å¼é”™è¯¯");
 			note.setData("");
 		} 
 		return note;
 	}
 
 	/**
-	 * ¸øÖ¸¶¨Éè±¸Ìí¼ÓÓÃ»§ÁĞ±í
+	 * ç»™æŒ‡å®šè®¾å¤‡æ·»åŠ ç”¨æˆ·åˆ—è¡¨
 	 */
 	public NoteResult monAddUser(String jsonStr) {
 		NoteResult note=new NoteResult();
 		if(jsonStr==null||"".equals(jsonStr)){
 			note.setStatus(5);
-			note.setMsg("²ÎÊıÎª¿Õ");
+			note.setMsg("å‚æ•°ä¸ºç©º");
 			note.setData("");
 			return note;
 		}
@@ -153,34 +153,34 @@ public class MonitorServiceImpl implements  MonitorService{
 			Map<String,Object> map=JSON.parseObject(jsonStr);
 		if(map==null||map.isEmpty()){				
 			note.setStatus(5);
-			note.setMsg("²ÎÊıÎª¿Õ");
+			note.setMsg("å‚æ•°ä¸ºç©º");
 			note.setData("");
 			return note;
 		}else if(map.get("monId")==null){
 			note.setStatus(2);
-			note.setMsg("Éè±¸idÎª¿Õ");
+			note.setMsg("è®¾å¤‡idä¸ºç©º");
 			note.setData("");
 			
 		}else if(map.get("userList")==null||"".equals(map.get("userList"))){
 			monitorDao.monDelteUser((Integer)map.get("monId"));
 			note.setStatus(0);
-			note.setMsg("Çå¿ÕÉè±¸ÓÃ»§ÁĞ±í³É¹¦");
+			note.setMsg("æ¸…ç©ºè®¾å¤‡ç”¨æˆ·åˆ—è¡¨æˆåŠŸ");
 			note.setData("");
 			
 		}else{
 			monitorDao.monDelteUser((Integer)map.get("monId"));
 			monitorDao.monAddUser(map);
 			note.setStatus(0);
-			note.setMsg("²Ù×÷³É¹¦");
+			note.setMsg("æ“ä½œæˆåŠŸ");
 			note.setData("");
 		}
 		} catch (JSONException e) {
 			note.setStatus(4);
-			note.setMsg("²ÎÊı¸ñÊ½´íÎó");
+			note.setMsg("å‚æ•°æ ¼å¼é”™è¯¯");
 			note.setData("");
 		}catch(ClassCastException c){
 			note.setStatus(4);
-			note.setMsg("²ÎÊı¸ñÊ½´íÎó");
+			note.setMsg("å‚æ•°æ ¼å¼é”™è¯¯");
 			note.setData("");
 		}
 		return note;
@@ -188,20 +188,20 @@ public class MonitorServiceImpl implements  MonitorService{
 	}
 
 	/**
-	 * ²éÑ¯Ö¸¶¨ÓÃ»§ÏÂµÄËùÓĞÉè±¸
+	 * æŸ¥è¯¢æŒ‡å®šç”¨æˆ·ä¸‹çš„æ‰€æœ‰è®¾å¤‡
 	 */
 	public NoteResult seleteMonByUserId(Integer userId) {
 		NoteResult note=new NoteResult();
 		
 		if(userId==null){
 			note.setStatus(5);
-			note.setMsg("²ÎÊıÎª¿Õ");
+			note.setMsg("å‚æ•°ä¸ºç©º");
 			note.setData("");
 			
 		}else{
 		List<Monitor> list=monitorDao.seleteMonByUserId(userId);
 			note.setStatus(5);
-			note.setMsg("²Ù×÷³É¹¦");
+			note.setMsg("æ“ä½œæˆåŠŸ");
 			note.setData(list);
 		}
 		return note;	
