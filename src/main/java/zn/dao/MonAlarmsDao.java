@@ -16,5 +16,6 @@ public interface MonAlarmsDao {
 	public   int selectAlarmsDateIsExist(int monId);
 	public    int  addMonAlarms(MonAlarms monAlarms);
 	public int changeMonAlarms(MonAlarms monAlarms);
-	public int deleteMonAlarms(int monId);
+	public int deleteMonAlarmsById(int alarmsId);
+	public int deleteMonAlarmsByMonId(int monId);
 }

@@ -29,8 +29,13 @@
 	</update>
 	
 	
-	<delete id="deleteMonAlarms" parameterType="int">
+	<delete id="deleteMonAlarmsByMonId" parameterType="int">
 	delete from monalarms where monId=#{monId}
 	</delete>
+	
+	<delete id="deleteMonAlarmsById" parameterType="int">
+	delete from monalarms where alarmsId=#{alarmsId}
+	</delete>
+
  	
  </mapper>

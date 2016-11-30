@@ -47,7 +47,7 @@ public class AnalysisServiceImpl implements AnalysisService{
 
 				  String be=udpServerSocket.receive();
 				  String bex=be.replaceAll("\\s", "");
-				    byte[] hex=bex.getBytes();
+				  byte[] hex=EncodeUtils.hexDecode(bex);
 				    String monNumber=bex.substring(bex.length()-32, bex.length());
 	            analysisHex(hex,monNumber);
 	                
@@ -193,12 +193,9 @@ public class AnalysisServiceImpl implements AnalysisService{
 	}else if(mes[8]==30){
 		MonAlarms monAlarms=analysisWarningHex(mes);
 		
-		monAlarms.setMonId(monit.getMonId());
-		if(monAlarmsDao.selectAlarmsDateIsExist(monit.getMonId())==0){
+		monAlarms.setMonId(mon.getMonId());
+		
 		monAlarmsDao.addMonAlarms(monAlarms);	
-		}else{
-			monAlarmsDao.changeMonAlarms(monAlarms);
-		}
 		return;
 	}
 	

@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import zn.service.MonAlarmsService;
-import zn.service.MonitorService;
 import zn.until.NoteResult;
 
 /**
@@ -19,16 +18,17 @@ import zn.until.NoteResult;
  */
 @Controller
 @RequestMapping("/monAlarms")
-public class DeleteMonAlarmsController {
+public class DeleteMonAlarmsByIdController {
 	@Resource
 	private MonAlarmsService monAlarmsService;
 	
-	@RequestMapping("/deleteMonAlarms")
+	@RequestMapping("/deleteMonAlarmsById")
 	@ResponseBody
-	public NoteResult execute(Integer monId){
-		NoteResult note=monAlarmsService.deleteMonAlarms(monId);	
+	public NoteResult execute(Integer alarmsId){
+		NoteResult note=monAlarmsService.deleteMonAlarmsById(alarmsId);	
 		return note;
 		
 	}
+
 
 }

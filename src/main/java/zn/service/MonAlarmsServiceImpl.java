@@ -39,7 +39,7 @@ public class MonAlarmsServiceImpl implements MonAlarmsService {
 	}
 
 	
-	public NoteResult deleteMonAlarms(Integer monId) {
+	public NoteResult deleteMonAlarmsByMonId(Integer monId) {
 		NoteResult note=new NoteResult();
 		if(monId==null){
 			note.setStatus(1);
@@ -47,7 +47,7 @@ public class MonAlarmsServiceImpl implements MonAlarmsService {
 			note.setData("");
 		
 		}else{
-			monAlarmsDao.deleteMonAlarms(monId);
+			monAlarmsDao.deleteMonAlarmsByMonId(monId);
 			note.setStatus(0);
 			note.setMsg("删除成功");
 			note.setData("");
@@ -55,5 +55,24 @@ public class MonAlarmsServiceImpl implements MonAlarmsService {
 		}
 		return note;
 	}
+	
+	
+	public NoteResult deleteMonAlarmsById(Integer alarmsId) {
+		NoteResult note=new NoteResult();
+		if(alarmsId==null){
+			note.setStatus(1);
+			note.setMsg("参数不能为空");
+			note.setData("");
+		
+		}else{
+			monAlarmsDao.deleteMonAlarmsById(alarmsId);
+			note.setStatus(0);
+			note.setMsg("删除成功");
+			note.setData("");
+			return note;
+		}
+		return note;
+	}
+
 
 }

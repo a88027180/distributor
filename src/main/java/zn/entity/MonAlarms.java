@@ -8,8 +8,15 @@ package zn.entity;
  *
  */
 public class MonAlarms {
+	private int alarmsId;
 	private int monId;
 	
+	public int getAlarmsId() {
+		return alarmsId;
+	}
+	public void setAlarmsId(int alarmsId) {
+		this.alarmsId = alarmsId;
+	}
 	private String monAlarmsType;
 	private String monAlarmsTM;
 	private String monAlarmsInfo;
@@ -40,8 +47,9 @@ public class MonAlarms {
 	}
 	@Override
 	public String toString() {
-		return "Monalarms [monId=" + monId  + ", monAlarmsType=" + monAlarmsType + ", monAlarmsTM="
-				+ monAlarmsTM + ", monAlarmsInfo=" + monAlarmsInfo + "]";
+		return "MonAlarms [alarmsId=" + alarmsId + ", monId=" + monId + ", monAlarmsType=" + monAlarmsType
+				+ ", monAlarmsTM=" + monAlarmsTM + ", monAlarmsInfo=" + monAlarmsInfo + "]";
 	}
+
 	
 }
