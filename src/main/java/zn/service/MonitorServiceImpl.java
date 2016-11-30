@@ -120,6 +120,16 @@ public class MonitorServiceImpl implements  MonitorService{
 				note.setStatus(1);
 				note.setMsg("参数为空");
 				note.setData("");
+			}else if(mon.getMonNumber()==null){
+				note.setStatus(2);
+				note.setMsg("设备编号为空");
+				note.setData("");
+				
+			}else if(monitorDao.monIsExist(mon.getMonNumber())!=0){
+				note.setStatus(3);
+				note.setMsg("设备编号已存在");
+				note.setData("");
+				
 			}else{
 				monitorDao.changeMon(mon);
 				note.setStatus(0);

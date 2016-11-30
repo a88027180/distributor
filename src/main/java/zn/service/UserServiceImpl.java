@@ -314,7 +314,7 @@ public class UserServiceImpl implements UserService{
 		}
 		try {
 			Map<String,Object> map=JSON.parseObject(jsonStr);
-		if(map.get("monList")==null||"".equals(map.get("monList"))){				
+		if(map==null||map.isEmpty()){				
 			note.setStatus(1);
 			note.setMsg("参数不能为空");
 			note.setData("");
@@ -324,7 +324,7 @@ public class UserServiceImpl implements UserService{
 			note.setMsg("用户id为空");
 			note.setData("");
 					
-		}else if(map==null||map.isEmpty()){
+		}else if(map.get("monList")==null||"".equals(map.get("monList"))||"[]".equals(map.get("monList"))){
 			userDao.userDelteMon((Integer)map.get("userId"));
 			note.setStatus(0);
 			note.setMsg("清空用户设备列表成功");
