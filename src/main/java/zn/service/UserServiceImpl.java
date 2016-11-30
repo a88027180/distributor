@@ -307,16 +307,16 @@ public class UserServiceImpl implements UserService{
 	public NoteResult userAddMon(String jsonStr) {
 		NoteResult note=new NoteResult();
 		if(jsonStr==null||"".equals(jsonStr)){
-			note.setStatus(5);
-			note.setMsg("参数为空");
+			note.setStatus(1);
+			note.setMsg("参数不能为空");
 			note.setData("");
 			return note;
 		}
 		try {
 			Map<String,Object> map=JSON.parseObject(jsonStr);
 		if(map==null||map.isEmpty()){				
-			note.setStatus(5);
-			note.setMsg("参数为空");
+			note.setStatus(1);
+			note.setMsg("参数不能为空");
 			note.setData("");
 			return note;
 		}else if(map.get("userId")==null){
@@ -357,13 +357,13 @@ public class UserServiceImpl implements UserService{
 		NoteResult note=new NoteResult();
 		
 		if(monId==null){
-			note.setStatus(5);
-			note.setMsg("参数为空");
+			note.setStatus(1);
+			note.setMsg("参数不能为空");
 			note.setData("");
 			
 		}else{
 		List<User> list=userDao.seleteUserByMonId(monId);
-			note.setStatus(5);
+			note.setStatus(0);
 			note.setMsg("操作成功");
 			note.setData(list);
 		}
