@@ -171,7 +171,7 @@ public class MonitorServiceImpl implements  MonitorService{
 			note.setMsg("设备id为空");
 			note.setData("");
 			
-		}else if(map.get("userList")==null||"".equals(map.get("userList"))){
+		}else if(map.get("userList")==null||"".equals(map.get("userList"))||"[]".equals(map.get("userList"))){
 			monitorDao.monDelteUser((Integer)map.get("monId"));
 			note.setStatus(0);
 			note.setMsg("清空设备用户列表成功");
@@ -204,13 +204,13 @@ public class MonitorServiceImpl implements  MonitorService{
 		NoteResult note=new NoteResult();
 		
 		if(userId==null){
-			note.setStatus(5);
+			note.setStatus(1);
 			note.setMsg("参数为空");
 			note.setData("");
 			
 		}else{
 		List<Monitor> list=monitorDao.seleteMonByUserId(userId);
-			note.setStatus(5);
+			note.setStatus(0);
 			note.setMsg("操作成功");
 			note.setData(list);
 		}
