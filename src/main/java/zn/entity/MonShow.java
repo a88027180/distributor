@@ -21,6 +21,13 @@ public class MonShow {
 	private String monType;							//设备类型
 	private String monNumber;                       //设备编号
 	private int monRoute;                           //设备路数
+	private String monInT;
+	public String getMonInT() {
+		return monInT;
+	}
+	public void setMonInT(String monInT) {
+		this.monInT = monInT;
+	}
 	private String allAV;
 	private String allBV;
 	private String allCV;
@@ -149,9 +156,9 @@ public class MonShow {
 		return "MonShow [monId=" + monId + ", monName=" + monName + ", monAlias=" + monAlias + ", monInstall="
 				+ monInstall + ", monIP=" + monIP + ", monModel=" + monModel + ", monPlace=" + monPlace
 				+ ", monPlaceLevel=" + monPlaceLevel + ", monType=" + monType + ", monNumber=" + monNumber
-				+ ", monRoute=" + monRoute + ", allAV=" + allAV + ", allBV=" + allBV + ", allCV=" + allCV
-				+ ", humidity=" + humidity + ", allAA=" + allAA + ", allBA=" + allBA + ", allCA=" + allCA + ", list="
-				+ list + "]";
+				+ ", monRoute=" + monRoute + ", monInT=" + monInT + ", allAV=" + allAV + ", allBV=" + allBV + ", allCV="
+				+ allCV + ", humidity=" + humidity + ", allAA=" + allAA + ", allBA=" + allBA + ", allCA=" + allCA
+				+ ", list=" + list + "]";
 	}
 	
 	
