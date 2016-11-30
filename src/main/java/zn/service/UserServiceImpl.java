@@ -69,7 +69,7 @@ public class UserServiceImpl implements UserService{
 				loginDao.deleteCountByuserId(userId);
 				String lastLoadTime=format.format(new Date());
 				userDao.changeUserState(userId,lastLoadTime);
-				note.setStatus(1);
+				note.setStatus(0);
 				note.setMsg("登陆成功");
 				note.setData(userId);				
 			}
