@@ -52,7 +52,6 @@
         <property name="maxInMemorySize" value="40960" />    
     </bean>   
     
-    
          <!-- 拦截器 -->  
         <mvc:interceptors>  
             <!-- 多个拦截器，顺序执行 -->  

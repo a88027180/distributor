@@ -54,7 +54,7 @@ public class LoginInterceptor implements HandlerInterceptor {
         }  
         //不符合条件的，跳转到登录界面  
         request.getRequestDispatcher("/user/login.do").forward(request, response);  
-        System.out.println(2); 
+
         return false;  
     }  
   
