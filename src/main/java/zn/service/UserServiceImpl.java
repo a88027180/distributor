@@ -47,7 +47,7 @@ public class UserServiceImpl implements UserService{
 		int state=userDao.checkTel(telephone);	
 		if(state==0){          					//检查用户的账号是否正确    
 		note.setStatus(1);
-		note.setMsg("账号错误");
+		note.setMsg("账号错误或者用户未登陆");
 		note.setData("");
 		}else{
 			String pass=NoteUtil.md5(password);   //对密码加密
@@ -74,7 +74,7 @@ public class UserServiceImpl implements UserService{
 				loginDao.deleteCountByuserId(userId);
 				String lastLoadTime=format.format(new Date());
 				userDao.changeUserState(userId,lastLoadTime);
-		
+				
 				note.setStatus(0);
 				note.setMsg("登陆成功");
 				note.setData(userId);
