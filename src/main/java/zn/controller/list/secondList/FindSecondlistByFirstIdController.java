@@ -24,8 +24,8 @@ public class FindSecondlistByFirstIdController {
 	
 	@RequestMapping("/findByFirst")
 	@ResponseBody
-	public NoteResult execute(){
-		NoteResult note=monSecondListService.findAllSecondList();
+	public NoteResult execute(Integer firstListId){
+		NoteResult note=monSecondListService.findSecondlistByFirstId(firstListId);
 		return note;
 		
 	}

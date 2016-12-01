@@ -132,12 +132,13 @@ public class MonSecondListServiceImpl implements MonSecondListService {
 	
 	public NoteResult findSecondlistByFirstId(Integer firstListId) {
 		NoteResult note=new NoteResult();
-		List<MonSecondList>		list=	monSecondListDao.findSecondlistByFirstId(firstListId);
+		
 		 if(firstListId==null){
 			 	note.setStatus(1);
 				note.setMsg("参数不能为空");
 				note.setData("");
 		 }else{
+			 List<MonSecondList>		list=	monSecondListDao.findSecondlistByFirstId(firstListId);
 			 note.setStatus(0);
 			 note.setMsg("查询成功");
 			 note.setData(list);

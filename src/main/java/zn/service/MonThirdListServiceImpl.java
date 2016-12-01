@@ -51,12 +51,13 @@ public class MonThirdListServiceImpl implements MonThirdListService {
 	public NoteResult findThirdlistBySecondId(Integer secondListId) {
 		
 		NoteResult note=new NoteResult();
-		List<MonThirdList>		list=monThirdListDao.findThirdlistBySecondId(secondListId)	;
+		
 		if(secondListId==null){
 		 	note.setStatus(1);
 			note.setMsg("参数不能为空");
 			note.setData("");
 	 } else{
+		 List<MonThirdList>		list=monThirdListDao.findThirdlistBySecondId(secondListId)	;
 		 note.setStatus(0);
 		note.setMsg("查询成功");
 		note.setData(list);
