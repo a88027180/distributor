@@ -254,14 +254,14 @@ public class UserServiceImpl implements UserService{
 	public NoteResult changePassword(String oldPassword,String nowFirstPassword,String nowTwoPassword,Integer userId,HttpSession session) {
 		NoteResult note=new NoteResult();
 		User  user=userDao.selectUserById(userId);
-		if(oldPassword==null||userId==null||nowFirstPassword==null||nowTwoPassword==null){
-			note.setStatus(1);
-			note.setMsg("参数不能为空");
-			note.setData("");	
-		}else if(session.getAttribute("userId")!=userId){
+		 if(session.getAttribute("userId")!=userId){
 			note.setStatus(7);
 			note.setMsg("用户未登陆");
 			note.setData("");
+		 }else	if(oldPassword==null||userId==null||nowFirstPassword==null||nowTwoPassword==null){
+				note.setStatus(1);
+				note.setMsg("参数不能为空");
+				note.setData("");	
 		}else if(user.getLimitsId()!=1){
 			note.setStatus(6);
 			note.setMsg("权限不足");
