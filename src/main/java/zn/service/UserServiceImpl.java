@@ -74,11 +74,11 @@ public class UserServiceImpl implements UserService{
 				loginDao.deleteCountByuserId(userId);
 				String lastLoadTime=format.format(new Date());
 				userDao.changeUserState(userId,lastLoadTime);
-				session.setAttribute("userId", userId);
+		
 				note.setStatus(0);
 				note.setMsg("登陆成功");
 				note.setData(userId);
-			
+				session.setAttribute("telephone", telephone);
 			}
 		}		
 		return note;
@@ -254,11 +254,7 @@ public class UserServiceImpl implements UserService{
 	public NoteResult changePassword(String oldPassword,String nowFirstPassword,String nowTwoPassword,Integer userId,HttpSession session) {
 		NoteResult note=new NoteResult();
 		User  user=userDao.selectUserById(userId);
-		 if(session.getAttribute("userId")!=userId){
-			note.setStatus(7);
-			note.setMsg("用户未登陆");
-			note.setData("");
-		 }else	if(oldPassword==null||userId==null||nowFirstPassword==null||nowTwoPassword==null){
+		if(oldPassword==null||userId==null||nowFirstPassword==null||nowTwoPassword==null){
 				note.setStatus(1);
 				note.setMsg("参数不能为空");
 				note.setData("");	
