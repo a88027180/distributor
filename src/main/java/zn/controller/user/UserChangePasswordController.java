@@ -4,6 +4,7 @@
 package zn.controller.user;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,8 +25,8 @@ public class UserChangePasswordController {
 	
 	@RequestMapping("/changePassword")
 	@ResponseBody
-	public NoteResult execute(String oldPassword,String nowFirstPassword,String nowTwoPassword,Integer userId){
-		NoteResult note=userService.changePassword(oldPassword, nowFirstPassword, nowTwoPassword, userId);
+	public NoteResult execute(String oldPassword,String nowFirstPassword,String nowTwoPassword,Integer userId,HttpSession session){
+		NoteResult note=userService.changePassword(oldPassword, nowFirstPassword, nowTwoPassword, userId,session);
 		return note;	
 	}
 }

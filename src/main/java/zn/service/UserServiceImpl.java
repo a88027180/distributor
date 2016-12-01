@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
-
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -26,6 +26,11 @@ public class UserServiceImpl implements UserService{
 
 	@Resource//注入
 	private UserDao userDao;
+	
+	@Resource
+	HttpSession session;
+	
+	
 	
 	@Resource
 	private LoginDao loginDao;
@@ -69,10 +74,11 @@ public class UserServiceImpl implements UserService{
 				loginDao.deleteCountByuserId(userId);
 				String lastLoadTime=format.format(new Date());
 				userDao.changeUserState(userId,lastLoadTime);
-				
+				session.setAttribute("userId", userId);
 				note.setStatus(0);
 				note.setMsg("登陆成功");
-				note.setData(userId);				
+				note.setData(userId);
+			
 			}
 		}		
 		return note;
@@ -245,13 +251,17 @@ public class UserServiceImpl implements UserService{
 	/**
 	 * 更改用户密码
 	 */
-	public NoteResult changePassword(String oldPassword,String nowFirstPassword,String nowTwoPassword,Integer userId) {
+	public NoteResult changePassword(String oldPassword,String nowFirstPassword,String nowTwoPassword,Integer userId,HttpSession session) {
 		NoteResult note=new NoteResult();
 		User  user=userDao.selectUserById(userId);
 		if(oldPassword==null||userId==null||nowFirstPassword==null||nowTwoPassword==null){
 			note.setStatus(1);
 			note.setMsg("参数不能为空");
 			note.setData("");	
+		}else if(session.getAttribute("userId")!=userId){
+			note.setStatus(7);
+			note.setMsg("用户未登陆");
+			note.setData("");
 		}else if(user.getLimitsId()!=1){
 			note.setStatus(6);
 			note.setMsg("权限不足");

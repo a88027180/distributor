@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import zn.entity.User;
 import zn.service.UserService;
@@ -23,6 +24,7 @@ public class UserLoginController {
 	@RequestMapping("/login")
 	@ResponseBody
 	public NoteResult execute(String telephone,String password){
+		
 		NoteResult note=userService.checkLogin(telephone, password);	
 		return note;	
 	}
