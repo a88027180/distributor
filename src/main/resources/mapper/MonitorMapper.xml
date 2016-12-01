@@ -17,6 +17,7 @@
 		<result property="monType" column="monType"/>
 		<result property="monRoute" column="monRoute" />
 		<result property="monPlaceLevel" column="monPlaceLevel"/>
+		<result property="monState" column="monState"/>
  	</resultMap>
  	
  	<!-- 查询所有设备信息 -->
@@ -38,8 +39,8 @@
  	
  	<!--添加设备  -->
  	<insert id="addMon" parameterType="zn.entity.Monitor" useGeneratedKeys="true" keyProperty="monId">
- 	insert into monitor(monAlias,monInstall,monIP,monModel,monName,monNumber,monPlace,monType,monRoute,monPlaceLevel) 
- 	value(#{monAlias},#{monInstall},#{monIP},#{monModel},#{monName},#{monNumber},#{monPlace},#{monType},#{monRoute},#{monPlaceLevel});
+ 	insert into monitor(monAlias,monInstall,monIP,monModel,monName,monNumber,monPlace,monType,monRoute,monPlaceLevel,monState) 
+ 	value(#{monAlias},#{monInstall},#{monIP},#{monModel},#{monName},#{monNumber},#{monPlace},#{monType},#{monRoute},#{monPlaceLevel},#{monState});
  	</insert>
  
 	<!-- 根据设备id删除设备 --> 
@@ -61,6 +62,7 @@
 	<if test="monType!=null">monPlace=#{monType},</if>
 	<if test="monRoute!=null">monPlace=#{monRoute},</if>
 	<if test="monPlaceLevel!=null">monPlace=#{monPlaceLevel},</if>
+	<if test="monState!=null"> monState=#{monState},   </if>
 	</set> where monId=#{monId};
 	</update>
 	

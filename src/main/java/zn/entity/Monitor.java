@@ -19,8 +19,14 @@ public class Monitor {
 	private String monType;							//设备类型
 	private String monNumber;                       //设备编号
 	private int monRoute;                           //设备路数
-                    
+    private int monState;                           //设备状态
 	
+	public int getMonState() {
+		return monState;
+	}
+	public void setMonState(int monState) {
+		this.monState = monState;
+	}
 	public int getMonRoute() {
 		return monRoute;
 	}
@@ -91,7 +97,8 @@ public class Monitor {
 	public String toString() {
 		return "Monitor [monId=" + monId + ", monAlias=" + monAlias + ", monInstall=" + monInstall + ", monIP=" + monIP
 				+ ", monModel=" + monModel + ", monName=" + monName + ", monPlace=" + monPlace + ", monPlaceLevel="
-				+ monPlaceLevel + ", monType=" + monType + ", monNumber=" + monNumber + ", monRoute=" + monRoute + "]";
+				+ monPlaceLevel + ", monType=" + monType + ", monNumber=" + monNumber + ", monRoute=" + monRoute
+				+ ", monState=" + monState + "]";
 	}
 
 	

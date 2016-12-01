@@ -87,6 +87,7 @@ public class MonDateServiceImpl implements MonDateService{
 			 monShow.setMonRoute(monitor.getMonRoute());
 			 monShow.setMonType(monitor.getMonType());
 			 monShow.setMonInT(mon.getMonInT());
+			 monShow.setMonState(monitor.getMonState());
 			note.setStatus(0);
 			note.setMsg("查询成功");
 			note.setData(monShow);	
