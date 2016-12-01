@@ -31,7 +31,7 @@ public class UserServiceImpl implements UserService{
 	private LoginDao loginDao;
 	
 	/**
-	 * 检测用户登陆
+	 * 用户登陆
 	 */
 	public NoteResult checkLogin(String telephone,String password){
 		SimpleDateFormat format=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -69,6 +69,7 @@ public class UserServiceImpl implements UserService{
 				loginDao.deleteCountByuserId(userId);
 				String lastLoadTime=format.format(new Date());
 				userDao.changeUserState(userId,lastLoadTime);
+				
 				note.setStatus(0);
 				note.setMsg("登陆成功");
 				note.setData(userId);				
@@ -355,6 +356,7 @@ public class UserServiceImpl implements UserService{
 	 */
 	public NoteResult seleteUserByMonId(Integer monId) {
 		NoteResult note=new NoteResult();
+
 		
 		if(monId==null){
 			note.setStatus(1);

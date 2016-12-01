@@ -22,4 +22,5 @@ public interface MonThirdListDao {
 	public List<MonThirdList>  findAllThirdlist();
 	public int selectIsExistById(int thirdListId);
 	public   MonThirdList      selectListById(int thirdListId);
+	public  List<MonThirdList> findThirdlistBySecondId(int secondListId);
 }

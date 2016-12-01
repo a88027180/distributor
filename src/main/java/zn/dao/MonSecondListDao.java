@@ -21,4 +21,6 @@ public interface MonSecondListDao {
 	public List<MonSecondList>  findAllSecondlist();
 	public int selectIsExistById(int secondListId);
 	public   MonSecondList    selectListById(int secondListId);
+	
+	public List<MonSecondList>  findSecondlistByFirstId(int firstListId);
 }

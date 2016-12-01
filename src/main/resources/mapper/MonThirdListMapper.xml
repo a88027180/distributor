@@ -41,5 +41,8 @@
 		select * from monthirdlist where thirdListId=#{thirdListId}
 	</select>
  	
+ 		<select id="findThirdlistBySecondId" parameterType="int" resultMap="MonThirdList">
+	select * from monthirdlist where secondListId=#{secondListId}
+	</select>
  	
  </mapper>

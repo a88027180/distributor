@@ -37,8 +37,17 @@
 	select * from monsecondlist
 	</select>
 	
+	
+	<select id="findSecondlistByFirstId"  parameterType="int"  resultMap="MonSecondList">
+	select * from monsecondlist where firstListId=#{firstListId}
+	</select>
+	
+	
 	<select id="selectListById" parameterType="int" resultMap="MonSecondList">
 		select * from monsecondlist where secondListId=#{secondListId}
 	</select>
+	
+	
+	
  	
  </mapper>
