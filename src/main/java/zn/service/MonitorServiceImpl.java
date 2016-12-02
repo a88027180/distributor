@@ -1,6 +1,8 @@
 
 package zn.service;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -217,7 +219,9 @@ public class MonitorServiceImpl implements  MonitorService{
 	}
 
 
-	@Override
+	/**
+	 * 查询指定状态下的设备信息
+	 */
 	public NoteResult findMonByState(Integer monState) {
 		NoteResult note=new NoteResult();
 		if(monState==null){
@@ -235,13 +239,41 @@ public class MonitorServiceImpl implements  MonitorService{
 	
 	}
 
-	/* (non-Javadoc)
-	 * @see zn.service.MonitorService#findMonNumByState()
+	/**
+	 * 查询指定状态下的设备数量
 	 */
-	@Override
 	public NoteResult findMonNumByState() {
-		// TODO Auto-generated method stub
-		return null;
+		NoteResult note=new NoteResult();
+		int  num1=   monitorDao.findMonNumByState(1);
+		int num2=monitorDao.findMonNumByState(2);
+		int num3=monitorDao.findMonNumByState(3);
+		int num4=monitorDao.findMonNumByState(4);
+		Map<String,Object> map1=new HashMap<String,Object>();
+		map1.put("num", num1);
+		map1.put("state",1 );
+		map1.put("stateName", "正常设备");
+		Map<String,Object> map2=new HashMap<String,Object>();
+		map2.put("num", num2);
+		map2.put("state",2);
+		map2.put("stateName", "离线设备");
+		Map<String,Object> map3=new HashMap<String,Object>();
+		map3.put("num", num3);
+		map3.put("state",3);
+		map3.put("stateName", "报警设备");
+		Map<String,Object> map4=new HashMap<String,Object>();
+		map4.put("num", num4);
+		map4.put("state",4);
+		map4.put("stateName", "故障设备");
+		List<Map<String,Object>> list=new ArrayList<Map<String,Object>>();
+		list.add(map1);
+		list.add(map2);
+		list.add(map3);
+		list.add(map4);
+		
+		note.setStatus(0);
+		note.setMsg("操作成功");
+		note.setData(list);
+		return note;
 	}
 
 }
