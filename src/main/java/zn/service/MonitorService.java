@@ -19,4 +19,5 @@ public interface MonitorService {
 	public NoteResult    monAddUser(String jsonStr);
 	public NoteResult    seleteMonByUserId(Integer userId);
 	public NoteResult findMonByState(Integer monState);
+	public NoteResult findMonNumByState();
 }

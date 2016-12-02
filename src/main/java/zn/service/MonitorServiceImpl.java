@@ -32,6 +32,7 @@ public class MonitorServiceImpl implements  MonitorService{
 	@Resource//注入
 	private MonDateDao monDateDao;
 
+	
 	/**
 	 * 添加设备
 	 */
@@ -232,6 +233,15 @@ public class MonitorServiceImpl implements  MonitorService{
 		}
 		return note;	
 	
+	}
+
+	/* (non-Javadoc)
+	 * @see zn.service.MonitorService#findMonNumByState()
+	 */
+	@Override
+	public NoteResult findMonNumByState() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

@@ -29,4 +29,7 @@ public interface MonitorDao {
 	      public List<Monitor> seleteMonByUserId(int userId);
 	  	  public List<Monitor> findMonByState(int monState);
 	  	  public List<Monitor> findMonByList(@Param("monPlace")String monPlace,@Param("monPlaceLevel")int monPlaceLevel);
+	  	  public int findMonNumByState(int monState); 
+
 }
+

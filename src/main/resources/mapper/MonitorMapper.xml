@@ -36,8 +36,10 @@
  	</select>
  	
  	
- 	
- 	
+ 	<!-- 查询指定状态下的设备 -->
+ 	<select id="findMonNumByState" parameterType="int" resultType="int">
+ 	select count(monId) from monitor where monState=#{monState}
+ 	</select>
  	
  	<!-- 根据制定id查询设备 -->
  	 	<select id="findMonById" resultMap="Monitor" parameterType="int">
