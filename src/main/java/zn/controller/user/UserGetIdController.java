@@ -20,8 +20,7 @@ import zn.until.NoteResult;
 @Controller  
 @RequestMapping("/user")  
 public class UserGetIdController {
-	@Resource
-	private UserService userService;
+	
 	
 	@RequestMapping("/getId")
 	@ResponseBody
