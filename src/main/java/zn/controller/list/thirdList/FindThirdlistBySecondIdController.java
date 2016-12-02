@@ -18,7 +18,7 @@ import zn.until.NoteResult;
  */
 @Controller
 @RequestMapping("/thirdList")
-public class FindThirdListBySecondIdController {
+public class FindThirdlistBySecondIdController {
 	@Resource
 	private MonThirdListService  monThirdListService;
 	
