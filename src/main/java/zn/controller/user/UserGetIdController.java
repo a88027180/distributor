@@ -25,8 +25,13 @@ public class UserGetIdController {
 	@RequestMapping("/getId")
 	@ResponseBody
 	public Object execute(HttpSession session){
-		Object userId=  session.getAttribute("userId");
+		NoteResult note=new NoteResult();
 		
+		
+		Object userId=  session.getAttribute("userId");
+		note.setStatus(0);
+		note.setMsg("查询成功");
+		note.setData(userId);
 		return userId;	
 	}
 }
