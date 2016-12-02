@@ -1,7 +1,7 @@
 /**
  * 
  */
-package zn.controller.list.thirdList;
+package zn.controller.list.fourthList;
 
 import javax.annotation.Resource;
 
@@ -17,16 +17,18 @@ import zn.until.NoteResult;
  *
  */
 @Controller
-@RequestMapping("/thirdList")
-public class FindThirdListBySecondIdController {
+@RequestMapping("/fourthList")
+public class FindFourthListAndMonController {
 	@Resource
 	private MonThirdListService  monThirdListService;
 	
-	@RequestMapping("/findBySecondId")
+	@RequestMapping("/findFourthListAndMon")
 	@ResponseBody
-	public NoteResult execute(Integer secondListId){
-		NoteResult note= monThirdListService.findThirdlistBySecondId(secondListId);
+	public NoteResult execute(Integer thirdListId){
+		NoteResult note= monThirdListService.findFourthListAndMon(thirdListId);
 		return note;
 		
 	}
 }
+
+

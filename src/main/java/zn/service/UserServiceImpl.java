@@ -79,6 +79,7 @@ public class UserServiceImpl implements UserService{
 				note.setMsg("登陆成功");
 				note.setData(userId);
 				session.setAttribute("telephone", telephone);
+				session.setAttribute("userId", userId+"");
 			}
 		}		
 		return note;
@@ -377,6 +378,7 @@ public class UserServiceImpl implements UserService{
 		}
 		return note;
 	}
+
 
 
 	

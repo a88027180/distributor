@@ -3,7 +3,9 @@
  */
 package zn.service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
@@ -15,6 +17,7 @@ import zn.dao.MonThirdListDao;
 import zn.dao.MonitorDao;
 import zn.entity.MonSecondList;
 import zn.entity.MonThirdList;
+import zn.entity.Monitor;
 import zn.until.NoteResult;
 
 /**
@@ -33,6 +36,9 @@ public class MonThirdListServiceImpl implements MonThirdListService {
 	
 	@Resource//注入
 	private MonThirdListDao  monThirdListDao; 
+	
+	
+	
 
 		/**
 		 * 查询所有三级列表
@@ -48,6 +54,9 @@ public class MonThirdListServiceImpl implements MonThirdListService {
 
 	}
 	
+	/**
+	 * 查询指定二级列表下的三级列表
+	 */
 	public NoteResult findThirdlistBySecondId(Integer secondListId) {
 		
 		NoteResult note=new NoteResult();
@@ -66,6 +75,52 @@ public class MonThirdListServiceImpl implements MonThirdListService {
 
 }
 
+	/**
+	 * 查询指定二级列表下的三级列表和设备
+	 */
+	@Override
+	public NoteResult findThirdListAndMon(Integer secondListId) {
+		NoteResult note=new NoteResult();
+		
+		if(secondListId==null){
+		 	note.setStatus(1);
+			note.setMsg("参数不能为空");
+			note.setData("");
+	 } else{
+		 List<MonThirdList>		list=monThirdListDao.findThirdlistBySecondId(secondListId)	;
+		 List<Monitor>  monList=monitorDao.findMonByList(monSecondListDao.selectListById(secondListId).getSecondListName(), 2);
+		Map<String,Object> map=new HashMap<String,Object>();
+		map.put("list", list);
+		map.put("monList", monList);
+		 note.setStatus(0);
+		note.setMsg("查询成功");
+		note.setData(map);
+	 }
+		return note;
+	}
+	
+	/**
+	 * 查询三级列表下的设备
+	 */
+	public NoteResult findFourthListAndMon(Integer thirdListId) {
+		NoteResult note=new NoteResult();
+		
+		if(thirdListId==null){
+		 	note.setStatus(1);
+			note.setMsg("参数不能为空");
+			note.setData("");
+	 } else{
+		
+		 List<Monitor>  monList=monitorDao.findMonByList(monThirdListDao.selectListById(thirdListId).getThirdListName(), 2);
+
+		 note.setStatus(0);
+		note.setMsg("查询成功");
+		note.setData(monList);
+	 }
+		return note;
+	}
+	
+	
 	
 	
 
@@ -155,5 +210,8 @@ public class MonThirdListServiceImpl implements MonThirdListService {
 			return note;
 	
 	}
+
+	
+
 
 }

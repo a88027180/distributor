@@ -3,6 +3,8 @@ package zn.service;
 
 
 
+import javax.servlet.http.HttpSession;
+
 import zn.until.NoteResult;
 
 public interface UserService {
@@ -16,5 +18,6 @@ public interface UserService {
 	public NoteResult deleteUser(Integer userId);
 	public NoteResult userAddMon(String jsonStr);
 	public NoteResult seleteUserByMonId(Integer monId);
+
 
 }

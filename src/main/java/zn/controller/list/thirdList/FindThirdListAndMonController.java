@@ -18,15 +18,17 @@ import zn.until.NoteResult;
  */
 @Controller
 @RequestMapping("/thirdList")
-public class FindThirdListBySecondIdController {
+public class FindThirdListAndMonController {
 	@Resource
 	private MonThirdListService  monThirdListService;
 	
-	@RequestMapping("/findBySecondId")
+	@RequestMapping("/findThirdListAndMon")
 	@ResponseBody
 	public NoteResult execute(Integer secondListId){
-		NoteResult note= monThirdListService.findThirdlistBySecondId(secondListId);
+		NoteResult note= monThirdListService.findThirdListAndMon(secondListId);
 		return note;
 		
 	}
+
+
 }

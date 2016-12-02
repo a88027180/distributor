@@ -15,5 +15,6 @@ public interface MonThirdListService {
 	public  NoteResult   deleteThirdList(Integer thirdListId);
 	public  NoteResult   changeThirdList(String thirdListName,Integer  secondListId,Integer thirdListId);
 	public NoteResult findThirdlistBySecondId(Integer secondListId);
-
+	public NoteResult findThirdListAndMon(Integer secondListId);
+	public NoteResult findFourthListAndMon(Integer thirdListId);
 }
