@@ -92,6 +92,7 @@ public class MonFirstListServiceImpl implements MonFirstListService {
 				note.setData("");
 		 }else{
 			 MonFirstList mon=monFirstListDao.selectListById(firstListId);
+			
 			 	if(mon!=null){
 			 	monitorDao.deleteMonPlace(mon.getFirstListName(),1);
 		 }

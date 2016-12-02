@@ -84,7 +84,7 @@
 	
 	<!-- 根据设备所属列表名称删除设备 -->
 	<update id="deleteMonPlace" >
-	update monitor set monPlacce=null,monPlaceLevel=0 where monPlace=#{monPlace} and monPlaceLevel=#{monPlaceLevel};
+	update monitor set monPlace=null,monPlaceLevel=0 where monPlace=#{monPlace} and monPlaceLevel=#{monPlaceLevel};
 	</update>
 	
 	<!-- 更改设备所属列表名称 -->
