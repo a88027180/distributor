@@ -25,6 +25,20 @@
  		select * from monitor
  	</select>
  	
+ 	<!-- 根据设备状态查询设备 -->
+	<select id="findMonByState" parameterType="int" resultMap="Monitor">
+	select * from monitor where monState=#{monState}
+	</select>
+	
+	<!-- 查询指定列表下的设备 -->
+ 	<select id="findMonByList" resultMap="Monitor">
+ 	select * from monitor where monPlace=#{monPlace} and monPlaceLevel=#{monPlaceLevel}
+ 	</select>
+ 	
+ 	
+ 	
+ 	
+ 	
  	<!-- 根据制定id查询设备 -->
  	 	<select id="findMonById" resultMap="Monitor" parameterType="int">
  		select * from monitor     where monId=#{monId}; 

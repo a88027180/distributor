@@ -85,8 +85,8 @@ public class newTest {
 	
 	@Test
 	public void test(){
-		 ApplicationContext    ac = new ClassPathXmlApplicationContext("spring-mybatis.xml");  
-	     UserDao dao = ac.getBean("userDao",UserDao.class);
+//		 ApplicationContext    ac = new ClassPathXmlApplicationContext("spring-mybatis.xml");  
+//	     UserDao dao = ac.getBean("userDao",UserDao.class);
 //	     try {
 //			String userStr="{\"telephone\":\"13888444555\",\"password\":\"123456\",\"userName\":\"keng\",\"information\":\"123\"}";
 //		User user=JSON.parseObject(userStr, User.class);
@@ -128,9 +128,9 @@ public class newTest {
    
 		@Test
 		public void test4(){
-//			 ApplicationContext    ac = new ClassPathXmlApplicationContext("spring-mybatis.xml");  
-//			 MonitorDao dao = ac.getBean("monitorDao",MonitorDao.class);
-//			 Monitor monitor=new Monitor();      
+			 ApplicationContext    ac = new ClassPathXmlApplicationContext("spring-mybatis.xml");  
+			 MonitorDao dao = ac.getBean("monitorDao",MonitorDao.class);
+			 Monitor monitor=new Monitor();      
 //			 monitor.setMonAlias("whe");
 //			 monitor.setMonInstall("北");
 //			 monitor.setMonIP("192.195.145");
@@ -139,12 +139,12 @@ public class newTest {
 //			 monitor.setMonNumber("12356");
 //			 monitor.setMonPlace("福");
 //			 monitor.setMonType("4321");
-//			 monitor.setMonRoute(1);
-//			 monitor.setMonPlaceLevel(2);
+			 monitor.setMonRoute(1);
+			 monitor.setMonPlaceLevel(2);
 //			 int a=    dao.addMon(monitor);
 //			 int f=dao.changeMon(monitor);
 //			 System.out.println(a);
-//			 List<Monitor> list=  dao.findAllMon();
+
 //			 System.out.println(list.toString());
 //			 System.out.println(dao.monIsExist("123"));
 //			 System.out.println(dao.deleteMon(2));
@@ -159,11 +159,11 @@ public class newTest {
 //		StringBuilder ss=new StringBuilder("1111111111111");
 //		  System.out.println(ss.replace(12-3+1, 12-3+2, "0"));
 		
-		InputStream inStream =ClassLoader.getSystemResourceAsStream("udp.properties"); 
-		Properties prop = new Properties();    
-		prop.load(inStream);    
-		int localityPort = Integer.valueOf(prop.getProperty("localityPort"));
-		System.out.println(localityPort);
+//		InputStream inStream =ClassLoader.getSystemResourceAsStream("udp.properties"); 
+//		Properties prop = new Properties();    
+//		prop.load(inStream);    
+//		int localityPort = Integer.valueOf(prop.getProperty("localityPort"));
+//		System.out.println(localityPort);
 	}
  
 

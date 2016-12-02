@@ -1,6 +1,4 @@
-/**
- * 
- */
+
 package zn.service;
 
 import java.util.List;
@@ -120,12 +118,12 @@ public class MonitorServiceImpl implements  MonitorService{
 				note.setStatus(1);
 				note.setMsg("参数为空");
 				note.setData("");
-			}else if(mon.getMonNumber()==null){
+			}else if(mon.getMonId()==0){
 				note.setStatus(2);
-				note.setMsg("设备编号为空");
+				note.setMsg("设备id为空");
 				note.setData("");
 				
-			}else if(monitorDao.monIsExist(mon.getMonNumber())!=0&&!monitorDao.findMonById(mon.getMonId()).getMonNumber().equals(mon.getMonNumber())){
+			}else if(mon.getMonNumber()!=null&&monitorDao.monIsExist(mon.getMonNumber())!=0&&!monitorDao.findMonById(mon.getMonId()).getMonNumber().equals(mon.getMonNumber())){
 				note.setStatus(3);
 				note.setMsg("设备编号已存在");
 				note.setData("");
@@ -215,6 +213,25 @@ public class MonitorServiceImpl implements  MonitorService{
 			note.setData(list);
 		}
 		return note;	
+	}
+
+
+	@Override
+	public NoteResult findMonByState(Integer monState) {
+		NoteResult note=new NoteResult();
+		if(monState==null){
+			note.setStatus(1);
+			note.setMsg("参数为空");
+			note.setData("");
+			
+		}else{
+		List<Monitor> list=monitorDao.findMonByState(monState);
+			note.setStatus(0);
+			note.setMsg("操作成功");
+			note.setData(list);
+		}
+		return note;	
+	
 	}
 
 }

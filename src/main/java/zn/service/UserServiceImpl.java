@@ -47,7 +47,7 @@ public class UserServiceImpl implements UserService{
 		int state=userDao.checkTel(telephone);	
 		if(state==0){          					//检查用户的账号是否正确    
 		note.setStatus(1);
-		note.setMsg("账号错误或者用户未登陆");
+		note.setMsg("账号错误");
 		note.setData("");
 		}else{
 			String pass=NoteUtil.md5(password);   //对密码加密
@@ -251,7 +251,7 @@ public class UserServiceImpl implements UserService{
 	/**
 	 * 更改用户密码
 	 */
-	public NoteResult changePassword(String oldPassword,String nowFirstPassword,String nowTwoPassword,Integer userId,HttpSession session) {
+	public NoteResult changePassword(String oldPassword,String nowFirstPassword,String nowTwoPassword,Integer userId) {
 		NoteResult note=new NoteResult();
 		User  user=userDao.selectUserById(userId);
 		if(oldPassword==null||userId==null||nowFirstPassword==null||nowTwoPassword==null){
@@ -377,6 +377,10 @@ public class UserServiceImpl implements UserService{
 		}
 		return note;
 	}
+
+
+	
+
 	
 	
 	

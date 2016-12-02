@@ -25,8 +25,8 @@ public class UserChangePasswordController {
 	
 	@RequestMapping("/changePassword")
 	@ResponseBody
-	public NoteResult execute(String oldPassword,String nowFirstPassword,String nowTwoPassword,Integer userId,HttpSession session){
-		NoteResult note=userService.changePassword(oldPassword, nowFirstPassword, nowTwoPassword, userId,session);
+	public NoteResult execute(String oldPassword,String nowFirstPassword,String nowTwoPassword,Integer userId){
+		NoteResult note=userService.changePassword(oldPassword, nowFirstPassword, nowTwoPassword, userId);
 		return note;	
 	}
 }

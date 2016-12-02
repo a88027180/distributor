@@ -3,7 +3,9 @@
  */
 package zn.service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
@@ -14,6 +16,7 @@ import zn.dao.MonFirstListDao;
 import zn.dao.MonSecondListDao;
 import zn.dao.MonitorDao;
 import zn.entity.MonSecondList;
+import zn.entity.Monitor;
 import zn.until.NoteResult;
 
 /**
@@ -142,6 +145,29 @@ public class MonSecondListServiceImpl implements MonSecondListService {
 			 note.setStatus(0);
 			 note.setMsg("查询成功");
 			 note.setData(list);
+		 }
+		 return note;
+	}
+
+
+	
+	public NoteResult findSecondListAndMon(Integer firstListId) {
+		NoteResult note=new NoteResult();
+		
+		 if(firstListId==null){
+			 	note.setStatus(1);
+				note.setMsg("参数不能为空");
+				note.setData("");
+		 }else{
+			 List<MonSecondList> list=	monSecondListDao.findSecondlistByFirstId(firstListId);
+	
+			 List<Monitor>   monList=monitorDao.findMonByList(monFirstListDao.selectListById(firstListId).getFirstListName() , 1);
+			 Map<String,Object> map=new HashMap<String,Object>();
+			 map.put("monList", monList);
+			 map.put("list", list);
+			 note.setStatus(0);
+			 note.setMsg("查询成功");
+			 note.setData(map);
 		 }
 		 return note;
 	}

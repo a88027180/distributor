@@ -37,5 +37,6 @@ public interface UserDao {
 	public int userAddLimits(@Param("limitsId")int limitsId,@Param("userId")int userId);
 	public int userDeleteLimits(int userId);
 	public int seleteUserLimitsById(Integer userId);
+
 	
 }
