@@ -18,6 +18,7 @@ import com.alibaba.fastjson.JSONException;
 
 import zn.dao.MonDateDao;
 import zn.dao.MonitorDao;
+import zn.dao.UserDao;
 import zn.entity.Monitor;
 import zn.entity.User;
 import zn.until.NoteResult;
@@ -36,7 +37,8 @@ public class MonitorServiceImpl implements  MonitorService{
 	@Resource//注入
 	private MonDateDao monDateDao;
 
-	
+	@Resource//
+	private UserDao userDao;
 	
 	/**
 	 * 添加设备
@@ -205,6 +207,9 @@ public class MonitorServiceImpl implements  MonitorService{
 	 * 查询指定用户下的所有设备
 	 */
 	public NoteResult seleteMonByUserId(Integer userId) {
+		
+		
+		
 		NoteResult note=new NoteResult();
 		
 		if(userId==null){
@@ -213,10 +218,18 @@ public class MonitorServiceImpl implements  MonitorService{
 			note.setData("");
 			
 		}else{
+		int	limitsId=	userDao.selectUserById(userId).getLimitsId();
+		if(limitsId==2){
 		List<Monitor> list=monitorDao.seleteMonByUserId(userId);
 			note.setStatus(0);
 			note.setMsg("操作成功");
 			note.setData(list);
+			}else if(limitsId==1){
+				List<Monitor> list=monitorDao.findAllMon();
+				note.setStatus(0);
+				note.setMsg("查询成功");
+				note.setData(list);
+			}
 		}
 		return note;	
 	}
