@@ -42,7 +42,7 @@ public class AnalysisInfoListener implements ServletContextListener{
 			 
 		
 			InputStream inStream =AnalysisInfoListener.class.getClassLoader() .getResourceAsStream( "./udp.properties" );  
-			System.out.println(inStream);
+		
 			Properties prop = new Properties();    
 			prop.load(inStream);    
 				int localityPort = Integer.valueOf(prop.getProperty("localityPort"));
