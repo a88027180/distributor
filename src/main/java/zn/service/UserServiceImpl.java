@@ -80,6 +80,7 @@ public class UserServiceImpl implements UserService{
 				note.setData(userId);
 				session.setAttribute("telephone", telephone);
 				session.setAttribute("userId", userId+"");
+			
 			}
 		}		
 		return note;

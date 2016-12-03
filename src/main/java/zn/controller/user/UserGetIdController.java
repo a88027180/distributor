@@ -10,7 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-
+import zn.service.UserService;
 import zn.until.NoteResult;
 
 /**
@@ -20,18 +20,18 @@ import zn.until.NoteResult;
 @Controller  
 @RequestMapping("/user")  
 public class UserGetIdController {
-	
+	@Resource
+	private UserService userService;
 	
 	@RequestMapping("/getId")
 	@ResponseBody
 	public Object execute(HttpSession session){
-		NoteResult note=new NoteResult();
-		
-		
-		Object userId=  session.getAttribute("userId");
-		note.setStatus(0);
-		note.setMsg("查询成功");
-		note.setData(userId);
-		return userId;	
+	
+		String userId= (String) session.getAttribute("userId");
+	
+		int user=Integer.parseInt(userId);
+		NoteResult note=userService.selectUserById(user);
+
+		return note;	
 	}
 }
