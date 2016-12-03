@@ -180,20 +180,16 @@ public class MonThirdListServiceImpl implements MonThirdListService {
 	/**
 	 * 更改三级列表
 	 */
-	public NoteResult changeThirdList(String thirdListName, Integer secondListId, Integer thirdListId) {
+	public NoteResult changeThirdList(String thirdListName, Integer thirdListId) {
 		
 	
 			NoteResult note=new NoteResult();
 			
-			 if(thirdListName==null||secondListId==null||thirdListId==null){
+			 if(thirdListName==null||thirdListId==null){
 				 	note.setStatus(1);
 					note.setMsg("参数不能为空");
 					note.setData("");
-			 } else if(monSecondListDao.selectIsExistById(secondListId)==0){
-				 note.setStatus(3);
-					note.setMsg("上级列表不存在");
-					note.setData("");
-			 }else if(monThirdListDao.selectIsExist(thirdListName)!=0){ 
+			 } else if(monThirdListDao.selectIsExist(thirdListName)!=0){ 
 				 	note.setStatus(2);
 					note.setMsg("列表已存在");
 					note.setData("");
@@ -202,7 +198,7 @@ public class MonThirdListServiceImpl implements MonThirdListService {
 				 	if(mon!=null){
 				 	monitorDao.changeMonPlace(mon.getThirdListName(), thirdListName, 3);
 				 	}
-				 	monThirdListDao.changeThirdList(thirdListName, secondListId, thirdListId);
+				 	monThirdListDao.changeThirdList(thirdListName, mon.getSecondListId(), thirdListId);
 				 	note.setStatus(0);
 					note.setMsg("更改成功");
 					note.setData("");

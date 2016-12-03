@@ -24,8 +24,8 @@ public class ChangethirdListController {
 	
 	@RequestMapping("/change")
 	@ResponseBody
-	public NoteResult execute(String thirdListName,Integer secondListId,Integer thirdListId){
-		NoteResult note= monThirdListService.changeThirdList(thirdListName, secondListId, thirdListId);	
+	public NoteResult execute(String thirdListName,Integer thirdListId){
+		NoteResult note= monThirdListService.changeThirdList(thirdListName,  thirdListId);	
 		return note;
 		
 	}

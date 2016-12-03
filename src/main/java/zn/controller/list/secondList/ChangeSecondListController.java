@@ -24,8 +24,8 @@ public class ChangeSecondListController {
 	
 	@RequestMapping("/change")
 	@ResponseBody
-	public NoteResult execute(String secondListName,Integer firstListId,Integer secondListId){
-		NoteResult note=monSecondListService.changeSecondList(secondListName, firstListId, secondListId);	
+	public NoteResult execute(String secondListName,Integer secondListId){
+		NoteResult note=monSecondListService.changeSecondList(secondListName,  secondListId);	
 		return note;
 		
 	}

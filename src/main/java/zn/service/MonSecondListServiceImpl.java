@@ -90,18 +90,14 @@ public class MonSecondListServiceImpl implements MonSecondListService {
 	/**
 	 * 更改二级列表
 	 */
-	public NoteResult changeSecondList(String secondListName, Integer firstListId, Integer secondListId) {
+	public NoteResult changeSecondList(String secondListName, Integer secondListId) {
 		NoteResult note=new NoteResult();
 		
-		 if(secondListName==null||firstListId==null||secondListId==null){
+		 if(secondListName==null||secondListId==null){
 			 	note.setStatus(1);
 				note.setMsg("参数不能为空");
 				note.setData("");
-		 } else if(monFirstListDao.selectIsExistById(firstListId)==0){
-			 note.setStatus(3);
-				note.setMsg("上级列表不存在");
-				note.setData("");
-		 }else if(monSecondListDao.selectIsExist(secondListName)!=0){ 
+		 } else if(monSecondListDao.selectIsExist(secondListName)!=0){ 
 			 	note.setStatus(2);
 				note.setMsg("列表已存在");
 				note.setData("");
@@ -112,7 +108,7 @@ public class MonSecondListServiceImpl implements MonSecondListService {
 			 	}
 				
 
-			 	monSecondListDao.changeSecondList(secondListName, firstListId, secondListId);
+			 	monSecondListDao.changeSecondList(secondListName, mon.getFirstListId(), secondListId);
 			 	note.setStatus(0);
 				note.setMsg("更改成功");
 				note.setData("");
