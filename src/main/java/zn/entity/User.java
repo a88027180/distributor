@@ -11,7 +11,16 @@ public class User {
 	private String orgName;
 	private int   limitsId;
 	private String limitsName;
+	private String userPicUrl;
 	
+	public String getUserPicUrl() {
+		return userPicUrl;
+	}
+
+	public void setUserPicUrl(String userPicUrl) {
+		this.userPicUrl = userPicUrl;
+	}
+
 	public int getOrgId() {
 		return orgId;
 	}
@@ -106,8 +115,8 @@ public class User {
 	public String toString() {
 		return "User [userId=" + userId + ", userName=" + userName + ", telephone=" + telephone + ", password="
 				+ password + ", lastLoadTime=" + lastLoadTime + ", loadState=" + loadState + ", orgId=" + orgId
-				+ ", orgName=" + orgName + ", limitsId=" + limitsId + ", limitsName=" + limitsName + ", information="
-				+ information + "]";
+				+ ", orgName=" + orgName + ", limitsId=" + limitsId + ", limitsName=" + limitsName + ", userPicUrl="
+				+ userPicUrl + ", information=" + information + "]";
 	}
 
 	

@@ -4,22 +4,25 @@
 package zn.service;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
 import org.springframework.web.multipart.MultipartFile;
 
-
-
+import zn.dao.UserDao;
 import zn.until.NoteResult;
+import zn.until.ReadFile;
 
 /**
  * @author hq
@@ -27,41 +30,45 @@ import zn.until.NoteResult;
  */
 @Service("pictureService")
 public class PictureServiceImpl implements PictureService {
+	@Resource//注入
+	private UserDao userDao;
 
 
 
-	/* (non-Javadoc)
-	 * @see zn.service.PictureService#findAllPictures()
-	 */
+
+	
 	@Override
-	public NoteResult findAllPictures() {
-		// TODO Auto-generated method stub
-		return null;
+	public NoteResult deletePictures(Integer userId) {
+		NoteResult note=new NoteResult(); 
+		 if(userId==null){
+			 	note.setStatus(1);
+				note.setMsg("参数不能为空");
+				note.setData("");
+		 }else{
+		
+		userDao.changePicUrl(userId, "");
+		String path=userDao.selectUserPic(userId);
+		File filePath=new File(path);
+ 		ReadFile.deleteFile(filePath);
+		note.setStatus(0);
+		note.setMsg("操作成功");
+		note.setData("");
+	}
+		 return note;
 	}
 
-	/* (non-Javadoc)
-	 * @see zn.service.PictureService#deletePictures(java.lang.String)
-	 */
 	@Override
-	public NoteResult deletePictures(String pictureId) {
-		// TODO Auto-generated method stub
-		return null;
+	public String findUserPicture(int userId) {
+		
+		
+		String path=userDao.selectUserPic(userId);
+		return path;
+	
 	}
 
-	/* (non-Javadoc)
-	 * @see zn.service.PictureService#findUserPicture()
-	 */
+	
 	@Override
-	public NoteResult findUserPicture() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	/* (non-Javadoc)
-	 * @see zn.service.PictureService#uploadPictures(org.springframework.web.multipart.MultipartFile, java.lang.String, java.lang.String)
-	 */
-	@Override
-	public NoteResult uploadPictures(MultipartFile file, String pathUrl, String fileName) {
+	public NoteResult uploadPictures(MultipartFile file, String pathUrl, String fileName,int userId) {
 		NoteResult note=new NoteResult(); 
 	 
 	         int lastlen= fileName.lastIndexOf(".");
@@ -82,15 +89,18 @@ public class PictureServiceImpl implements PictureService {
 	 		note.setData("");
 	 	// 文件读入
 	 	} else{
-	 	long time=new Date().getTime();
-	 	File upLoadFile = new File(pathUrl+File.separator+time+"."+extensionName);
+	 			
+	 	File upLoadFile = new File(pathUrl+File.separator+fileName);
+	 	userDao.changePicUrl(userId, pathUrl+File.separator+fileName);
 	 	try {
+	 		File filePath=new File(pathUrl);
+	 		ReadFile.deleteFile(filePath);
 			file.transferTo(upLoadFile);
 		} catch (IllegalStateException | IOException e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
-		}
-		 	note.setStatus(0);
+		} 
+				note.setStatus(0);
 	 		note.setMsg("操作成功");
 	 		note.setData("");
 	 	}
@@ -100,6 +110,7 @@ public class PictureServiceImpl implements PictureService {
 
 	
 	
+
 	
 	
 	

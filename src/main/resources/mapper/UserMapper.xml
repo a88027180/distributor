@@ -113,7 +113,14 @@
 	select limitsId from userview where userId=#{userId}
 	</select>
 	
+	<!-- 用户添加头像路径 -->
+	<update id="changePicUrl" >
+	update user set userPicUrl=#{userPicUrl}  where userId=#{userId}
+	</update>
 	
+	<!-- 查询用户头像路径 -->
+	<select id="selectUserPic" parameterType="int" resultType="String">
+	select userPicUrl from user where userId=#{userId}
 	
-	
+	</select>
 </mapper>

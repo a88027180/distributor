@@ -3,6 +3,8 @@
  */
 package zn.service;
 
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.web.multipart.MultipartFile;
 
 import zn.until.NoteResult;
@@ -12,8 +14,8 @@ import zn.until.NoteResult;
  *
  */
 public interface PictureService {
-	public NoteResult uploadPictures(MultipartFile file,String pathUrl,String fileName);
-	public NoteResult findAllPictures();
-	public NoteResult deletePictures(String pictureId);
-	public NoteResult findUserPicture();
+	public NoteResult uploadPictures(MultipartFile file,String pathUrl,String fileName,int userId);
+
+	public NoteResult deletePictures(Integer userId);
+	public String findUserPicture(int userId);
 }

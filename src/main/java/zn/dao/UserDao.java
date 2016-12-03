@@ -29,6 +29,8 @@ public interface UserDao {
 	
 	public int changePassword(@Param("password")String password,@Param("userId")int userId);
 	
+	public int changePicUrl(@Param("userId")int userId,@Param("userPicUrl")String userPicUrl);
+	public String selectUserPic(int userId);
 	
 	public  int  userAddMon(Map<String,Object>     param);
 	public int userDelteMon(int userId);
