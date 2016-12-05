@@ -25,7 +25,7 @@ public class AnalysisInfoListener implements ServletContextListener{
 	 * @see javax.servlet.ServletContextListener#contextDestroyed(javax.servlet.ServletContextEvent)
 	 */
 	public void contextDestroyed(ServletContextEvent arg0) {
-		AnalysisService analysisService=WebApplicationContextUtils.getWebApplicationContext(arg0.getServletContext()).getBean(AnalysisService.class);
+		
 		
 	}
 
@@ -34,7 +34,7 @@ public class AnalysisInfoListener implements ServletContextListener{
 	 */
 	public void contextInitialized(ServletContextEvent arg0) {
 		AnalysisService analysisService=WebApplicationContextUtils.getWebApplicationContext(arg0.getServletContext()).getBean(AnalysisService.class);
-		
+	
 
 	
 		

@@ -34,9 +34,12 @@ public class UploadPicturesController {
 	
 	@RequestMapping(value = "/load",method = RequestMethod.POST)	
 	@ResponseBody
-	public NoteResult execute(HttpServletRequest request,@RequestParam(value = "file", required = false) MultipartFile file){
-	 	String pathUrl = request.getSession().getServletContext().getRealPath("")+"/picture/"+request.getSession().getAttribute("userId");
+	public NoteResult execute(HttpServletRequest request,@RequestParam(value = "file1") MultipartFile file){
+	 	String pathUrl = request.getSession().getServletContext().getRealPath("")+"picture"+File.separator +request.getSession().getAttribute("userId");
 	 	int userId=Integer.parseInt((String)request.getSession().getAttribute("userId"));
+	 	System.out.println(pathUrl);
+
+	 	
 	 	String fileName = file.getOriginalFilename();
 		NoteResult note=pictureService.uploadPictures(file,pathUrl,fileName,userId);	
 

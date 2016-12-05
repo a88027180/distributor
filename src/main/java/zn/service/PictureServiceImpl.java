@@ -95,6 +95,7 @@ public class PictureServiceImpl implements PictureService {
 	 	try {
 	 		File filePath=new File(pathUrl);
 	 		ReadFile.deleteFile(filePath);
+	 		filePath.mkdirs();
 			file.transferTo(upLoadFile);
 		} catch (IllegalStateException | IOException e) {
 			
