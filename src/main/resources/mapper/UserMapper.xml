@@ -68,7 +68,7 @@
 	
 	<!-- 根据id删除用户信息 -->
 	<delete id="deleteUser"  parameterType="int">
-    delete from User where userId=#{userId};
+    delete from user where userId=#{userId};
 	</delete>
 	
 	<!-- 更改用户信息 -->
