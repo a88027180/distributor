@@ -45,11 +45,12 @@ public class PictureServiceImpl implements PictureService {
 				note.setMsg("参数不能为空");
 				note.setData("");
 		 }else{
-		
-		userDao.changePicUrl(userId, "");
 		String path=userDao.selectUserPic(userId);
+		userDao.changePicUrl(userId, "");
+		System.out.println(path);
 		File filePath=new File(path);
  		ReadFile.deleteFile(filePath);
+ 	
 		note.setStatus(0);
 		note.setMsg("操作成功");
 		note.setData("");
