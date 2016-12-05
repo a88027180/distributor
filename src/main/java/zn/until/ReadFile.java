@@ -9,30 +9,35 @@ import java.io.File;
   
 public class ReadFile {  
   
- /** 
-  * 删除某个文件夹下的所有文件夹和文件 
-  * 
-  * @param delpath 
-  *            String 
-  * @throws FileNotFoundException 
-  * @throws IOException 
-  * @return boolean 
-  */  
-    /**
-     * 删除文件夹下的所有文件
-     * @param oldPath
+	   /**
+     * 删除空目录
+     * @param dir 将要删除的目录路径
      */
-    public static  void deleteFile(File oldPath) {
-          if (oldPath.isDirectory()) {
-           System.out.println(oldPath + "是文件夹--");
-           File[] files = oldPath.listFiles();
-           for (File file : files) {
-             deleteFile(file);
-           }
-          }else{
-            oldPath.delete();
-          }
+    public  static void doDeleteEmptyDir(String dir) {
+       (new File(dir)).delete();
+     
+    }
+
+    /**
+     * 递归删除目录下的所有文件及子目录下所有文件
+     * @param dir 将要删除的文件目录
+     * @return boolean Returns "true" if all deletions were successful.
+     *                 If a deletion fails, the method stops attempting to
+     *                 delete and returns "false".
+     */
+    public static  boolean deleteFile(File dir) {
+        if (dir.isDirectory()) {
+            String[] children = dir.list();
+            for (int i=0; i<children.length; i++) {
+                boolean success = deleteFile(new File(dir, children[i]));
+                if (!success) {
+                    return false;
+                }
+            }
         }
+        // 目录此时为空，可以删除
+        return dir.delete();
+    }
 
   
  /** 

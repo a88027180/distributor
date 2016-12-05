@@ -47,7 +47,7 @@ public class PictureServiceImpl implements PictureService {
 		 }else{
 		String path=userDao.selectUserPic(userId);
 		userDao.changePicUrl(userId, "");
-		System.out.println(path);
+	
 		File filePath=new File(path);
  		ReadFile.deleteFile(filePath);
  	
