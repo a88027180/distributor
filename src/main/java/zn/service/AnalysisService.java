@@ -11,7 +11,7 @@ import zn.until.UdpServerSocket;
  *
  */
 public interface AnalysisService {
-	public void analysisMon(UdpServerSocket udpServerSocket);
+	public void analysisMon();
 	public void analysisHex(byte[] hex,String monNumber);
 	public MonAlarms  analysisWarningHex(byte[] mes);
 }

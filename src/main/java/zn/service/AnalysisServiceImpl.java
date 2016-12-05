@@ -3,6 +3,10 @@
  */
 package zn.service;
 
+import java.io.InputStream;
+import java.net.InetAddress;
+import java.util.Properties;
+
 import javax.annotation.Resource;
 import javax.sound.midi.SysexMessage;
 
@@ -16,6 +20,7 @@ import zn.dao.MonitorDao;
 import zn.entity.MonAlarms;
 import zn.entity.MonDate;
 import zn.entity.Monitor;
+import zn.listener.AnalysisInfoListener;
 import zn.until.EncodeUtils;
 import zn.until.UdpServerSocket;
 
@@ -38,21 +43,31 @@ public class AnalysisServiceImpl implements AnalysisService{
 	private	MonitorDao monitorDao; 
 	
 	@Async
-	public void  analysisMon(UdpServerSocket udpServerSocket){
+	public void  analysisMon(){
 		
 		  try {
-			 
+
+				InputStream inStream =AnalysisInfoListener.class.getClassLoader() .getResourceAsStream( "./udp.properties" );  
+				
+				Properties prop = new Properties();    
+				prop.load(inStream);    
+				int localityPort = Integer.valueOf(prop.getProperty("localityPort"));
+			
+				
+				UdpServerSocket udpServerSocket=new UdpServerSocket(InetAddress.getLocalHost().getHostAddress(), localityPort);
+				
 			  while(true){
-				 
+					
 
 				  String be=udpServerSocket.receive();
 				  String bex=be.replaceAll("\\s", "");
 				  byte[] hex=EncodeUtils.hexDecode(bex);
-				    String monNumber=bex.substring(bex.length()-32, bex.length());
-	            analysisHex(hex,monNumber);
-	                
+				   String monNumber=bex.substring(bex.length()-32, bex.length());
+				   analysisHex(hex,monNumber);
+				  udpServerSocket.close();
+				  Thread.sleep(20);    
 			  }
-		  
+			  
 		  } catch (Exception e) {
 			  
 			e.printStackTrace();

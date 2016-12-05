@@ -25,7 +25,7 @@ public class AnalysisInfoListener implements ServletContextListener{
 	 * @see javax.servlet.ServletContextListener#contextDestroyed(javax.servlet.ServletContextEvent)
 	 */
 	public void contextDestroyed(ServletContextEvent arg0) {
-		// TODO Auto-generated method stub
+		AnalysisService analysisService=WebApplicationContextUtils.getWebApplicationContext(arg0.getServletContext()).getBean(AnalysisService.class);
 		
 	}
 
@@ -37,21 +37,21 @@ public class AnalysisInfoListener implements ServletContextListener{
 		
 
 	
-		UdpServerSocket udpServerSocket = null;
+		
 		 try {
 			 
 		
-			InputStream inStream =AnalysisInfoListener.class.getClassLoader() .getResourceAsStream( "./udp.properties" );  
-		
-			Properties prop = new Properties();    
-			prop.load(inStream);    
-				int localityPort = Integer.valueOf(prop.getProperty("localityPort"));
-			udpServerSocket = new UdpServerSocket(InetAddress.getLocalHost().getHostAddress(), localityPort);
-			if(udpServerSocket!=null){
-			analysisService.analysisMon( udpServerSocket);
-			}
+//			InputStream inStream =AnalysisInfoListener.class.getClassLoader() .getResourceAsStream( "./udp.properties" );  
+//		
+//			Properties prop = new Properties();    
+//			prop.load(inStream);    
+//				int localityPort = Integer.valueOf(prop.getProperty("localityPort"));
+//			udpServerSocket = new UdpServerSocket(InetAddress.getLocalHost().getHostAddress(), localityPort);
+//			if(udpServerSocket!=null){
+			analysisService.analysisMon( );
+//			}
 		 } catch (Exception e) {
-			// TODO Auto-generated catch block
+		
 			e.printStackTrace();
 		}
 		

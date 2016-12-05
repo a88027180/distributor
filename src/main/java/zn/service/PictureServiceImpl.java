@@ -100,7 +100,7 @@ public class PictureServiceImpl implements PictureService {
 			
 			e.printStackTrace();
 		} 
-				note.setStatus(0);
+			note.setStatus(0);
 	 		note.setMsg("操作成功");
 	 		note.setData("");
 	 	}

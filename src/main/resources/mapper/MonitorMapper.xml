@@ -75,9 +75,9 @@
 	<if test="monName!=null">monName=#{monName},</if>
 	<if test="monNumber!=null">monNumber=#{monNumber},</if>
 	<if test="monPlace!=null">monPlace=#{monPlace},</if>
-	<if test="monType!=null">monPlace=#{monType},</if>
-	<if test="monRoute!=null">monPlace=#{monRoute},</if>
-	<if test="monPlaceLevel!=null">monPlace=#{monPlaceLevel},</if>
+	<if test="monType!=null">monType=#{monType},</if>
+	<if test="monRoute!=null">monRoute=#{monRoute},</if>
+	<if test="monPlaceLevel!=null">monPlaceLevel=#{monPlaceLevel},</if>
 	<if test="monState!=null"> monState=#{monState},   </if>
 	</set> where monId=#{monId};
 	</update>
