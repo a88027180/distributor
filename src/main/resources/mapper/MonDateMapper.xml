@@ -62,7 +62,7 @@
 	<if test="name9!=null">name9=#{name9},</if>
 	<if test="name10!=null">name10=#{name10},</if>
 	<if test="name11!=null">name11=#{name11},</if>
-	<if test="name11!=null">name12=#{name12},</if>
+	<if test="name12!=null">name12=#{name12},</if>
 	<if test="T1!=null and T1!=''">T1=#{T1},</if>
 	<if test="T2!=null and T2!=''">T2=#{T2},</if>
 	<if test="T3!=null and T3!=''">T3=#{T3},</if>

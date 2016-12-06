@@ -9,6 +9,7 @@ import java.util.Properties;
 
 import javax.annotation.Resource;
 import javax.sound.midi.SysexMessage;
+import javax.swing.plaf.synth.SynthSpinnerUI;
 
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
@@ -58,13 +59,15 @@ public class AnalysisServiceImpl implements AnalysisService{
 				
 			  while(true){
 					
-
+				  
 				  String be=udpServerSocket.receive();
+				
 				  String bex=be.replaceAll("\\s", "");
 				  byte[] hex=EncodeUtils.hexDecode(bex);
+				  															
 				   String monNumber=bex.substring(bex.length()-32, bex.length());
 				   analysisHex(hex,monNumber);
-				  udpServerSocket.close();
+
 				  Thread.sleep(20);    
 			  }
 			  
