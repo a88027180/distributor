@@ -50,6 +50,10 @@
 	insert into user_org(userId,orgId) values(#{userId},#{orgId}) 
 	</insert>
 	
+	<delete id="deleteUserAndOrg" parameterType="int">
+	delete from user_org where userId=#{userId}
+	</delete>
+	
 		<!-- 给用户添加权限 -->
 	<insert id="userAddLimits">
 	insert into user_limits(limitsId,userId) values (#{limitsId},#{userId}); 

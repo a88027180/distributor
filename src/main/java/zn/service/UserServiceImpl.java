@@ -202,6 +202,7 @@ public class UserServiceImpl implements UserService{
 		User user=new User();
 		user.setUserId(userId);
 		user.setOrgId(orgId);
+		userDao.deleteUserAndOrg(userId);
 		userDao.addUserAndOrg(user);
 		userDao.changeUserInfo(information, userName,userId);
 		note.setStatus(0);

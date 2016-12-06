@@ -35,6 +35,7 @@ public interface UserDao {
 	public  int  userAddMon(Map<String,Object>     param);
 	public int userDelteMon(int userId);
 	public   List<User>   seleteUserByMonId(int monId);
+	public int  deleteUserAndOrg(int userId);
 	
 	public int userAddLimits(@Param("limitsId")int limitsId,@Param("userId")int userId);
 	public int userDeleteLimits(int userId);
