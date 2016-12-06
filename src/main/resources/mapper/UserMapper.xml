@@ -73,7 +73,7 @@
 	
 	<!-- 更改用户信息 -->
 	<update id="changeUserInfo">
-	update User  <set>
+	update user  <set>
 	<if test="information!=null">information=#{information},</if>
 	<if test="userName!=null">userName=#{userName}</if>
 	</set>   where userId=#{userId};
