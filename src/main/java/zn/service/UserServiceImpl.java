@@ -401,7 +401,7 @@ public class UserServiceImpl implements UserService{
 			note.setData("");
 			
 		}else{
-			List<Map<String,Object>> list=userDao.seleteUserListByMonId(3);;
+			List<Map<String,Object>> list=userDao.seleteUserListByMonId(monId);;
 			note.setStatus(0);
 			note.setMsg("操作成功");
 			note.setData(list);

@@ -138,7 +138,6 @@
 	<!-- 查询指定设备下的用户关联列表 -->
 	<select id="seleteUserListByMonId" parameterType="int" resultType="java.util.Map">
 	 select a.userId,a.userName,count(b.id) as relation from user a left join (select * from user_monitor where monId=#{monId}) b on a.userId=b.userId group by a.userId,a.userName
-	
 	</select>
 	
 	
