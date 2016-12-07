@@ -4,6 +4,7 @@
 package zn.controller.moitor;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,8 +25,10 @@ public class AddMonitorController {
 	
 	@RequestMapping("/add")
 	@ResponseBody
-	public NoteResult execute(String monStr){
-		NoteResult note=monitorService.addMon(monStr);	
+	public NoteResult execute(String monStr,HttpSession session){
+		int userId=Integer.parseInt((String)session.getAttribute("userId"));
+		NoteResult note=monitorService.addMon(monStr,userId);	
+		
 		return note;
 		
 	}

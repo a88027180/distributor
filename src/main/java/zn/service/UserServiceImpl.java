@@ -299,6 +299,28 @@ public class UserServiceImpl implements UserService{
 		}
 		return note;
 	}
+	
+	
+	public NoteResult changeOthersPassword(String password,Integer userId){
+		NoteResult note=new NoteResult();
+		if(password==null||userId==null){
+			note.setStatus(1);
+			note.setMsg("参数不能为空");
+			note.setData("");	
+		}else if(!password.matches("^\\w{6,16}$")){
+			note.setStatus(3);
+			note.setMsg("密码格式不对,密码为大于6位小于16位的纯数字或字母");
+			note.setData("");	
+			
+		}else {
+		userDao.changePassword(NoteUtil.md5(password), userId);
+		note.setStatus(0);
+		note.setMsg("更改密码成功");
+		note.setData("");
+	}
+		return note;
+	}
+	
 
 
 	/**

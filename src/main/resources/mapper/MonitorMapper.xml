@@ -100,6 +100,8 @@
 	</foreach>                             
 	</insert>
 	
+	
+	
 		<!-- 删除设备的关联用户 -->
 	<delete id="monDelteUser" parameterType="int">
 	delete from user_monitor where monId=#{monId};

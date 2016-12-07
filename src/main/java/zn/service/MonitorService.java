@@ -11,7 +11,7 @@ import zn.until.NoteResult;
  */
 
 public interface MonitorService {
-	public  NoteResult  addMon(String monStr);
+	public  NoteResult  addMon(String monStr,int userId);
 	public  NoteResult  findAllMon();
 	public  NoteResult  deleteMon(Integer monId);
 	public  NoteResult  changeMon(String monStr);

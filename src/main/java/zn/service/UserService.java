@@ -20,6 +20,7 @@ public interface UserService {
 	public NoteResult seleteUserByMonId(Integer monId);
 	public NoteResult selectAllUser();
 	public NoteResult   seleteUserListByMonId(Integer monId);
+	public NoteResult changeOthersPassword(String password,Integer userId);
 
 
 }

@@ -43,7 +43,7 @@ public class MonitorServiceImpl implements  MonitorService{
 	/**
 	 * 添加设备
 	 */
-	public NoteResult addMon(String monStr) {
+	public NoteResult addMon(String monStr,int userId) {
 		NoteResult note=new NoteResult();
 		
 		try {
@@ -64,8 +64,17 @@ public class MonitorServiceImpl implements  MonitorService{
 				note.setData("");
 				
 			}else{
+				
+				
+			
+				
 				monitorDao.addMon(mon);
 				monDateDao.addMonDateId(mon.getMonId());
+				Map<String,Object> param=new HashMap<String,Object>();
+				param.put("monId", mon.getMonId());
+				List<Integer> userList=new ArrayList<Integer>();
+				userList.add(userId);
+				monitorDao.monAddUser(param);
 				note.setStatus(0);
 				note.setMsg("添加设备成功");
 				note.setData("");

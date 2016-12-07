@@ -316,9 +316,9 @@ public class AnalysisServiceImpl implements AnalysisService{
 				pv="C";
 			}
 			mon.setMonAlarmsInfo("主动上传总电压过低告警,"+pv+"相,电压值为"+EncodeUtils.byte2float(mes, 56));
-			}else if(mes[12]==24){
+		}else if(mes[12]==24){
 				mon.setMonAlarmsInfo("主动上传湿度过高告警,湿度值为"+EncodeUtils.byte2float(mes, 56));
-			}else if(mes[12]==55){
+		}else if(mes[12]==49){
 				mon.setMonAlarmsInfo("停电报警");					
 		}else if(mes[12]==25){
 			long monV=EncodeUtils.getLong(mes, 44);
