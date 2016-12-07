@@ -71,6 +71,11 @@
 	select * from userview where userId=#{userId};
 	</select>
 	
+	<!-- 根据所有查询用户信息 -->
+	<select id="selectAllUser"  resultMap="User">
+	select * from userview ;
+	</select>
+	
 	<!-- 根据id删除用户信息 -->
 	<delete id="deleteUser"  parameterType="int">
     delete from user where userId=#{userId};
@@ -128,4 +133,12 @@
 	select userPicUrl from user where userId=#{userId}
 	
 	</select>
+	
+	
+	<!-- 查询指定设备下的用户关联列表 -->
+	<select id="seleteUserListByMonId" parameterType="int" resultType="java.util.Map">
+	 select a.userId,a.userName,count(b.id) as relation from user a left join (select * from user_monitor where monId=#{monId}) b on a.userId=b.userId group by a.userId,a.userName
+	</select>
+	
+	
 </mapper>

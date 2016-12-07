@@ -26,6 +26,8 @@ public interface UserDao {
 	public int changeUserInfo(@Param("information")String information,@Param("userName")String userName,@Param("userId")int userId);
 	
 	public List<User> selectUserByOrg(int orgId);
+	public List<User> selectAllUser();
+	
 	
 	public int changePassword(@Param("password")String password,@Param("userId")int userId);
 	
@@ -40,6 +42,8 @@ public interface UserDao {
 	public int userAddLimits(@Param("limitsId")int limitsId,@Param("userId")int userId);
 	public int userDeleteLimits(int userId);
 	public int seleteUserLimitsById(Integer userId);
+	
+	public List<Map<String,Object>> seleteUserListByMonId(int monId);
 
 	
 }

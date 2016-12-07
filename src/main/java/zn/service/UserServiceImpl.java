@@ -230,6 +230,15 @@ public class UserServiceImpl implements UserService{
 		}
 		return note;
 	}
+	
+	public NoteResult selectAllUser(){
+		NoteResult note=new NoteResult();
+		List<User> list=userDao.selectAllUser();
+		note.setStatus(0);
+		note.setMsg("查询成功");
+		note.setData(list);	
+		return note;
+	}
 
 
 	/**
@@ -381,11 +390,27 @@ public class UserServiceImpl implements UserService{
 		return note;
 	}
 
+	public NoteResult   seleteUserListByMonId(Integer monId){
+	
+		NoteResult note=new NoteResult();
 
+		
+		if(monId==null){
+			note.setStatus(1);
+			note.setMsg("参数不能为空");
+			note.setData("");
+			
+		}else{
+			List<Map<String,Object>> list=userDao.seleteUserListByMonId(3);;
+			note.setStatus(0);
+			note.setMsg("操作成功");
+			note.setData(list);
+		}
+		return note;
 
 	
 
-	
+	}
 	
 	
 }

@@ -18,6 +18,8 @@ public interface UserService {
 	public NoteResult deleteUser(Integer userId);
 	public NoteResult userAddMon(String jsonStr);
 	public NoteResult seleteUserByMonId(Integer monId);
+	public NoteResult selectAllUser();
+	public NoteResult   seleteUserListByMonId(Integer monId);
 
 
 }
