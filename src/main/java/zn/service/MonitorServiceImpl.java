@@ -74,6 +74,7 @@ public class MonitorServiceImpl implements  MonitorService{
 				param.put("monId", mon.getMonId());
 				List<Integer> userList=new ArrayList<Integer>();
 				userList.add(userId);
+				param.put("userList", userList);
 				monitorDao.monAddUser(param);
 				note.setStatus(0);
 				note.setMsg("添加设备成功");

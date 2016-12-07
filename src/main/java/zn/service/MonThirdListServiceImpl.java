@@ -111,7 +111,7 @@ public class MonThirdListServiceImpl implements MonThirdListService {
 			note.setData("");
 	 } else{
 		
-		 List<Monitor>  monList=monitorDao.findMonByList(monThirdListDao.selectListById(thirdListId).getThirdListName(), 2);
+		 List<Monitor>  monList=monitorDao.findMonByList(monThirdListDao.selectListById(thirdListId).getThirdListName(), 3);
 
 		 note.setStatus(0);
 		note.setMsg("查询成功");
