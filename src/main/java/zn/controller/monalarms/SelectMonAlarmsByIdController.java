@@ -24,6 +24,7 @@ public class SelectMonAlarmsByIdController {
 	private MonAlarmsService monAlarmsService;
 	
 	@RequestMapping("/selectMonAlarmsById")
+	
 	@ResponseBody
 	public NoteResult execute(Integer monId){
 		NoteResult note=monAlarmsService.selectMonAlarmsById(monId);	
