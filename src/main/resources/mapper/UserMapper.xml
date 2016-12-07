@@ -15,6 +15,7 @@
 		<result property="orgName" column="orgName"/>
 		<result property="limitsId" column="limitsIde"/>
 		<result property="limitsName" column="limitsName"/>
+		<result property="userPicUrl" column="userPicUrl" />
 		
 	</resultMap> 
 

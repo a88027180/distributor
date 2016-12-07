@@ -63,9 +63,13 @@ public class AnalysisServiceImpl implements AnalysisService{
 				  String be=udpServerSocket.receive();
 				
 				  String bex=be.replaceAll("\\s", "");
-				  byte[] hex=EncodeUtils.hexDecode(bex);
-				  															
-				   String monNumber=bex.substring(bex.length()-32, bex.length());
+//				  byte[] hex=EncodeUtils.hexDecode(bex);
+				  byte[] hex=bex.getBytes();
+				
+				  String aex=EncodeUtils.hexEncode(hex);
+				  System.out.println(aex);
+				   String monNumber=aex.substring(aex.length()-32, aex.length());
+//				   String monNumber=bex.substring(bex.length()-32, bex.length());
 				   analysisHex(hex,monNumber);
 
 				  Thread.sleep(20);    

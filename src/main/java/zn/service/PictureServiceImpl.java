@@ -33,9 +33,6 @@ public class PictureServiceImpl implements PictureService {
 	@Resource//注入
 	private UserDao userDao;
 
-
-
-
 	
 	@Override
 	public NoteResult deletePictures(Integer userId) {
