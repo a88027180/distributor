@@ -18,4 +18,5 @@ public interface MonAlarmsDao {
 	public int changeMonAlarms(MonAlarms monAlarms);
 	public int deleteMonAlarmsById(int alarmsId);
 	public int deleteMonAlarmsByMonId(int monId);
+	public  List<MonAlarms>	selectMonAlarmsById(int monId);
 }

@@ -11,7 +11,9 @@
  	select count(monId) from monalarms where   monId=#{monId}    
  	</select>
  	
- 	
+ 	<select id="selectMonAlarmsById"  parameterType="int"   resultType="zn.entity.MonAlarms">
+ 	select * from monalarms where monId=#{monId}    
+ 	</select>
  	
  	<insert id="addMonAlarms" parameterType="zn.entity.MonAlarms">
  	

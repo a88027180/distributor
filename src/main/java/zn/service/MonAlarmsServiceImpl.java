@@ -75,4 +75,27 @@ public class MonAlarmsServiceImpl implements MonAlarmsService {
 	}
 
 
+	/* (non-Javadoc)
+	 * @see zn.service.MonAlarmsService#selectMonAlarmsById(java.lang.Integer)
+	 */
+	@Override
+	public NoteResult selectMonAlarmsById(Integer monId) {
+		NoteResult note=new NoteResult();
+		if(monId==null){
+			note.setStatus(1);
+			note.setMsg("参数不能为空");
+			note.setData("");
+		
+		}else{
+			List<MonAlarms>    list=monAlarmsDao.selectMonAlarmsById(monId);
+			note.setStatus(0);
+			note.setMsg("查询成功");
+			note.setData(list);
+	
+			
+		}
+		return note;
+	}
+
+
 }

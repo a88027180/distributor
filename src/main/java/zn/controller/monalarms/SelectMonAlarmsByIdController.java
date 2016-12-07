@@ -18,14 +18,15 @@ import zn.until.NoteResult;
  */
 @Controller
 @RequestMapping("/monAlarms")
-public class SelectAllMonAlarmsController {
+public class SelectMonAlarmsByIdController {
+	
 	@Resource
 	private MonAlarmsService monAlarmsService;
 	
-	@RequestMapping("/selectAllMonAlarms")
+	@RequestMapping("/selectMonAlarmsById")
 	@ResponseBody
-	public NoteResult execute(){
-		NoteResult note=monAlarmsService.selectAllMonAlarms();	
+	public NoteResult execute(Integer monId){
+		NoteResult note=monAlarmsService.selectMonAlarmsById(monId);	
 		return note;
 		
 	}
