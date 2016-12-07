@@ -423,9 +423,9 @@ public class AnalysisServiceImpl implements AnalysisService{
 			}
 			mon.setMonAlarmsInfo(T+"线路上温度过高报警,该路为"+mov+","+pv+"温度值为"+EncodeUtils.byte2float(mes, 56));		
 		}
-		if(mon.getMonAlarmsInfo()!=null){
-		JPushClientExample.jpush(mon.getMonAlarmsInfo());
-		}
+//		if(mon.getMonAlarmsInfo()!=null){
+//		JPushClientExample.jpush(mon.getMonAlarmsInfo());
+//		}
 		return mon;
 	}
 	

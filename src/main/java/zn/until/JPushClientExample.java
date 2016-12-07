@@ -7,8 +7,11 @@ import cn.jiguang.common.resp.APIConnectionException;
 import cn.jiguang.common.resp.APIRequestException;
 import cn.jpush.api.JPushClient;
 import cn.jpush.api.push.PushResult;
-
+import cn.jpush.api.push.model.Message;
+import cn.jpush.api.push.model.Platform;
 import cn.jpush.api.push.model.PushPayload;
+import cn.jpush.api.push.model.audience.Audience;
+import cn.jpush.api.push.model.audience.AudienceTarget;
 
 /**
  * @author hq
@@ -45,6 +48,20 @@ public class JPushClientExample {
         return PushPayload.alertAll(message);
     }
     
+    //平台是 Andorid 与 iOS，推送目标是 （"tag1" 与 "tag2" 的并集）交（"alias1" 与 "alias2" 的并集），推送内容是 - 内容为 MSG_CONTENT 的消息
+    public static PushPayload buildPushObject_ios_audienceMore_messageWithExtras() {
+        return PushPayload.newBuilder()
+                .setPlatform(Platform.android_ios())
+                .setAudience(Audience.newBuilder()
+                        .addAudienceTarget(AudienceTarget.tag("tag1", "tag2"))
+                        .addAudienceTarget(AudienceTarget.alias("alias1", "alias2"))
+                        .build())
+                .setMessage(Message.newBuilder()
+                        .setMsgContent("")
+                        .addExtra("from", "JPush")
+                        .build())
+                .build();
+    }
     
     
 }
