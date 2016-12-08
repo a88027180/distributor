@@ -66,10 +66,10 @@ public class PictureServiceImpl implements PictureService {
 
 	
 	@Override
-	public NoteResult uploadPictures(MultipartFile file, String pathUrl, String fileName,int userId) {
+	public NoteResult uploadPictures(MultipartFile file, String pathUrl, String fileName,int userId,String realPath) {
 		NoteResult note=new NoteResult(); 
 	 
-	         int lastlen= fileName.lastIndexOf(".");
+	   
 	        
 	    if (null == fileName || 0 == fileName.length()) {
 	    	note.setStatus(1);
@@ -78,14 +78,19 @@ public class PictureServiceImpl implements PictureService {
 	 	// 文件后缀判断
 	 	} else{
 	 			
-	 	File upLoadFile = new File(pathUrl+File.separator+fileName);
+	 	File upLoadFile = new File(realPath+File.separator+fileName);
 	 	userDao.changePicUrl(userId, pathUrl+File.separator+fileName);
 	 	try {
-	 		File filePath=new File(pathUrl);
+	 		File filePath=new File(realPath);
 	 		ReadFile.deleteFile(filePath);
+	 		
 	 		filePath.mkdirs();
+	 	
+	 	
 			file.transferTo(upLoadFile);
 		} catch (IllegalStateException | IOException e) {
+			
+	
 			
 			e.printStackTrace();
 		} 

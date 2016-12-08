@@ -361,7 +361,7 @@ public class MonDateServiceImpl implements MonDateService{
 			
 			    
 		    
-		     String json="{\"monNumber\":\""+map.get("monNumber")+"\",\"way\":"+way+",\"switchState\":"+switchState+"}";   
+		     String json="[{\"monNumber\":\""+map.get("monNumber")+"\",\"way\":"+way+",\"switchState\":"+switchState+"}]";   
 			try {
 				InputStream inStream =AnalysisInfoListener.class.getClassLoader() .getResourceAsStream( "./udp.properties" );  ; 
 				Properties prop = new Properties();    

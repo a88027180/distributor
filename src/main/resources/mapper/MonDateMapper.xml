@@ -48,8 +48,8 @@
 	<if test="A7!=null">A7=#{A7},</if>
 	<if test="A8!=null">A8=#{A8},</if>
 	<if test="A9!=null">A9=#{A9},</if>
-	<if test="A10!=null">A9=#{A10},</if>
-	<if test="A11!=null">A9=#{A11},</if>
+	<if test="A10!=null">A10=#{A10},</if>
+	<if test="A11!=null">A11=#{A11},</if>
 	<if test="A12!=null">A12=#{A12},</if>
 	<if test="name1!=null">name1=#{name1},</if>
 	<if test="name2!=null">name2=#{name2},</if>

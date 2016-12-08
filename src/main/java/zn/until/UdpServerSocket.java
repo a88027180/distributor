@@ -80,9 +80,12 @@ public class UdpServerSocket {
 	        packet = new DatagramPacket(buffer, buffer.length);    
 	        ds.receive(packet);    
 	        orgIp = packet.getAddress().getHostAddress(); 
-	       
+	       System.out.println(packet.getData()[packet.getLength()-0]);
+	       System.out.println(packet.getData()[packet.getLength()-1]);
+	       System.out.println(packet.getData()[packet.getLength()-2]);
+	       System.out.println(packet.getData()[packet.getLength()-3]);
 	        String info = new String(packet.getData(), 0, packet.getLength());    
-	        System.out.println("接收信息：" + info);    
+	   
 	        return info; 
 	    }
 	    /**  

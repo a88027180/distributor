@@ -63,17 +63,19 @@ public class AnalysisServiceImpl implements AnalysisService{
 				  
 				  String be=udpServerSocket.receive();
 				
-				  String bex=be.replaceAll("\\s", "");
-//				  byte[] hex=EncodeUtils.hexDecode(bex);
-				  byte[] hex=bex.getBytes();
-				
+//				  String bex=be.replaceAll("\\s", "");
+//				  byte[] eeeex=EncodeUtils.hexDecode(be);
+//				  System.out.println(eeeex.length);
+				  byte[] hex=be.getBytes();
+				  
+				 
 				  String aex=EncodeUtils.hexEncode(hex);
-				  System.out.println(aex);
 				   String monNumber=aex.substring(aex.length()-32, aex.length());
 //				   String monNumber=bex.substring(bex.length()-32, bex.length());
 				   analysisHex(hex,monNumber);
-
-				  Thread.sleep(20);    
+				
+				
+				  
 			  }
 			  
 		  } catch (Exception e) {
@@ -134,6 +136,34 @@ public class AnalysisServiceImpl implements AnalysisService{
 				//第六路电流
 				mon.setA6(EncodeUtils.byte2float(mes, 104)+","+EncodeUtils.byte2float(mes, 108)+","+EncodeUtils.byte2float(mes, 112)+","+EncodeUtils.byte2float(mes, 136));				
 			}else if(mes[12]==12){       //12路
+				if(mes.length==160){
+					//A相总电压
+					mon.setAllAV(EncodeUtils.byte2float(mes, 16)+"");
+					//B相总电压
+					mon.setAllBV(EncodeUtils.byte2float(mes, 20)+"");
+					//C相总电压
+					mon.setAllCV(EncodeUtils.byte2float(mes, 24)+"");
+					//A相总电流
+					mon.setAllAA(EncodeUtils.byte2float(mes, 28)+"");
+					//B相总电流
+					mon.setAllBA(EncodeUtils.byte2float(mes, 32)+"");
+					//C相总电流
+					mon.setAllCA(EncodeUtils.byte2float(mes, 36)+"");
+					//湿度值
+					mon.setHumidity(EncodeUtils.byte2float(mes, 40)+"");
+					//第一路电流
+					mon.setA1(EncodeUtils.byte2float(mes, 44)+","+EncodeUtils.byte2float(mes, 48)+","+EncodeUtils.byte2float(mes, 52)+","+EncodeUtils.byte2float(mes, 116));
+					//第二路电流
+					mon.setA2(EncodeUtils.byte2float(mes, 56)+","+EncodeUtils.byte2float(mes, 60)+","+EncodeUtils.byte2float(mes, 64)+","+EncodeUtils.byte2float(mes, 120));
+					//第三路电流
+					mon.setA3(EncodeUtils.byte2float(mes, 68)+","+EncodeUtils.byte2float(mes, 72)+","+EncodeUtils.byte2float(mes, 76)+","+EncodeUtils.byte2float(mes, 124));
+					//第四路电流
+					mon.setA4(EncodeUtils.byte2float(mes, 80)+","+EncodeUtils.byte2float(mes, 84)+","+EncodeUtils.byte2float(mes, 88)+","+EncodeUtils.byte2float(mes, 128));
+					//第五路电流
+					mon.setA5(EncodeUtils.byte2float(mes, 92)+","+EncodeUtils.byte2float(mes, 96)+","+EncodeUtils.byte2float(mes, 100)+","+EncodeUtils.byte2float(mes, 132));
+					//第六路电流
+					mon.setA6(EncodeUtils.byte2float(mes, 104)+","+EncodeUtils.byte2float(mes, 108)+","+EncodeUtils.byte2float(mes, 112)+","+EncodeUtils.byte2float(mes, 136));		
+				}else if(mes.length==132){ 
 				//第七路电流
 				mon.setA7(EncodeUtils.byte2float(mes, 20)+","+EncodeUtils.byte2float(mes, 24)+","+EncodeUtils.byte2float(mes, 28)+","+EncodeUtils.byte2float(mes, 92));
 				//第八电流
@@ -146,7 +176,9 @@ public class AnalysisServiceImpl implements AnalysisService{
 				mon.setA11(EncodeUtils.byte2float(mes, 68)+","+EncodeUtils.byte2float(mes, 72)+","+EncodeUtils.byte2float(mes, 76)+","+EncodeUtils.byte2float(mes, 108));
 				//第十二路电流
 				mon.setA12(EncodeUtils.byte2float(mes, 80)+","+EncodeUtils.byte2float(mes, 84)+","+EncodeUtils.byte2float(mes, 88)+","+EncodeUtils.byte2float(mes, 112));					
-			}			
+				}
+				
+				}			
 	}else if(mes[8]==10){
            String T1="";
            String T2="";

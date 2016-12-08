@@ -14,7 +14,7 @@ import zn.until.NoteResult;
  *
  */
 public interface PictureService {
-	public NoteResult uploadPictures(MultipartFile file,String pathUrl,String fileName,int userId);
+	public NoteResult uploadPictures(MultipartFile file,String pathUrl,String fileName,int userId,String realPath);
 
 	public NoteResult deletePictures(Integer userId);
 	public String findUserPicture(int userId);
