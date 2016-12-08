@@ -285,11 +285,11 @@ public class MonitorServiceImpl implements  MonitorService{
 		Map<String,Object> map3=new HashMap<String,Object>();
 		map3.put("num", num3);
 		map3.put("state",3);
-		map3.put("stateName", "报警设备");
+		map3.put("stateName", "故障设备");
 		Map<String,Object> map4=new HashMap<String,Object>();
 		map4.put("num", num4);
 		map4.put("state",4);
-		map4.put("stateName", "故障设备");
+		map4.put("stateName", "报警设备");
 		List<Map<String,Object>> list=new ArrayList<Map<String,Object>>();
 		list.add(map1);
 		list.add(map2);
