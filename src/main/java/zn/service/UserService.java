@@ -5,11 +5,13 @@ package zn.service;
 
 
 
+import java.util.Map;
+
 import zn.until.NoteResult;
 
 public interface UserService {
 	public NoteResult checkTel(String checkTel);
-	public NoteResult checkLogin(String telephone,String password);
+	public Map<String,Object> checkLogin(String telephone,String password);
 	public NoteResult creatUser(String userStr,Integer userId);
 	public NoteResult changeUserInfo(String information,String userName,Integer userId,Integer orgId);
 	public NoteResult selectUserByOrg(Integer orgId);

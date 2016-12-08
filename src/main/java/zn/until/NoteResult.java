@@ -3,7 +3,7 @@ package zn.until;
 import java.io.Serializable;
 
 /**
- * ��Ϊ�����������Ӧ����
+ * 作为统一的返回信息
  *
  */
 public class NoteResult implements Serializable{

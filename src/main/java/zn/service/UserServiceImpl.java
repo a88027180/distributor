@@ -2,6 +2,7 @@ package zn.service;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -27,8 +28,7 @@ public class UserServiceImpl implements UserService{
 	@Resource//注入
 	private UserDao userDao;
 	
-	@Resource
-	HttpSession session;
+
 	
 	
 	
@@ -38,8 +38,9 @@ public class UserServiceImpl implements UserService{
 	/**
 	 * 用户登陆
 	 */
-	public NoteResult checkLogin(String telephone,String password){
+	public Map<String,Object> checkLogin(String telephone,String password){
 		SimpleDateFormat format=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		Map<String,Object> map=new HashMap<String,Object>();
 		Date date=new Date((new Date()).getTime()-2*60*60*1000);
 		String agoTime=format.format(date);
 		loginDao.deleteOutModedCount(agoTime);//清楚超过2小时的登陆记录
@@ -78,12 +79,15 @@ public class UserServiceImpl implements UserService{
 				note.setStatus(0);
 				note.setMsg("登陆成功");
 				note.setData(userId);
-				session.setAttribute("telephone", telephone);
-				session.setAttribute("userId", userId+"");
+				map.put("telephone", telephone);
+				map.put("userId", userId+"");
 			
 			}
 		}		
-		return note;
+		
+		map.put("NoteResult", note);
+		
+		return map;
 	}
 	
 	  

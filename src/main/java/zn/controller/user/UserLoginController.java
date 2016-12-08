@@ -1,5 +1,7 @@
 package zn.controller.user;
 
+import java.util.Map;
+
 import javax.annotation.Resource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,9 +25,11 @@ public class UserLoginController {
 	
 	@RequestMapping("/login")
 	@ResponseBody
-	public NoteResult execute(String telephone,String password){
-		
-		NoteResult note=userService.checkLogin(telephone, password);	
+	public NoteResult execute(String telephone,String password,HttpSession httpSession){
+		Map<String,Object> map=userService.checkLogin(telephone, password);	
+		NoteResult note=(NoteResult) map.get("NoteResult");
+		httpSession.setAttribute("telephone", map.get("telephone"));
+		httpSession.setAttribute("userId", map.get("userId"));
 		return note;	
 	}
 	
