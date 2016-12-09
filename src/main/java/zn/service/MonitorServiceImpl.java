@@ -190,7 +190,7 @@ public class MonitorServiceImpl implements  MonitorService{
 		}else if(map.get("userList")==null||"".equals(map.get("userList"))||"[]".equals(map.get("userList"))){
 			monitorDao.monDelteUser((Integer)map.get("monId"));
 			note.setStatus(0);
-			note.setMsg("清空设备用户列表成功");
+			 note.setMsg("清空设备用户列表成功");
 			note.setData("");
 			
 		}else{

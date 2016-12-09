@@ -198,16 +198,20 @@ public class UserServiceImpl implements UserService{
 	 */
 	public NoteResult changeUserInfo( String information, String userName,Integer userId,Integer orgId) {
 		NoteResult note=new NoteResult();
-		if(userName==null||userId==null||orgId==null){
+		if(userName==null||userId==null){
 			note.setStatus(1);
 			note.setMsg("参数不能为空");
 			note.setData("");	
 		}else{
 		User user=new User();
 		user.setUserId(userId);
+		if(orgId!=null){
 		user.setOrgId(orgId);
 		userDao.deleteUserAndOrg(userId);
 		userDao.addUserAndOrg(user);
+		}
+		
+		
 		userDao.changeUserInfo(information, userName,userId);
 		note.setStatus(0);
 		note.setMsg("更改成功");
