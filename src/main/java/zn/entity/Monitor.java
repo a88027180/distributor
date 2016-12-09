@@ -20,7 +20,35 @@ public class Monitor {
 	private String monNumber;                       //设备编号
 	private int monRoute;                           //设备路数
     private int monState;                           //设备状态
+    private String allAV;
+	private String allBV;
+	private String allCV;
+	private String monInT;
+	public String getMonInT() {
+		return monInT;
+	}
+	public void setMonInT(String monInT) {
+		this.monInT = monInT;
+	}
 	
+	public String getAllAV() {
+		return allAV;
+	}
+	public void setAllAV(String allAV) {
+		this.allAV = allAV;
+	}
+	public String getAllBV() {
+		return allBV;
+	}
+	public void setAllBV(String allBV) {
+		this.allBV = allBV;
+	}
+	public String getAllCV() {
+		return allCV;
+	}
+	public void setAllCV(String allCV) {
+		this.allCV = allCV;
+	}
 	public int getMonState() {
 		return monState;
 	}
