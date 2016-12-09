@@ -9,6 +9,7 @@ import java.net.DatagramSocket;
 import java.net.InetAddress;
 import java.net.InetSocketAddress;
 import java.net.SocketException;
+import java.util.Arrays;
 
 /**
  * @author hq
@@ -76,17 +77,18 @@ public class UdpServerSocket {
 	     * @return 返回接收的数据串信息  
 	     * @throws IOException   
 	     */    
-	    public final String receive() throws IOException {    
+	    public final byte[] receive() throws IOException {    
 	        packet = new DatagramPacket(buffer, buffer.length);    
 	        ds.receive(packet);    
 	        orgIp = packet.getAddress().getHostAddress(); 
-	       System.out.println(packet.getData()[packet.getLength()-0]);
-	       System.out.println(packet.getData()[packet.getLength()-1]);
-	       System.out.println(packet.getData()[packet.getLength()-2]);
-	       System.out.println(packet.getData()[packet.getLength()-3]);
-	        String info = new String(packet.getData(), 0, packet.getLength());    
+//	       System.out.println(packet.getData()[packet.getLength()-0]);
+//	       System.out.println(packet.getData()[packet.getLength()-1]);
+//	       System.out.println(packet.getData()[packet.getLength()-2]);
+//	       System.out.println(packet.getData()[packet.getLength()-3]);
+	       byte[] bex=Arrays.copyOfRange(packet.getData(), 0, packet.getLength());
+//	        String info = new String(packet.getData(), 0, packet.getLength());    
 	   
-	        return info; 
+	        return bex; 
 	    }
 	    /**  
 	     * 将响应包发送给请求端.  

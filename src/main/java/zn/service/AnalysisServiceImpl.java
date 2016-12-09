@@ -61,17 +61,15 @@ public class AnalysisServiceImpl implements AnalysisService{
 			  while(true){
 					
 				  
-				  String be=udpServerSocket.receive();
+				  
 				
-//				  String bex=be.replaceAll("\\s", "");
-//				  byte[] eeeex=EncodeUtils.hexDecode(be);
-//				  System.out.println(eeeex.length);
-				  byte[] hex=be.getBytes();
+
+				  byte[] hex=udpServerSocket.receive();
 				  
 				 
 				  String aex=EncodeUtils.hexEncode(hex);
 				   String monNumber=aex.substring(aex.length()-32, aex.length());
-//				   String monNumber=bex.substring(bex.length()-32, bex.length());
+
 				   analysisHex(hex,monNumber);
 				
 				

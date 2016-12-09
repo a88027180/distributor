@@ -59,6 +59,9 @@ org.springframework.web.servlet.DispatcherServlet
     <listener-class>zn.listener.AnalysisInfoListener</listener-class>
 	</listener>
  
-
+	 <!-- 设置session失效，单位分 -->
+ 	<session-config>
+ 	 <session-timeout>1000</session-timeout>
+ 	</session-config>
   
 </web-app>  

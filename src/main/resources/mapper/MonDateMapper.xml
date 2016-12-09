@@ -71,10 +71,10 @@
 	<if test="T6!=null and  T6!=''">T6=#{T6},</if>
 	<if test="T7!=null and  T7!=''">T7=#{T7},</if>
 	<if test="T8!=null and  T8!=''">T8=#{T8},</if>
-	<if test="T9!=null and   T9!=''">T9=#{T9},</if>
+	<if test="T9!=null and  T9!=''">T9=#{T9},</if>
 	<if test="T10!=null and T10!=''">T10=#{T10},</if>
 	<if test="T11!=null and T11!=''">T11=#{T11},</if>
-	<if test="T12!=null  and T12!=''">T12=#{T12},</if>	
+	<if test="T12!=null and T12!=''">T12=#{T12},</if>	
 	</set> 
 	where monId=#{monId}; 
 	</update>
