@@ -115,8 +115,6 @@ public class MonDateServiceImpl implements MonDateService {
 		}
 		if (mon.getT1() != null && !"".equals(mon.getT1())) {
 			monson1.setT(JSON.parseObject("{" + mon.getT1().substring(0, mon.getT1().length() - 1) + "}", MonT.class));
-		}else{
-			monson1.setT( JSON.toJSONString(new MonT()));
 		}
 		monsonList.add(monson1);
 		if (monRoute == 1) {
@@ -156,8 +154,6 @@ public class MonDateServiceImpl implements MonDateService {
 		}
 		if (mon.getT3() != null && !"".equals(mon.getT3())) {
 			monson3.setT(JSON.parseObject("{" + mon.getT3().substring(0, mon.getT3().length() - 1) + "}", MonT.class));
-		}else{
-			monson3.setT("{\"singleT\":null, \"at\":null,\"bt\":null,\"ct\":null,\"nt\":null}");
 		}
 		monsonList.add(monson3);
 		// 第四路
