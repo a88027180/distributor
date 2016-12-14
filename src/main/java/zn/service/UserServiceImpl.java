@@ -334,11 +334,15 @@ public class UserServiceImpl implements UserService{
 	/**
 	 * 根据id删除用户
 	 */
-	public NoteResult deleteUser(Integer userId) {
+	public NoteResult deleteUser(Integer userId,Integer ownId) {
 		NoteResult note=new NoteResult();
 		if(userId==null){
 			note.setStatus(1);
 			note.setMsg("参数不能为空");
+			note.setData("");	
+		}else if(ownId==userId){
+			note.setStatus(2);
+			note.setMsg("不能删除自己的账号");
 			note.setData("");	
 		}else{
 			userDao.deleteUser(userId);

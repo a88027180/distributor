@@ -17,7 +17,7 @@ public interface UserService {
 	public NoteResult selectUserByOrg(Integer orgId);
 	public NoteResult selectUserById(Integer userId);
 	public NoteResult changePassword(String oldPassword,String nowFirstPassword,String nowTwoPassword,Integer userId);
-	public NoteResult deleteUser(Integer userId);
+	public NoteResult deleteUser(Integer userId,Integer ownId);
 	public NoteResult userAddMon(String jsonStr);
 	public NoteResult seleteUserByMonId(Integer monId);
 	public NoteResult selectAllUser();

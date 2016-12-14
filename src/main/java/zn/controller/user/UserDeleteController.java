@@ -4,6 +4,8 @@
 package zn.controller.user;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,8 +26,9 @@ public class UserDeleteController {
 	
 	@RequestMapping("/delete")
 	@ResponseBody
-	public NoteResult execute(Integer userId){
-		NoteResult note=userService.deleteUser(userId);	
+	public NoteResult execute(Integer userId,HttpServletRequest request){
+		int ownId=Integer.parseInt((String)request.getSession().getAttribute("userId"));
+		NoteResult note=userService.deleteUser(userId,ownId);	
 		return note;	
 	}
 }

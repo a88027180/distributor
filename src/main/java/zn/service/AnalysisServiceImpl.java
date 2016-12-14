@@ -62,7 +62,7 @@ public class AnalysisServiceImpl implements AnalysisService {
 
 				String aex = EncodeUtils.hexEncode(hex);
 				String monNumber = aex.substring(aex.length() - 32, aex.length());
-
+	
 				analysisHex(hex, monNumber);
 
 			}
@@ -309,7 +309,7 @@ public class AnalysisServiceImpl implements AnalysisService {
 			} else if (p == 18) {
 				pv = "C";
 			}
-			mon.setMonAlarmsInfo("ͨ通道" + EncodeUtils.getLong(mes, 40) + "主动上传电流过载报警,该路电压为" + mov + "," + pv + "相,电流值为ֵΪ"
+			mon.setMonAlarmsInfo("ͨ通道" + (EncodeUtils.getLong(mes, 40)+1) + "主动上传电流过载报警,该路电压为" + mov + "," + pv + "相,电流值为"
 					+ EncodeUtils.byte2float(mes, 56));
 		} else if (mes[12] == 21) {
 			String pv = "";
@@ -358,12 +358,12 @@ public class AnalysisServiceImpl implements AnalysisService {
 				mov = "380V";
 			}
 
-			mon.setMonAlarmsInfo("通道" + EncodeUtils.getLong(mes, 40) + "主动上传单路漏电报警,该路电压为" + mov + ",漏电流值为"
+			mon.setMonAlarmsInfo("通道" + (EncodeUtils.getLong(mes, 40)+1) + "主动上传单路漏电报警,该路电压为" + mov + ",漏电流值为"
 					+ EncodeUtils.byte2float(mes, 56));
 		} else if (mes[12] == 32) {
 			long monV = EncodeUtils.getLong(mes, 44);
 			long p = EncodeUtils.getLong(mes, 48);
-			long mT = EncodeUtils.getLong(mes, 40);
+			long mT = EncodeUtils.getLong(mes, 40)+1;
 			String mov = "";
 			if (monV == 16) {
 				mov = "单相";
@@ -405,7 +405,7 @@ public class AnalysisServiceImpl implements AnalysisService {
 			} else if (p == 18) {
 				pv = "C";
 			}
-			mon.setMonAlarmsInfo("通道" + EncodeUtils.getLong(mes, 40) + "打火报警,该路电压为" + mov + "," + pv + "相");
+			mon.setMonAlarmsInfo("通道" + (EncodeUtils.getLong(mes, 40)+1) + "打火报警,该路电压为" + mov + "," + pv + "相");
 		} else if (mes[12] == 34) {
 			long monV = EncodeUtils.getLong(mes, 44);
 			long p = EncodeUtils.getLong(mes, 48);
@@ -423,13 +423,13 @@ public class AnalysisServiceImpl implements AnalysisService {
 			} else if (p == 18) {
 				pv = "C";
 			}
-			mon.setMonAlarmsInfo("通道" + EncodeUtils.getLong(mes, 40) + "单路电流过高报警,该路电压为" + mov + "," + pv + "相,电流值为"
+			mon.setMonAlarmsInfo("通道" +(EncodeUtils.getLong(mes, 40)+1) + "单路电流过高报警,该路电压为" + mov + "," + pv + "相,电流值为"
 					+ EncodeUtils.byte2float(mes, 56));
 
 		} else if (mes[12] == 35) {
 			long monV = EncodeUtils.getLong(mes, 44);
 			long p = EncodeUtils.getLong(mes, 48);
-			long mT = EncodeUtils.getLong(mes, 40);
+			long mT = EncodeUtils.getLong(mes, 40)+1;
 			String mov = "";
 			if (monV == 16) {
 				mov = "单相";

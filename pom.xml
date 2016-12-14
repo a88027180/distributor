@@ -167,11 +167,6 @@
         	<artifactId>spring-test</artifactId>
         	<version>4.0.2.RELEASE</version>
         </dependency>
-		
-		
-
-		
-		
 
         <dependency>
         	<groupId>javax.servlet</groupId>
