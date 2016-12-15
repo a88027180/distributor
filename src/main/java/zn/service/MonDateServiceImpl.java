@@ -348,13 +348,13 @@ public class MonDateServiceImpl implements MonDateService {
 		} else {
 			Map<String, Object> map = monDateDao.selectSwitchAndNumber(monId);
 			StringBuilder monSwitch = new StringBuilder((String) map.get("monSwitch"));
-
+		
 			String json = "[{\"monNumber\":\"" + map.get("monNumber") + "\",\"way\":" + way + ",\"switchState\":"
 					+ switchState + "}]";
 			try {
 				InputStream inStream = AnalysisInfoListener.class.getClassLoader()
 						.getResourceAsStream("./udp.properties");
-				;
+			
 				Properties prop = new Properties();
 				prop.load(inStream);
 				int serverPort = Integer.valueOf(prop.getProperty("serverPort"));
@@ -368,7 +368,8 @@ public class MonDateServiceImpl implements MonDateService {
 				e.printStackTrace();
 				return note;
 			}
-			monDateDao.changeMonSwitch(monSwitch.replace(12 - way + 1, 12 - way + 2, switchState).toString(), monId);
+		
+			monDateDao.changeMonSwitch(monSwitch.replace(12 - way, 12-way+1 , switchState).toString(), monId);
 			note.setStatus(0);
 			note.setMsg("操作成功");
 			note.setData("");
