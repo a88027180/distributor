@@ -4,6 +4,7 @@
 package zn.controller.monalarms;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,8 +25,9 @@ public class SelectAllMonAlarmsController {
 	
 	@RequestMapping("/selectAllMonAlarms")
 	@ResponseBody
-	public NoteResult execute(){
-		NoteResult note=monAlarmsService.selectAllMonAlarms();	
+	public NoteResult execute(HttpSession session){
+		int userId=Integer.parseInt((String) session.getAttribute("userId"));
+		NoteResult note=monAlarmsService.selectAllMonAlarms(userId);	
 		return note;
 		
 	}

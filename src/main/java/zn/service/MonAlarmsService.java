@@ -14,11 +14,11 @@ import zn.until.NoteResult;
 
 public interface MonAlarmsService {
 	
-	public NoteResult selectAllMonAlarms();
-	
+	public NoteResult selectAllMonAlarms(Integer userId);
 	public NoteResult deleteMonAlarmsByMonId(Integer monId);
 	public NoteResult deleteMonAlarmsById(Integer alarmsId);
 	public NoteResult selectMonAlarmsById(Integer monId);
-	public NoteResult changeMonAlarmsStatus(Integer alarmsId);
+	public NoteResult changeMonAlarmsStatus(Integer alarmsId,Integer userId);
+	
 
 }

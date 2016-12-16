@@ -131,7 +131,10 @@
 	<!-- 查询用户头像路径 -->
 	<select id="selectUserPic" parameterType="int" resultType="String">
 	select userPicUrl from user where userId=#{userId}
+	</select>
 	
+	<select id="selectUserIdList" resultType="Integer">
+	select userId from user ;
 	</select>
 	
 	

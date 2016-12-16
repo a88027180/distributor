@@ -44,6 +44,9 @@ public interface UserDao {
 	public int seleteUserLimitsById(Integer userId);
 	
 	public List<Map<String,Object>> seleteUserListByMonId(int monId);
+	
+	
+	public List<Integer> selectUserIdList();
 
 	
 }

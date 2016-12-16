@@ -12,8 +12,10 @@ import org.springframework.transaction.annotation.Transactional;
 
 
 import zn.dao.MonAlarmsDao;
+import zn.dao.UserDao;
 import zn.entity.Alarms;
-import zn.entity.MonAlarms;
+
+
 import zn.until.NoteResult;
 
 /**
@@ -27,15 +29,29 @@ public class MonAlarmsServiceImpl implements MonAlarmsService {
 	
 	@Resource//注入
 	private MonAlarmsDao  monAlarmsDao; 
+	
+	@Resource//注入
+	private UserDao  userDao; 
 	/**
 	 * 查询所有设备警示信息
 	 */
-	public NoteResult selectAllMonAlarms() {
+	public NoteResult selectAllMonAlarms(Integer userId) {
 		NoteResult note=new NoteResult();
-		List<Alarms>    list= monAlarmsDao.selectAllMonAlarms();
-		note.setStatus(0);
-		note.setMsg("查询成功");
-		note.setData(list);
+		int userLimit=userDao.seleteUserLimitsById(userId);
+		 
+		if(userLimit==1){
+			List<Alarms>    list= monAlarmsDao.selectAllMonAlarms(userId);	
+			note.setStatus(0);
+			note.setMsg("查询成功");
+			note.setData(list);
+		}else if(userLimit==2){
+			List<Alarms>    list=monAlarmsDao.selectUserAllMonAlarms(userId);
+			note.setStatus(0);
+			note.setMsg("查询成功");
+			note.setData(list);
+		}
+		
+		
 		return note;
 	}
 
@@ -49,6 +65,7 @@ public class MonAlarmsServiceImpl implements MonAlarmsService {
 		
 		}else{
 			monAlarmsDao.deleteMonAlarmsByMonId(monId);
+		
 			note.setStatus(0);
 			note.setMsg("删除成功");
 			note.setData("");
@@ -67,6 +84,7 @@ public class MonAlarmsServiceImpl implements MonAlarmsService {
 		
 		}else{
 			monAlarmsDao.deleteMonAlarmsById(alarmsId);
+		
 			note.setStatus(0);
 			note.setMsg("删除成功");
 			note.setData("");
@@ -98,7 +116,7 @@ public class MonAlarmsServiceImpl implements MonAlarmsService {
 		return note;
 	}
 	
-	public NoteResult changeMonAlarmsStatus(Integer alarmsId){
+	public NoteResult changeMonAlarmsStatus(Integer alarmsId,Integer userId){
 		NoteResult note=new NoteResult();
 		if(alarmsId==null){
 			note.setStatus(1);
@@ -106,7 +124,7 @@ public class MonAlarmsServiceImpl implements MonAlarmsService {
 			note.setData("");
 		
 		}else{
-			monAlarmsDao.changeMonAlarmsStatus(alarmsId);
+			monAlarmsDao.changeMonAlarmsStatus(alarmsId,userId);
 			note.setStatus(0);
 			note.setMsg("更改成功");
 			note.setData("");

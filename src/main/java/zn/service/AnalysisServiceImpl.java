@@ -5,6 +5,10 @@ package zn.service;
 
 import java.io.InputStream;
 import java.net.InetAddress;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.Properties;
 
 import javax.annotation.Resource;
@@ -18,6 +22,7 @@ import org.springframework.transaction.annotation.Transactional;
 import zn.dao.MonAlarmsDao;
 import zn.dao.MonDateDao;
 import zn.dao.MonitorDao;
+import zn.dao.UserDao;
 import zn.entity.MonAlarms;
 import zn.entity.MonDate;
 import zn.entity.Monitor;
@@ -41,6 +46,9 @@ public class AnalysisServiceImpl implements AnalysisService {
 
 	@Resource // 注入
 	private MonitorDao monitorDao;
+	
+	@Resource
+	private UserDao userDao;
 
 	@Async
 	public void analysisMon() {
@@ -248,8 +256,18 @@ public class AnalysisServiceImpl implements AnalysisService {
 			MonAlarms monAlarms = analysisWarningHex(mes);
 
 			monAlarms.setMonId(mon.getMonId());
-
+		
 			monAlarmsDao.addMonAlarms(monAlarms);
+			List<Integer> list=userDao.selectUserIdList();
+			List<Map<String , Object>> mapList=new ArrayList<Map<String , Object>>();
+			for(Integer userId:list){
+				Map<String, Object> map=new HashMap<String,Object>();
+				map.put("userId", userId);
+				map.put("alarmsId", monAlarms.getAlarmsId());
+				mapList.add(map);
+			}
+			monAlarmsDao.userAddAlarm(mapList);
+			
 			return;
 		}
 

@@ -5,7 +5,9 @@ import java.io.InputStream;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
@@ -22,10 +24,12 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONException;
 
 import zn.dao.LoginDao;
+import zn.dao.MonAlarmsDao;
 import zn.dao.MonDateDao;
 import zn.dao.MonitorDao;
 import zn.dao.OrganizationDao;
 import zn.dao.UserDao;
+import zn.entity.MonAlarms;
 import zn.entity.Monitor;
 import zn.entity.Organization;
 import zn.entity.User;
@@ -85,25 +89,25 @@ public class newTest {
 	
 	@Test
 	public void test(){
-//		 ApplicationContext    ac = new ClassPathXmlApplicationContext("spring-mybatis.xml");  
-//	     UserDao dao = ac.getBean("userDao",UserDao.class);
-//	     try {
-//			String userStr="{\"telephone\":\"13888444555\",\"password\":\"123456\",\"userName\":\"keng\",\"information\":\"123\"}";
-//		User user=JSON.parseObject(userStr, User.class);
-//	    	 User user=new User();
-//	    	     user.setInformation("fei");
-//	    	     user.setOrgId(2);
-//	    	     user.setOrgName("天");
-//	    	     user.setTelephone("12123456789");
-//	    	     user.setPassword(NoteUtil.md5("123456"));
-//	    	     user.setUserName("啊坑");
-//	    	     user.setUserId(1);
-//	    	     dao.addUserAndGetId(user);
-//	    	     dao.addUserAndOrg(user);
-//		System.out.println(user.toString());
-//		} catch (JSONException e) {
-//			System.out.println("json");
-//		}
+		 ApplicationContext    ac = new ClassPathXmlApplicationContext("spring-mybatis.xml");  
+	     UserDao userDao = ac.getBean("userDao",UserDao.class);
+	     MonAlarmsDao monAlarmsDao = ac.getBean("monAlarmsDao",MonAlarmsDao.class);
+	     MonAlarms monAlarms=new MonAlarms();
+	     monAlarms.setMonAlarmsInfo("aaa");
+	     monAlarms.setMonAlarmsType("12");
+	     monAlarms.setMonId(1);
+		monAlarmsDao.addMonAlarms(monAlarms);
+		List<Integer> list=userDao.selectUserIdList();
+		List<Map<String , Object>> mapList=new ArrayList<Map<String , Object>>();
+		for(Integer userId:list){
+			Map<String, Object> map=new HashMap<String,Object>();
+			map.put("userId", userId);
+			map.put("alarmsId", monAlarms.getAlarmsId());
+			
+			mapList.add(map);
+		}
+		System.out.println(mapList.toString());
+		monAlarmsDao.userAddAlarm(mapList);
 //		
 		
 		
