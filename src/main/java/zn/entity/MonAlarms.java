@@ -20,6 +20,20 @@ public class MonAlarms {
 	private String monAlarmsType;
 	private String monAlarmsTM;
 	private String monAlarmsInfo;
+	private int monAlarmsStatus;
+
+	@Override
+	public String toString() {
+		return "MonAlarms [alarmsId=" + alarmsId + ", monId=" + monId + ", monAlarmsType=" + monAlarmsType
+				+ ", monAlarmsTM=" + monAlarmsTM + ", monAlarmsInfo=" + monAlarmsInfo + ", monAlarmsStatus="
+				+ monAlarmsStatus + "]";
+	}
+	public int getMonAlarmsStatus() {
+		return monAlarmsStatus;
+	}
+	public void setMonAlarmsStatus(int monAlarmsStatus) {
+		this.monAlarmsStatus = monAlarmsStatus;
+	}
 	public int getMonId() {
 		return monId;
 	}
@@ -45,11 +59,8 @@ public class MonAlarms {
 	public void setMonAlarmsInfo(String monAlarmsInfo) {
 		this.monAlarmsInfo = monAlarmsInfo;
 	}
-	@Override
-	public String toString() {
-		return "MonAlarms [alarmsId=" + alarmsId + ", monId=" + monId + ", monAlarmsType=" + monAlarmsType
-				+ ", monAlarmsTM=" + monAlarmsTM + ", monAlarmsInfo=" + monAlarmsInfo + "]";
-	}
+
+	
 
 	
 }

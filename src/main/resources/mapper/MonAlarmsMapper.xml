@@ -33,6 +33,11 @@
 	</update>
 	
 	
+	<update id="changeMonAlarmsStatus" parameterType="int">
+	update monalarms set monAlarmsStatus=1  where alarmsId=#{alarmsId}
+	</update>
+	
+	
 	<delete id="deleteMonAlarmsByMonId" parameterType="int">
 	delete from monalarms where monId=#{monId}
 	</delete>

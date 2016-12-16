@@ -11,7 +11,9 @@ public class Alarms {
 	private int alarmsId;
 	private int monId;
 	private String monName;
+	private int monAlarmsStatus;
 	
+
 	public String getMonName() {
 		return monName;
 	}
@@ -61,12 +63,19 @@ public class Alarms {
 	public void setMonAlarmsInfo(String monAlarmsInfo) {
 		this.monAlarmsInfo = monAlarmsInfo;
 	}
+	public int getMonAlarmsStatus() {
+		return monAlarmsStatus;
+	}
+	public void setMonAlarmsStatus(int monAlarmsStatus) {
+		this.monAlarmsStatus = monAlarmsStatus;
+	}
 	@Override
 	public String toString() {
-		return "Alarms [alarmsId=" + alarmsId + ", monId=" + monId + ", monName=" + monName + ", monPlace=" + monPlace
-				+ ", monAlarmsType=" + monAlarmsType + ", monAlarmsTM=" + monAlarmsTM + ", monAlarmsInfo="
-				+ monAlarmsInfo + "]";
+		return "Alarms [alarmsId=" + alarmsId + ", monId=" + monId + ", monName=" + monName + ", monAlarmsStatus="
+				+ monAlarmsStatus + ", monPlace=" + monPlace + ", monAlarmsType=" + monAlarmsType + ", monAlarmsTM="
+				+ monAlarmsTM + ", monAlarmsInfo=" + monAlarmsInfo + "]";
 	}
+
 
 	
 

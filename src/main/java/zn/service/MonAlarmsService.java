@@ -19,5 +19,6 @@ public interface MonAlarmsService {
 	public NoteResult deleteMonAlarmsByMonId(Integer monId);
 	public NoteResult deleteMonAlarmsById(Integer alarmsId);
 	public NoteResult selectMonAlarmsById(Integer monId);
+	public NoteResult changeMonAlarmsStatus(Integer alarmsId);
 
 }

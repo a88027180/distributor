@@ -97,6 +97,21 @@ public class MonAlarmsServiceImpl implements MonAlarmsService {
 		}
 		return note;
 	}
-
+	
+	public NoteResult changeMonAlarmsStatus(Integer alarmsId){
+		NoteResult note=new NoteResult();
+		if(alarmsId==null){
+			note.setStatus(1);
+			note.setMsg("参数不能为空");
+			note.setData("");
+		
+		}else{
+			monAlarmsDao.changeMonAlarmsStatus(alarmsId);
+			note.setStatus(0);
+			note.setMsg("更改成功");
+			note.setData("");
+		}
+		return note;
+	}
 
 }
