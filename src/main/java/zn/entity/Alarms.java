@@ -21,6 +21,12 @@ public class Alarms {
 	private String monPlace;
 	
 	
+	public String getMonPlace() {
+		return monPlace;
+	}
+	public void setMonPlace(String monPlace) {
+		this.monPlace = monPlace;
+	}
 	public int getAlarmsId() {
 		return alarmsId;
 	}
