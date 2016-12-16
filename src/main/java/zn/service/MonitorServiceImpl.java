@@ -302,4 +302,22 @@ public class MonitorServiceImpl implements  MonitorService{
 		return note;
 	}
 
+
+	
+	public NoteResult seleteUserListByMonId(Integer userId) {
+		NoteResult note=new NoteResult();
+		if(userId==null){
+			note.setStatus(1);
+			note.setMsg("参数不能为空");
+			note.setData("");
+			
+		}else{
+			List<Map<String,Object>> list=monitorDao.SeleteMonListByUserId(userId);
+			note.setStatus(0);
+			note.setMsg("操作成功");
+			note.setData(list);
+		}
+		return note;
+	}
+
 }

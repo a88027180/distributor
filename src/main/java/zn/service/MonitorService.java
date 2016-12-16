@@ -20,4 +20,5 @@ public interface MonitorService {
 	public NoteResult    seleteMonByUserId(Integer userId);
 	public NoteResult findMonByState(Integer monState);
 	public NoteResult findMonNumByState();
+	public NoteResult seleteUserListByMonId(Integer userId);
 }
