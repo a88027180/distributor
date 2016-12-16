@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 
 import zn.dao.MonAlarmsDao;
+import zn.entity.Alarms;
 import zn.entity.MonAlarms;
 import zn.until.NoteResult;
 
@@ -31,7 +32,7 @@ public class MonAlarmsServiceImpl implements MonAlarmsService {
 	 */
 	public NoteResult selectAllMonAlarms() {
 		NoteResult note=new NoteResult();
-		List<MonAlarms>    list= monAlarmsDao.selectAllMonAlarms();
+		List<Alarms>    list= monAlarmsDao.selectAllMonAlarms();
 		note.setStatus(0);
 		note.setMsg("查询成功");
 		note.setData(list);
@@ -87,7 +88,7 @@ public class MonAlarmsServiceImpl implements MonAlarmsService {
 			note.setData("");
 		
 		}else{
-			List<MonAlarms>    list=monAlarmsDao.selectMonAlarmsById(monId);
+			List<Alarms>    list=monAlarmsDao.selectMonAlarmsById(monId);
 			note.setStatus(0);
 			note.setMsg("查询成功");
 			note.setData(list);

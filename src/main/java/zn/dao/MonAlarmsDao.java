@@ -5,6 +5,7 @@ package zn.dao;
 
 import java.util.List;
 
+import zn.entity.Alarms;
 import zn.entity.MonAlarms;
 
 /**
@@ -12,11 +13,11 @@ import zn.entity.MonAlarms;
  *
  */
 public interface MonAlarmsDao {
-	public  List<MonAlarms> selectAllMonAlarms();
+	public  List<Alarms> selectAllMonAlarms();
 	public   int selectAlarmsDateIsExist(int monId);
 	public    int  addMonAlarms(MonAlarms monAlarms);
 	public int changeMonAlarms(MonAlarms monAlarms);
 	public int deleteMonAlarmsById(int alarmsId);
 	public int deleteMonAlarmsByMonId(int monId);
-	public  List<MonAlarms>	selectMonAlarmsById(int monId);
+	public  List<Alarms>	selectMonAlarmsById(int monId);
 }
