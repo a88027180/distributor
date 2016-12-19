@@ -74,6 +74,7 @@ public class UserServiceImpl implements UserService{
 			}else{
 				loginDao.deleteCountByuserId(userId);
 				String lastLoadTime=format.format(new Date());
+				
 				userDao.changeUserState(userId,lastLoadTime);
 				
 				note.setStatus(0);

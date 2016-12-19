@@ -258,7 +258,7 @@ public class AnalysisServiceImpl implements AnalysisService {
 			monAlarms.setMonId(mon.getMonId());
 		
 			monAlarmsDao.addMonAlarms(monAlarms);
-			List<Integer> list=userDao.selectUserIdList();
+			List<Integer> list=userDao.selectUserIdList(mon.getMonId());
 			List<Map<String , Object>> mapList=new ArrayList<Map<String , Object>>();
 			for(Integer userId:list){
 				Map<String, Object> map=new HashMap<String,Object>();
@@ -327,7 +327,7 @@ public class AnalysisServiceImpl implements AnalysisService {
 			} else if (p == 18) {
 				pv = "C";
 			}
-			mon.setMonAlarmsInfo("ͨ通道" + (EncodeUtils.getLong(mes, 40)+1) + "主动上传电流过载报警,该路电压为" + mov + "," + pv + "相,电流值为"
+			mon.setMonAlarmsInfo("通道" + (EncodeUtils.getLong(mes, 40)+1) + "主动上传电流过载报警,该路电压为" + mov + "," + pv + "相,电流值为"
 					+ EncodeUtils.byte2float(mes, 56));
 		} else if (mes[12] == 21) {
 			String pv = "";

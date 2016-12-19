@@ -95,9 +95,9 @@ public class newTest {
 	     MonAlarms monAlarms=new MonAlarms();
 	     monAlarms.setMonAlarmsInfo("aaa");
 	     monAlarms.setMonAlarmsType("12");
-	     monAlarms.setMonId(1);
+	     monAlarms.setMonId(3);
 		monAlarmsDao.addMonAlarms(monAlarms);
-		List<Integer> list=userDao.selectUserIdList();
+		List<Integer> list=userDao.selectUserIdList(monAlarms.getMonId());
 		List<Map<String , Object>> mapList=new ArrayList<Map<String , Object>>();
 		for(Integer userId:list){
 			Map<String, Object> map=new HashMap<String,Object>();

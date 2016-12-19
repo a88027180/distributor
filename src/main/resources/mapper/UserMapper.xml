@@ -133,8 +133,8 @@
 	select userPicUrl from user where userId=#{userId}
 	</select>
 	
-	<select id="selectUserIdList" resultType="Integer">
-	select userId from user ;
+	<select id="selectUserIdList"  parameterType="int" resultType="Integer">
+	select userId  from user_monitor  where monId=#{monId}  union  select userId from user_limits where limitsId=1 
 	</select>
 	
 	

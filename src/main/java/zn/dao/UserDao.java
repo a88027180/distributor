@@ -46,7 +46,7 @@ public interface UserDao {
 	public List<Map<String,Object>> seleteUserListByMonId(int monId);
 	
 	
-	public List<Integer> selectUserIdList();
+	public List<Integer> selectUserIdList(int  monId);
 
 	
 }
