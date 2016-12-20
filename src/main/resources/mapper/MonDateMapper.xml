@@ -13,6 +13,15 @@
 	insert into mondate(monId) values (#{monId}) 
 	</insert>
 	
+	<insert id="addMonDateIdList">
+	insert into mondate(monId) values 
+	<foreach collection="list"  separator=","   item="model">
+	(#{model}) 
+	</foreach>
+	</insert>
+	
+	
+	
 	<!-- 添加设备数据 -->
 	<insert id="addMonDate" parameterType="zn.entity.MonDate">
 	insert into mondate(monInT,allAV,allBV,allCV,humidity,monSwitch,allAA,allBA,

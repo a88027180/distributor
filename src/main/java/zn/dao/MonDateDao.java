@@ -3,6 +3,7 @@
  */
 package zn.dao;
 
+import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.annotations.Param;
@@ -22,5 +23,8 @@ public interface MonDateDao {
 	public int changeMonSwitch(@Param("monSwitch")String monSwitch,@Param("monId")Integer monId );
 	
 	public Map<String,Object> selectSwitchAndNumber(int monId);
+	
+	
+	public int addMonDateIdList(List<Integer> list);
 
 }

@@ -64,10 +64,7 @@ public class MonitorServiceImpl implements  MonitorService{
 				note.setData("");
 				
 			}else{
-				
-				
-			
-				
+
 				monitorDao.addMon(mon);
 				monDateDao.addMonDateId(mon.getMonId());
 				Map<String,Object> param=new HashMap<String,Object>();

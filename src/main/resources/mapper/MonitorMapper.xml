@@ -39,6 +39,10 @@
  	select * from monitorview where monPlace=#{monPlace} and monPlaceLevel=#{monPlaceLevel}
  	</select>
  	
+ 		<!-- 查询指定列表下的设备 -->
+ 	<select id="findMonByMonList" resultMap="Monitor" parameterType="String">
+ 	select * from monitorview where monPlace=#{monPlace} 
+ 	</select>
  	
  	<!-- 查询指定状态下的设备 -->
  	<select id="findMonNumByState" parameterType="int" resultType="int">
@@ -62,6 +66,9 @@
  	insert into monitor(monAlias,monInstall,monIP,monModel,monName,monNumber,monPlace,monType,monRoute,monPlaceLevel,monState) 
  	value(#{monAlias},#{monInstall},#{monIP},#{monModel},#{monName},#{monNumber},#{monPlace},#{monType},#{monRoute},#{monPlaceLevel},#{monState});
  	</insert>
+ 	
+ 	
+ 	
  
 	<!-- 根据设备id删除设备 --> 
 	<delete id="deleteMon" parameterType="int">
@@ -123,5 +130,53 @@
 	<select id="selectMonByNum" parameterType="String" resultMap="Monitor">
 	select * from monitor where UPPER(REPLACE(monNumber,'-',''))=#{monNumber}
 	</select>
+	
+	<!--查询所有设备的编号 -->
+	<select id="selectAllmonNumber" resultType="String">
+	select  monNumber from monitor
+	</select>
+	
+	<!-- 添加多个设备 -->
+ 	<insert id="addMoreMon"  >
+ 		insert    into  monitor(monAlias,monInstall,monIP,monModel,monName,monNumber,monPlace,monType,monRoute,monPlaceLevel,monState) value
+	<foreach collection="list" separator="," index="index" item="item" >
+		(#{item.monAlias},#{item.monInstall},#{item.monIP},#{item.monModel},#{item.monName},#{item.monNumber},#{item.monPlace},#{item.monType},#{item.monRoute},#{item.monPlaceLevel},#{item.monState})	
+	</foreach>  
+ 	</insert>
+ 	
+ 	<!-- 根据设备编号删除设备 -->
+ 	<delete id="deleteMonByMonNumber">
+ 	<![CDATA[ 
+ 	delete from monitor where monNumber in
+ 	 ]]>
+ 	<foreach collection="list" open="(" separator="," close=")"  item="model">
+		#{model}	
+	</foreach>
+ 	</delete>
+ 	
+ 	<!-- 根据设备编号更新设备 -->
+ 		<update id="changeMonByMonNumber" parameterType="zn.entity.Monitor" >
+	update monitor <set>
+	<if test="monAlias!=null">monAlias=#{monAlias},</if>
+	<if test="monInstall!=null">monInstall=#{monInstall},</if>
+	<if test="monIP!=null">monIP=#{monIP},</if>
+	<if test="monModel!=null">monModel=#{monModel},</if>
+	<if test="monName!=null">monName=#{monName},</if>
+	<if test="monPlace!=null">monPlace=#{monPlace},</if>
+	<if test="monType!=null">monType=#{monType},</if>
+	<if test="monRoute!=null">monRoute=#{monRoute},</if>
+	<if test="monPlaceLevel!=null">monPlaceLevel=#{monPlaceLevel},</if>
+	<if test="monState!=null"> monState=#{monState},   </if>
+	</set> where monNumber=#{monNumber};
+	</update>
+	
+	<select id="selectMonIdByMonNumber" resultType="int">
+	select monId from monitor where monNumber in
+	  <foreach item="item" index="index" collection="list"
+      open="(" separator="," close=")">
+        #{item}
+  </foreach>
+	</select>
+	
 	
  </mapper>
