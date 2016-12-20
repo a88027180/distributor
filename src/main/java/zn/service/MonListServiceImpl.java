@@ -68,4 +68,16 @@ public class MonListServiceImpl implements MonListService{
 		 return note;
 	}
 
+
+	
+	@Override
+	public NoteResult selectAllMonList() {
+		NoteResult note=new NoteResult();
+		 List<MonList> list= monListDao.selectAllMonList(); 
+		 note.setStatus(0);
+		note.setMsg("查询成功");
+		note.setData(list);
+		 return note;
+	}
+
 }

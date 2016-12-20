@@ -16,5 +16,6 @@ public interface MonListDao {
 	public int addAllMonList(List<MonList> list);
 	public List<MonList> selectMonListByListLevel(int listLevel);
 	public List<MonList> selectMonListByList(String superiorListId);
+	public List<MonList> selectAllMonList();
 
 }

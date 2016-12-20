@@ -12,6 +12,7 @@ import zn.until.NoteResult;
 public interface MonListService {
 	public NoteResult selectMonListByList(String superiorListId);
 	public NoteResult selectMonListByListLevel(Integer listLevel);
+	public NoteResult selectAllMonList();
 	
 
 }

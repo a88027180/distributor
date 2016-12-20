@@ -17,6 +17,7 @@ import com.alibaba.fastjson.JSON;
 import zn.dao.MonDateDao;
 import zn.dao.MonitorDao;
 import zn.entity.Monitor;
+import zn.entity.XmlMonList;
 import zn.entity.XmlMonitor;
 import zn.until.WebService;
 
@@ -34,15 +35,29 @@ public class GetDateServiceImpl {
 	@Resource//注入
 	private MonDateDao monDateDao;
 	
-	 @Scheduled(cron ="0 49 12 * * ?") //每天凌晨两点执行
+	 @Scheduled(cron ="0 0 2 * * ?") //每天凌晨两点执行
      public    void doSomethingWith(){
-      
+		 DeviceInfoGetForJson();
        
     
 	 }
 	 
+	 public void RegionInfoGetForJson(){
+		 String xmlListStr=WebService.RegionInfoGetForJson();
+		 List<XmlMonList> xmlMonList=(List<XmlMonList>)JSON.parse(xmlListStr);
+		 for(XmlMonList x:xmlMonList){
+			 
+		 }
+	 }
 	 
-	 public void getDate(){
+	 
+	 /**
+	  * 获取所有设备信息
+	  * @Title: DeviceInfoGetForJson 
+	  * @Description: TODO   
+	  * @throws
+	  */
+	 public void DeviceInfoGetForJson(){
 		 String xmlListStr=WebService.DeviceInfoGetForJson();
 		 List<XmlMonitor>  xmlList= (List<XmlMonitor>) JSON.parseObject(xmlListStr);
 		 List<String> wen=new ArrayList<String>();
@@ -69,6 +84,7 @@ public class GetDateServiceImpl {
 					monitor.setMonPlace(x.getSBQY());
 					monitor.setMonType(x.getSBLX());
 					monitor.setMonInstall(x.getAZWZ());
+					monitor.setMonPlaceName(x.getSBQYMC());
 					if(x.getSBZT()!=null){
 						if ("在线".equals(x.getSBZT())) {
 						monitor.setMonState(1);	
@@ -90,6 +106,7 @@ public class GetDateServiceImpl {
 					monitor.setMonPlace(x.getSBQY());
 					monitor.setMonType(x.getSBLX());
 					monitor.setMonInstall(x.getAZWZ());
+					monitor.setMonPlaceName(x.getSBQYMC());
 					if(x.getSBZT()!=null){
 						if ("在线".equals(x.getSBZT())) {
 						monitor.setMonState(1);	
