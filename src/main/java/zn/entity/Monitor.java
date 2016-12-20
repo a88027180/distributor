@@ -15,7 +15,7 @@ public class Monitor {
 	private String monModel;						//设备型号
 	private String monName;							//设备名称
 	private String monPlace;						//设备归属地
-	private int monPlaceLevel;					//设备归属地级别
+	private String monPlaceName;					//设备归属地级别
 	private String monType;							//设备类型
 	private String monNumber;                       //设备编号
 	private int monRoute;                           //设备路数
@@ -115,19 +115,22 @@ public class Monitor {
 	public void setMonType(String monType) {
 		this.monType = monType;
 	}
-	public int getMonPlaceLevel() {
-		return monPlaceLevel;
+
+	public String getMonPlaceName() {
+		return monPlaceName;
 	}
-	public void setMonPlaceLevel(int monPlaceLevel) {
-		this.monPlaceLevel = monPlaceLevel;
+	public void setMonPlaceName(String monPlaceName) {
+		this.monPlaceName = monPlaceName;
 	}
 	@Override
 	public String toString() {
 		return "Monitor [monId=" + monId + ", monAlias=" + monAlias + ", monInstall=" + monInstall + ", monIP=" + monIP
-				+ ", monModel=" + monModel + ", monName=" + monName + ", monPlace=" + monPlace + ", monPlaceLevel="
-				+ monPlaceLevel + ", monType=" + monType + ", monNumber=" + monNumber + ", monRoute=" + monRoute
-				+ ", monState=" + monState + "]";
+				+ ", monModel=" + monModel + ", monName=" + monName + ", monPlace=" + monPlace + ", monPlaceName="
+				+ monPlaceName + ", monType=" + monType + ", monNumber=" + monNumber + ", monRoute=" + monRoute
+				+ ", monState=" + monState + ", allAV=" + allAV + ", allBV=" + allBV + ", allCV=" + allCV + ", monInT="
+				+ monInT + "]";
 	}
+	
 
 	
 

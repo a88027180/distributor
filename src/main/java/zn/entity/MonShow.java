@@ -17,7 +17,7 @@ public class MonShow {
 	private String monIP;							//设备IP
 	private String monModel;						//设备型号
 	private String monPlace;						//设备归属地
-	private int monPlaceLevel;					//设备归属地级别
+	private String monPlaceName;					//设备归属地级别
 	private String monType;							//设备类型
 	private String monNumber;                       //设备编号
 	private int monRoute;                           //设备路数
@@ -86,11 +86,12 @@ public class MonShow {
 	public void setMonPlace(String monPlace) {
 		this.monPlace = monPlace;
 	}
-	public int getMonPlaceLevel() {
-		return monPlaceLevel;
+	
+	public String getMonPlaceName() {
+		return monPlaceName;
 	}
-	public void setMonPlaceLevel(int monPlaceLevel) {
-		this.monPlaceLevel = monPlaceLevel;
+	public void setMonPlaceName(String monPlaceName) {
+		this.monPlaceName = monPlaceName;
 	}
 	public String getMonType() {
 		return monType;
@@ -162,11 +163,12 @@ public class MonShow {
 	public String toString() {
 		return "MonShow [monId=" + monId + ", monName=" + monName + ", monAlias=" + monAlias + ", monInstall="
 				+ monInstall + ", monIP=" + monIP + ", monModel=" + monModel + ", monPlace=" + monPlace
-				+ ", monPlaceLevel=" + monPlaceLevel + ", monType=" + monType + ", monNumber=" + monNumber
-				+ ", monRoute=" + monRoute + ", monState=" + monState + ", monInT=" + monInT + ", allAV=" + allAV
-				+ ", allBV=" + allBV + ", allCV=" + allCV + ", humidity=" + humidity + ", allAA=" + allAA + ", allBA="
-				+ allBA + ", allCA=" + allCA + ", list=" + list + "]";
+				+ ", monPlaceName=" + monPlaceName + ", monType=" + monType + ", monNumber=" + monNumber + ", monRoute="
+				+ monRoute + ", monState=" + monState + ", monInT=" + monInT + ", allAV=" + allAV + ", allBV=" + allBV
+				+ ", allCV=" + allCV + ", humidity=" + humidity + ", allAA=" + allAA + ", allBA=" + allBA + ", allCA="
+				+ allCA + ", list=" + list + "]";
 	}
+
 	
 	
 	

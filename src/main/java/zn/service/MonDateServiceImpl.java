@@ -81,7 +81,7 @@ public class MonDateServiceImpl implements MonDateService {
 			monShow.setMonName(monitor.getMonName());
 			monShow.setMonNumber(monitor.getMonNumber());
 			monShow.setMonPlace(monitor.getMonPlace());
-			monShow.setMonPlaceLevel(monitor.getMonPlaceLevel());
+			monShow.setMonPlaceName(monitor.getMonPlaceName());
 			monShow.setMonRoute(monitor.getMonRoute());
 			monShow.setMonType(monitor.getMonType());
 			monShow.setMonInT(mon.getMonInT());

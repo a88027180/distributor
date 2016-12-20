@@ -152,7 +152,7 @@ public class TwoTest {
 		 monShow.setMonName(monitor.getMonName());
 		 monShow.setMonNumber(monitor.getMonNumber());
 		 monShow.setMonPlace(monitor.getMonPlace());
-		 monShow.setMonPlaceLevel(monitor.getMonPlaceLevel());
+		
 		 monShow.setMonRoute(monitor.getMonRoute());
 		 monShow.setMonType(monitor.getMonType());
 	

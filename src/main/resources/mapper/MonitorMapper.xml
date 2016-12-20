@@ -16,7 +16,7 @@
 		<result property="monPlace" column="monPlace"/>
 		<result property="monType" column="monType"/>
 		<result property="monRoute" column="monRoute" />
-		<result property="monPlaceLevel" column="monPlaceLevel"/>
+		<result property="monPlaceName" column="monPlaceName"/>
 		<result property="monState" column="monState"/>
 		<result property="allAV" column="allAV"/>
 		<result property="allBV" column="allBV"/>
@@ -63,8 +63,8 @@
  	
  	<!--添加设备  -->
  	<insert id="addMon" parameterType="zn.entity.Monitor" useGeneratedKeys="true" keyProperty="monId">
- 	insert into monitor(monAlias,monInstall,monIP,monModel,monName,monNumber,monPlace,monType,monRoute,monPlaceLevel,monState) 
- 	value(#{monAlias},#{monInstall},#{monIP},#{monModel},#{monName},#{monNumber},#{monPlace},#{monType},#{monRoute},#{monPlaceLevel},#{monState});
+ 	insert into monitor(monAlias,monInstall,monIP,monModel,monName,monNumber,monPlace,monType,monRoute,monPlaceName,monState) 
+ 	value(#{monAlias},#{monInstall},#{monIP},#{monModel},#{monName},#{monNumber},#{monPlace},#{monType},#{monRoute},#{monPlaceName},#{monState});
  	</insert>
  	
  	
@@ -88,20 +88,20 @@
 	<if test="monPlace!=null">monPlace=#{monPlace},</if>
 	<if test="monType!=null">monType=#{monType},</if>
 	<if test="monRoute!=null">monRoute=#{monRoute},</if>
-	<if test="monPlaceLevel!=null">monPlaceLevel=#{monPlaceLevel},</if>
+	<if test="monPlaceLevel!=null">monPlaceName=#{monPlaceName},</if>
 	<if test="monState!=null"> monState=#{monState},   </if>
 	</set> where monId=#{monId};
 	</update>
 	
 	<!-- 根据设备所属列表名称删除设备 -->
-	<update id="deleteMonPlace" >
-	update monitor set monPlace=null,monPlaceLevel=0 where monPlace=#{monPlace} and monPlaceLevel=#{monPlaceLevel};
-	</update>
+<!-- 	<update id="deleteMonPlace" > -->
+<!-- 	update monitor set monPlace=null,monPlaceLevel=0 where monPlace=#{monPlace} and monPlaceLevel=#{monPlaceLevel}; -->
+<!-- 	</update> -->
 	
 	<!-- 更改设备所属列表名称 -->
-	<update id="changeMonPlace">
-	update monitor set monPlace=#{monNewPlace} where  monPlace=#{monOldPlace} and monPlaceLevel=#{monPlaceLevel};
-	</update>
+<!-- 	<update id="changeMonPlace"> -->
+<!-- 	update monitor set monPlace=#{monNewPlace} where  monPlace=#{monOldPlace} and monPlaceLevel=#{monPlaceLevel}; -->
+<!-- 	</update> -->
 	
 	<!-- 设备选择用户 -->
 	<insert id="monAddUser" >

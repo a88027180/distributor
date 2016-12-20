@@ -144,7 +144,7 @@ public class newTest {
 //			 monitor.setMonPlace("福");
 //			 monitor.setMonType("4321");
 			 monitor.setMonRoute(1);
-			 monitor.setMonPlaceLevel(2);
+			
 //			 int a=    dao.addMon(monitor);
 //			 int f=dao.changeMon(monitor);
 //			 System.out.println(a);
