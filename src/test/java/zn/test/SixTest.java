@@ -3,13 +3,23 @@
  */
 package zn.test;
 
+import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.xml.crypto.NodeSetData;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+
 import org.junit.Test;
-import org.junit.validator.PublicClassValidator;
+
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+import org.xml.sax.InputSource;
 
 import com.alibaba.fastjson.JSON;
 
@@ -157,11 +167,53 @@ public class SixTest {
 //		if(!list.isEmpty()){
 //		dao.addAllMonList(list);
 //		}
-		List<MonList> list1=dao.selectMonListByListLevel(1);
-		List<MonList> list2=dao.selectMonListByList("111");
-		System.out.println(JSON.toJSONString(list1).toString());
-		System.out.println(JSON.toJSONString(list2).toString());
+//		List<MonList> list1=dao.selectMonListByListLevel(1);
+//		List<MonList> list2=dao.selectMonListByList("111");
+//		System.out.println(JSON.toJSONString(list1).toString());
+//		System.out.println(JSON.toJSONString(list2).toString());
 	}
 	
+	
+	@Test
+	public void test3(){
+		 String text ="<?xml version=\"1.0\" encoding=\"gb2312\"?>"
+		 		+ "<string xmlns=\"SFBR_Web_API\">[{\"TDMC\":\"用电回路1\",\"TDHM\":1,\"TDZT\":\"在线\"},{\"TDMC\":\"用电回路2\",\"TDHM\":2,\"TDZT\":\"离线\"},{\"TDMC\":\"用电回路3\",\"TDHM\":3,\"TDZT\":\"报警\"},{\"TDMC\":\"用电回路4\",\"TDHM\":4,\"TDZT\":\"在线\"},{\"TDMC\":\"用电回路5\",\"TDHM\":5,\"TDZT\":\"在线\"},{\"TDMC\":\"用电回路6\",\"TDHM\":6,\"TDZT\":\"在线\"},{\"TDMC\":\"用电回路7\",\"TDHM\":7,\"TDZT\":\"离线\"},{\"TDMC\":\"用电回路8\",\"TDHM\":8,\"TDZT\":\"离线\"},{\"TDMC\":\"用电回路9\",\"TDHM\":9,\"TDZT\":\"离线\"},{\"TDMC\":\"用电回路10\",\"TDHM\":10,\"TDZT\":\"离线\"},{\"TDMC\":\"用电回路11\",\"TDHM\":11,\"TDZT\":\"离线\"},{\"TDMC\":\"用电回路12\",\"TDHM\":12,\"TDZT\":\"离线\"}]</string>";  
+		            
+		         long begin = System.currentTimeMillis();   
+		          parse( text );   
+		         long after = System.currentTimeMillis();   
+		          System.out.println("DOM用时"+(after-begin)+"毫秒");   
+	}
+			
+	 public  void parse(String protocolXML) {   
+         
+	        try {   
+	             DocumentBuilderFactory factory = DocumentBuilderFactory   
+	                     .newInstance();   
+	             DocumentBuilder builder = factory.newDocumentBuilder();   
+	             Document doc = builder   
+	                     .parse(new InputSource(new StringReader(protocolXML)));   
+	  
+	             Element root = doc.getDocumentElement();   
+	             NodeList books = root.getChildNodes();  
+	             Node boo=books.item(0);
+	            
+	             System.out.println(boo.getNodeValue());
+//	            if (books != null) {   
+//	                for (int i = 0; i < books.getLength(); i++) {   
+//	                     Node book = books.item(i);   
+//	                     System.out.println("节点=" + book.getNodeName() + "\ttext="  
+//	                             + book.getFirstChild().getNodeValue());   
+//	                 }   
+//	             }   
+	         } catch (Exception e) {   
+	             e.printStackTrace();   
+	         }  
+	        
+	        
+	        
+	     }   
+	  
+ 
 
 }

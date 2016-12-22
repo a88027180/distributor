@@ -8,6 +8,11 @@ package zn.entity;
  *
  */
 public class XmlMonList {
+	
+	private String QYBH;
+	private String QYMC;
+	private String SJQY;
+	private int QYPX;
 	public String getQYBH() {
 		return QYBH;
 	}
@@ -26,16 +31,15 @@ public class XmlMonList {
 	public void setSJQY(String sJQY) {
 		SJQY = sJQY;
 	}
-	public String getQYPX() {
+
+	public int getQYPX() {
 		return QYPX;
 	}
-	public void setQYPX(String qYPX) {
+	public void setQYPX(int qYPX) {
 		QYPX = qYPX;
 	}
-	private String QYBH;
-	private String QYMC;
-	private String SJQY;
-	private String QYPX;
+
+
 	
 	
 

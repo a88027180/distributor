@@ -87,6 +87,7 @@ public class AnalysisServiceImpl implements AnalysisService {
 	 */
 	@Async
 	public void analysisHex(byte[] hex, String monNumber) {
+		try{
 		MonDate mon = new MonDate();
 		byte[] mes = hex;
 
@@ -277,6 +278,10 @@ public class AnalysisServiceImpl implements AnalysisService {
 		} else {
 			monDateDao.changeMonDate(mon);
 		}
+		} catch (Exception e) {
+
+			e.printStackTrace();
+		}
 
 	}
 
@@ -293,6 +298,7 @@ public class AnalysisServiceImpl implements AnalysisService {
 			return "\"NT\":";
 		}
 		return "";
+	
 	}
 
 	/**
@@ -302,6 +308,8 @@ public class AnalysisServiceImpl implements AnalysisService {
 	@Async
 	public MonAlarms analysisWarningHex(byte[] mes) {
 		MonAlarms mon = new MonAlarms();
+		try{
+		
 		String monAlarmsTM = EncodeUtils.getLong(mes, 16) + "-" + EncodeUtils.getLong(mes, 20) + "-"
 				+ EncodeUtils.getLong(mes, 24) + " " + EncodeUtils.getLong(mes, 28) + ":" + EncodeUtils.getLong(mes, 32)
 				+ ":" + EncodeUtils.getLong(mes, 36);
@@ -475,6 +483,11 @@ public class AnalysisServiceImpl implements AnalysisService {
 		// if(mon.getMonAlarmsInfo()!=null){
 		// JPushClientExample.jpush(mon.getMonAlarmsInfo());
 		// }
+		
+		} catch (Exception e) {
+
+			e.printStackTrace();
+		}
 		return mon;
 	}
 

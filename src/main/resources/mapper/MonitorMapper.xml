@@ -35,9 +35,9 @@
 	</select>
 	
 	<!-- 查询指定列表下的设备 -->
- 	<select id="findMonByList" resultMap="Monitor">
- 	select * from monitorview where monPlace=#{monPlace} and monPlaceLevel=#{monPlaceLevel}
- 	</select>
+<!--  	<select id="findMonByList" resultMap="Monitor"> -->
+<!--  	select * from monitorview where monPlace=#{monPlace} and monPlaceLevel=#{monPlaceLevel} -->
+<!--  	</select> -->
  	
  		<!-- 查询指定列表下的设备 -->
  	<select id="findMonByMonList" resultMap="Monitor" parameterType="String">
@@ -88,7 +88,7 @@
 	<if test="monPlace!=null">monPlace=#{monPlace},</if>
 	<if test="monType!=null">monType=#{monType},</if>
 	<if test="monRoute!=null">monRoute=#{monRoute},</if>
-	<if test="monPlaceLevel!=null">monPlaceName=#{monPlaceName},</if>
+	<if test="monPlaceName!=null">monPlaceName=#{monPlaceName},</if>
 	<if test="monState!=null"> monState=#{monState},   </if>
 	</set> where monId=#{monId};
 	</update>
@@ -138,9 +138,9 @@
 	
 	<!-- 添加多个设备 -->
  	<insert id="addMoreMon"  >
- 		insert    into  monitor(monAlias,monInstall,monIP,monModel,monName,monNumber,monPlace,monType,monRoute,monPlaceLevel,monState) value
+ 		insert    into  monitor(monAlias,monInstall,monIP,monModel,monName,monNumber,monPlace,monType,monRoute,monPlaceName,monState) value
 	<foreach collection="list" separator="," index="index" item="item" >
-		(#{item.monAlias},#{item.monInstall},#{item.monIP},#{item.monModel},#{item.monName},#{item.monNumber},#{item.monPlace},#{item.monType},#{item.monRoute},#{item.monPlaceLevel},#{item.monState})	
+		(#{item.monAlias},#{item.monInstall},#{item.monIP},#{item.monModel},#{item.monName},#{item.monNumber},#{item.monPlace},#{item.monType},#{item.monRoute},#{item.monPlaceName},#{item.monState})	
 	</foreach>  
  	</insert>
  	
@@ -165,7 +165,7 @@
 	<if test="monPlace!=null">monPlace=#{monPlace},</if>
 	<if test="monType!=null">monType=#{monType},</if>
 	<if test="monRoute!=null">monRoute=#{monRoute},</if>
-	<if test="monPlaceLevel!=null">monPlaceLevel=#{monPlaceLevel},</if>
+	<if test="monPlaceLevel!=null">monPlaceName=#{monPlaceName},</if>
 	<if test="monState!=null"> monState=#{monState},   </if>
 	</set> where monNumber=#{monNumber};
 	</update>
