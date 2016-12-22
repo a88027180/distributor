@@ -3,10 +3,13 @@
  */
 package zn.test;
 
+import java.io.StringReader;
 import java.rmi.RemoteException;
 import java.util.Iterator;
 
 import javax.xml.namespace.QName;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
 
 import org.apache.axiom.om.OMAbstractFactory;
 import org.apache.axiom.om.OMElement;
@@ -20,6 +23,11 @@ import org.apache.axis2.addressing.EndpointReference;
 import org.apache.axis2.client.Options;
 import org.apache.axis2.client.ServiceClient;
 import org.apache.axis2.rpc.client.RPCServiceClient;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+import org.xml.sax.InputSource;
 
 
 
@@ -30,14 +38,15 @@ import org.apache.axis2.rpc.client.RPCServiceClient;
 public class WebServiceTest {
 	
     private static EndpointReference targetEPR = new EndpointReference(
-            "http://www.webservicex.net/globalweather.asmx");
+            "http://192.168.1.100/WebAPI/SFBRWebS.asmx?WSDL");
 
-	public void  te(){
+	public String te(){
+		String json="";
 		try {
 	OMFactory fac = OMAbstractFactory.getOMFactory();
 
     OMNamespace omNs = fac.createOMNamespace(
-            "http://www.webserviceX.NET", "tns");// 命名空间
+            "SFBR_Web_API", "tns");// 命名空间
 
     // 请求参数设置
     Options options = new Options();
@@ -51,65 +60,64 @@ public class WebServiceTest {
 
     // 设定访问的接口方法
 
-    OMElement method = fac.createOMElement("GetCitiesByCountry", omNs);// 要调用的接口方法名称
+    OMElement method = fac.createOMElement("ITPCDeviceChannelInfoGetByIDForJson", omNs);// 要调用的接口方法名称
     
-//    OMElement value1 = fac.createOMElement("CityName", omNs);// 方法的第一个参数名称
-//    value1.addChild(fac.createOMText(value1, "hangzhou"));// 设定参数的值
-//    method.addChild(value1);// 方法设置参数
+    OMElement value1 = fac.createOMElement("strDeviceId", omNs);// 方法的第一个参数名称
+    value1.addChild(fac.createOMText(value1, "f0f690d6-7147-49fa-9bdb-8e037f1d5444"));// 设定参数的值
+    method.addChild(value1);// 方法设置参数
     
-    OMElement value2 = fac.createOMElement("CountryName", omNs);// 方法的第一个参数名称
-    value2.addChild(fac.createOMText(value2, "China"));// 设定参数的值
-    method.addChild(value2);// 方法设置参数
+//    OMElement value2 = fac.createOMElement("CountryName", omNs);// 方法的第一个参数名称
+//    value2.addChild(fac.createOMText(value2, "China"));// 设定参数的值
+//    method.addChild(value2);// 方法设置参数
 
     OMElement result = sender.sendReceive(method);// 调用接口方法
 //    Iterator iterator = result.getChildrenWithLocalName("AuthorizationResult");
 //    System.out.println("guid="+((OMElement)iterator.next()).getText());
-    System.out.println(result.toString());
+    json= result.toString();
 	}catch (Exception e) {
     e.printStackTrace();
 	}
+		return json;
 	}
 	
  
-	
-	
-	public String invokeRemoteFuc() {
-//		String endpoint = "http://www.webservicex.net/globalweather.asmx?WSDL";
-////		String endpoint = "http://192.168.1.100/WebAPI/SFBRWebS.asmx";
-		String result = "no result!";
-//		Service service = new Service();
-//		Call call;
-//		Object[] object = new Object[1];
-//		object[0] = "Dear I miss you";//Object是用来存储方法的参数
-//		try {
-//			call = (Call) service.createCall();
-//			call.setTargetEndpointAddress(endpoint);// 远程调用路径
-//			call.setOperationName("GetWeather ");// 调用的方法名
-//			
-//			// 设置参数名:
-//			call.addParameter("DateSet", // 参数名
-//					XMLType.XSD_STRING,// 参数类型:String
-//					ParameterMode.IN);// 参数模式：'IN' or 'OUT'
-//  
-//			// 设置返回值类型：
-////			call.setReturnType();// 返回值类型：String	
-//			
-//		
-//			call.setReturnType(XMLType.XSD_STRING);
-//			result = (String) call.invoke(object);// 远程调用
-//			System.out.println("aaa");
-//		} catch (ServiceException e) {
-//			e.printStackTrace();
-//		} catch (RemoteException e) {
-//			e.printStackTrace();
-//		}
-		return result;
-	}
+	 public  String parse(String protocolXML) {   
+      	String json="[]";
+	        try {   
+	             DocumentBuilderFactory factory = DocumentBuilderFactory   
+	                     .newInstance();   
+	             DocumentBuilder builder = factory.newDocumentBuilder();   
+	             Document doc = builder   
+	                     .parse(new InputSource(new StringReader(protocolXML)));   
+	  
+	             Element root = doc.getDocumentElement();   
+	             NodeList books = root.getChildNodes();  
+	             Node boo=books.item(0);
+	            
+	             
+	             json=boo.getFirstChild().getNodeValue();
+	             System.out.println(json);
+	             return json;
+//	            if (books != null) {   
+//	                for (int i = 0; i < books.getLength(); i++) {   
+//	                     Node book = books.item(i);   
+//	                     System.out.println("节点=" + book.getNodeName() + "\ttext="  
+//	                             + book.getFirstChild().getNodeValue());   
+//	                 }   
+//	             }   
+	         } catch (Exception e) {   
+	             e.printStackTrace();   
+	         }
+			return json;  
+	        
+	        
+	        
+	     }   
 
 	public static void main(String[] args) {
 		WebServiceTest t = new WebServiceTest();
-//		 t.testRPC();
-		 t.te();
+		System.out.println(t.te());
+		t.parse(t.te());
 		
 		
 	}

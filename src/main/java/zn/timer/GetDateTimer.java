@@ -20,7 +20,7 @@ public class GetDateTimer {
 	@Resource
 	private GetDateService getDateService;
 	
-	 @Scheduled(cron ="0 14 20 * * ?") //每天凌晨两点执行
+	 @Scheduled(cron ="0 25 16 * * ?") //每天凌晨两点执行
      public    void doSomethingWith(){
 		 try {
 			

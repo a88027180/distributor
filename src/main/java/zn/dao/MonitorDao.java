@@ -26,6 +26,7 @@ public interface MonitorDao {
 	      public int monAddUser(Map<String,Object> param);
 	      public int monDelteUser(int monId);
 	      public Monitor selectMonByNum(String monNumber);
+	      public Monitor selectMonIdByNum(String monNumber);
 	      public List<Monitor> seleteMonByUserId(int userId);
 	  	  public List<Monitor> findMonByState(int monState);
 	  	  public List<Monitor> findMonByList(@Param("monPlace")String monPlace,@Param("monPlaceLevel")int monPlaceLevel);

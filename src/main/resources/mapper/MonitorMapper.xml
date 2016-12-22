@@ -131,6 +131,10 @@
 	select * from monitor where UPPER(REPLACE(monNumber,'-',''))=#{monNumber}
 	</select>
 	
+	<select id="selectMonIdByNum" parameterType="String" resultMap="Monitor">
+	select * from monitor where monNumber=#{monNumber}
+	</select>
+	
 	<!--查询所有设备的编号 -->
 	<select id="selectAllmonNumber" resultType="String">
 	select  monNumber from monitor
@@ -165,7 +169,7 @@
 	<if test="monPlace!=null">monPlace=#{monPlace},</if>
 	<if test="monType!=null">monType=#{monType},</if>
 	<if test="monRoute!=null">monRoute=#{monRoute},</if>
-	<if test="monPlaceLevel!=null">monPlaceName=#{monPlaceName},</if>
+	<if test="monPlaceName!=null">monPlaceName=#{monPlaceName},</if>
 	<if test="monState!=null"> monState=#{monState},   </if>
 	</set> where monNumber=#{monNumber};
 	</update>

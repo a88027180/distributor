@@ -176,8 +176,7 @@ public class SixTest {
 	
 	@Test
 	public void test3(){
-		 String text ="<?xml version=\"1.0\" encoding=\"gb2312\"?>"
-		 		+ "<string xmlns=\"SFBR_Web_API\">[{\"TDMC\":\"用电回路1\",\"TDHM\":1,\"TDZT\":\"在线\"},{\"TDMC\":\"用电回路2\",\"TDHM\":2,\"TDZT\":\"离线\"},{\"TDMC\":\"用电回路3\",\"TDHM\":3,\"TDZT\":\"报警\"},{\"TDMC\":\"用电回路4\",\"TDHM\":4,\"TDZT\":\"在线\"},{\"TDMC\":\"用电回路5\",\"TDHM\":5,\"TDZT\":\"在线\"},{\"TDMC\":\"用电回路6\",\"TDHM\":6,\"TDZT\":\"在线\"},{\"TDMC\":\"用电回路7\",\"TDHM\":7,\"TDZT\":\"离线\"},{\"TDMC\":\"用电回路8\",\"TDHM\":8,\"TDZT\":\"离线\"},{\"TDMC\":\"用电回路9\",\"TDHM\":9,\"TDZT\":\"离线\"},{\"TDMC\":\"用电回路10\",\"TDHM\":10,\"TDZT\":\"离线\"},{\"TDMC\":\"用电回路11\",\"TDHM\":11,\"TDZT\":\"离线\"},{\"TDMC\":\"用电回路12\",\"TDHM\":12,\"TDZT\":\"离线\"}]</string>";  
+		 String text ="<DeviceInfoGetForJsonResponse xmlns=\"SFBR_Web_API\"><DeviceInfoGetForJsonResult>[{\"SBBH\":\"bd686476-f81c-4a09-88a8-0b9ac334befa\",\"SBMC\":\"农行演示配电箱\",\"SBIP\":\"\",\"SBQY\":\"62d76f3c-59d5-40bd-a3a0-a7a4bf56a69d\",\"SBQYMC\":\"上海市\",\"SBLX\":\"ITPC_BOX\" ,\"SBLXMC\":\"智能配电箱\",\"SBZT\":\"在线\",\"HLSL\":10,\"AZWZ\":\"\"}]</DeviceInfoGetForJsonResult></DeviceInfoGetForJsonResponse>";  
 		            
 		         long begin = System.currentTimeMillis();   
 		          parse( text );   
@@ -197,8 +196,8 @@ public class SixTest {
 	             Element root = doc.getDocumentElement();   
 	             NodeList books = root.getChildNodes();  
 	             Node boo=books.item(0);
-	            
-	             System.out.println(boo.getNodeValue());
+	         
+	             System.out.println(boo.getFirstChild().getNodeValue());
 //	            if (books != null) {   
 //	                for (int i = 0; i < books.getLength(); i++) {   
 //	                     Node book = books.item(i);   

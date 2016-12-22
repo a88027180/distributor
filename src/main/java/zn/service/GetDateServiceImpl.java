@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
 
 import zn.dao.MonDateDao;
 import zn.dao.MonListDao;
@@ -58,12 +59,22 @@ public class GetDateServiceImpl implements GetDateService{
 	  */
 	 public NoteResult getDate(){
 		 NoteResult note=new NoteResult();
-		 DeviceInfoGetForJson();
-		 RegionInfoGetForJson();
-		 ITPCDeviceChannelInfoGetByIDForJson();
-		 	note.setStatus(0);
-			note.setMsg("同步成功");
-			note.setData("");
+		 long time =System.currentTimeMillis();
+		 try {
+			 DeviceInfoGetForJson();
+			 RegionInfoGetForJson();
+			 ITPCDeviceChannelInfoGetByIDForJson();
+				note.setStatus(0);
+				note.setMsg("同步成功");
+				note.setData("");
+				long time2 =System.currentTimeMillis();
+				 System.out.println(time2-time);
+		} catch (Exception e) {
+		
+		}
+		
+		 
+		 
 		 return note;
 	 }
 	 
@@ -76,18 +87,20 @@ public class GetDateServiceImpl implements GetDateService{
 		 }
 		 
 		 for(String monNumber: monNumberList){
-			
+		
 		 String xmlListStr=new WebService().ITPCDeviceChannelInfoGetByIDForJson(monNumber);
-	
+
 		 if("".equals(xmlListStr)||xmlListStr==null){
-			 return ;
+			 break ;
 		 }
-		 List<XmlMonSon> xmlMonList=(List<XmlMonSon>)JSON.parse(xmlListStr);
+		 List<XmlMonSon> xmlMonList=(List<XmlMonSon>)JSONArray.parseArray(xmlListStr,XmlMonSon.class);;
 		   if(!xmlMonList.isEmpty()){
+			   MonDate monDate=new MonDate();
 		  for(XmlMonSon monSon:xmlMonList){
 			 
-			  MonDate monDate=new MonDate();
-			  monDate.setMonId(monitorDao.selectMonByNum(monNumber).getMonId());
+			 
+			
+			  monDate.setMonId(monitorDao.selectMonIdByNum(monNumber).getMonId());
 			  if (monSon.getTDHM()==1) {
 				monDate.setName1(monSon.getTDMC());
 			}else if(monSon.getTDHM()==2) {
@@ -114,7 +127,7 @@ public class GetDateServiceImpl implements GetDateService{
 				monDate.setName12(monSon.getTDMC());
 			}
 			  
-			  monDateDao.addMonDate(monDate);
+			  monDateDao.changeMonDate(monDate);
 		  }
 		  }
 	 }
@@ -131,7 +144,7 @@ public class GetDateServiceImpl implements GetDateService{
 		 if("".equals(xmlListStr)||xmlListStr==null){
 			 return ;
 		 }
-		 List<XmlMonList> xmlMonList=(List<XmlMonList>)JSON.parse(xmlListStr);
+		 List<XmlMonList> xmlMonList=(List<XmlMonList>)JSONArray.parseArray(xmlListStr,XmlMonList.class);
 		 List<MonList> monList=new ArrayList<MonList>();
 		
 		
@@ -162,7 +175,9 @@ public class GetDateServiceImpl implements GetDateService{
 		 if("".equals(xmlListStr)||xmlListStr==null){
 			 return ;
 		 }
-		 List<XmlMonitor>  xmlList= (List<XmlMonitor>) JSON.parseObject(xmlListStr);
+		 
+		
+		 List<XmlMonitor>  xmlList= (List<XmlMonitor>)JSONArray.parseArray(xmlListStr,XmlMonitor.class);
 		 List<String> wen=new ArrayList<String>();
 		 for(XmlMonitor x:xmlList){
 				wen.add(x.getSBBH());
