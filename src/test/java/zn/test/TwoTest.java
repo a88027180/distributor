@@ -123,7 +123,7 @@ public class TwoTest {
 
 	@Test
 	public  void test6(){
-		ApplicationContext    ac = new ClassPathXmlApplicationContext("spring-mybatis.xml");  
+		ApplicationContext    ac = new ClassPathXmlApplicationContext("config/spring-mybatis.xml");  
 		MonDateDao dao = ac.getBean("monDateDao",MonDateDao.class);
 		MonitorDao dao2 = ac.getBean("monitorDao",MonitorDao.class);
 		 MonDate  mon=       dao.selectMonDateById(1);

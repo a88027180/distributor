@@ -12,8 +12,14 @@ public class Alarms {
 	private int monId;
 	private String monName;
 	private int monAlarmsStatus;
-	
+	private String monPlaceName;
 
+	public String getMonPlaceName() {
+		return monPlaceName;
+	}
+	public void setMonPlaceName(String monPlaceName) {
+		this.monPlaceName = monPlaceName;
+	}
 	public String getMonName() {
 		return monName;
 	}

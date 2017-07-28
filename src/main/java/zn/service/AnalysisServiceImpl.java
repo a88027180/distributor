@@ -5,6 +5,7 @@ package zn.service;
 
 import java.io.InputStream;
 import java.net.InetAddress;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -15,6 +16,7 @@ import javax.annotation.Resource;
 import javax.sound.midi.SysexMessage;
 import javax.swing.plaf.synth.SynthSpinnerUI;
 
+import org.apache.axis2.databinding.types.soapencoding.Decimal;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -60,15 +62,18 @@ public class AnalysisServiceImpl implements AnalysisService {
 			Properties prop = new Properties();
 			prop.load(inStream);
 			int localityPort = Integer.valueOf(prop.getProperty("localityPort"));
-
+			
+			String  localityHost=prop.getProperty("localityHost");
+			System.out.println(localityHost);
 			UdpServerSocket udpServerSocket = new UdpServerSocket(InetAddress.getLocalHost().getHostAddress(),
 					localityPort);
-
+			System.out.println("port"+InetAddress.getLocalHost().getHostAddress());
 			while (true) {
 
 				byte[] hex = udpServerSocket.receive();
 
 				String aex = EncodeUtils.hexEncode(hex);
+				System.out.println(aex);
 				String monNumber = aex.substring(aex.length() - 32, aex.length());
 	
 				analysisHex(hex, monNumber);
@@ -101,71 +106,71 @@ public class AnalysisServiceImpl implements AnalysisService {
 		if (mes[8] == 3) {
 			if (mes[12] == 6) { // 单路或者6路
 				// A相总电压
-				mon.setAllAV(EncodeUtils.byte2float(mes, 16) + "");
+				mon.setAllAV(EncodeUtils.byte2float(mes, 20) + "");
 				// B相总电压
-				mon.setAllBV(EncodeUtils.byte2float(mes, 20) + "");
+				mon.setAllBV(EncodeUtils.byte2float(mes, 24) + "");
 				// C相总电压
-				mon.setAllCV(EncodeUtils.byte2float(mes, 24) + "");
+				mon.setAllCV(EncodeUtils.byte2float(mes, 28) + "");
 				// A相总电流
-				mon.setAllAA(EncodeUtils.byte2float(mes, 28) + "");
+				mon.setAllAA(EncodeUtils.byte2float(mes, 32) + "");
 				// B相总电流
-				mon.setAllBA(EncodeUtils.byte2float(mes, 32) + "");
+				mon.setAllBA(EncodeUtils.byte2float(mes, 36) + "");
 				// C相总电流
-				mon.setAllCA(EncodeUtils.byte2float(mes, 36) + "");
+				mon.setAllCA(EncodeUtils.byte2float(mes, 40) + "");
 				// 湿度值
-				mon.setHumidity(EncodeUtils.byte2float(mes, 40) + "");
+				mon.setHumidity(EncodeUtils.byte2float(mes, 44) + "");
 				// 第一路电流
-				mon.setA1(EncodeUtils.byte2float(mes, 44) + "," + EncodeUtils.byte2float(mes, 48) + ","
-						+ EncodeUtils.byte2float(mes, 52) + "," + EncodeUtils.byte2float(mes, 116));
+				mon.setA1(EncodeUtils.byte2float(mes, 48) + "," + EncodeUtils.byte2float(mes, 52) + ","
+						+ EncodeUtils.byte2float(mes, 56) + "," + EncodeUtils.byte2float(mes, 120));
 				// 第二路电流
-				mon.setA2(EncodeUtils.byte2float(mes, 56) + "," + EncodeUtils.byte2float(mes, 60) + ","
-						+ EncodeUtils.byte2float(mes, 64) + "," + EncodeUtils.byte2float(mes, 120));
+				mon.setA2(EncodeUtils.byte2float(mes, 60) + "," + EncodeUtils.byte2float(mes, 64) + ","
+						+ EncodeUtils.byte2float(mes, 68) + "," + EncodeUtils.byte2float(mes, 124));
 				// 第三路电流
-				mon.setA3(EncodeUtils.byte2float(mes, 68) + "," + EncodeUtils.byte2float(mes, 72) + ","
-						+ EncodeUtils.byte2float(mes, 76) + "," + EncodeUtils.byte2float(mes, 124));
+				mon.setA3(EncodeUtils.byte2float(mes, 72) + "," + EncodeUtils.byte2float(mes, 76) + ","
+						+ EncodeUtils.byte2float(mes, 80) + "," + EncodeUtils.byte2float(mes, 128));
 				// 第四路电流
-				mon.setA4(EncodeUtils.byte2float(mes, 80) + "," + EncodeUtils.byte2float(mes, 84) + ","
-						+ EncodeUtils.byte2float(mes, 88) + "," + EncodeUtils.byte2float(mes, 128));
+				mon.setA4(EncodeUtils.byte2float(mes, 84) + "," + EncodeUtils.byte2float(mes, 88) + ","
+						+ EncodeUtils.byte2float(mes, 92) + "," + EncodeUtils.byte2float(mes, 132));
 				// 第五路电流
-				mon.setA5(EncodeUtils.byte2float(mes, 92) + "," + EncodeUtils.byte2float(mes, 96) + ","
-						+ EncodeUtils.byte2float(mes, 100) + "," + EncodeUtils.byte2float(mes, 132));
+				mon.setA5(EncodeUtils.byte2float(mes, 96) + "," + EncodeUtils.byte2float(mes, 100) + ","
+						+ EncodeUtils.byte2float(mes, 104) + "," + EncodeUtils.byte2float(mes, 136));
 				// 第六路电流
-				mon.setA6(EncodeUtils.byte2float(mes, 104) + "," + EncodeUtils.byte2float(mes, 108) + ","
-						+ EncodeUtils.byte2float(mes, 112) + "," + EncodeUtils.byte2float(mes, 136));
+				mon.setA6(EncodeUtils.byte2float(mes, 108) + "," + EncodeUtils.byte2float(mes, 112) + ","
+						+ EncodeUtils.byte2float(mes, 116) + "," + EncodeUtils.byte2float(mes, 140));
 			} else if (mes[12] == 12) { // 12路
 				if (mes.length == 160) {
 					// A相总电压
-					mon.setAllAV(EncodeUtils.byte2float(mes, 16) + "");
+					mon.setAllAV(EncodeUtils.byte2float(mes, 20) + "");
 					// B相总电压
-					mon.setAllBV(EncodeUtils.byte2float(mes, 20) + "");
+					mon.setAllBV(EncodeUtils.byte2float(mes, 24) + "");
 					// C相总电压
-					mon.setAllCV(EncodeUtils.byte2float(mes, 24) + "");
+					mon.setAllCV(EncodeUtils.byte2float(mes, 28) + "");
 					// A相总电流
-					mon.setAllAA(EncodeUtils.byte2float(mes, 28) + "");
+					mon.setAllAA(EncodeUtils.byte2float(mes, 32) + "");
 					// B相总电流
-					mon.setAllBA(EncodeUtils.byte2float(mes, 32) + "");
+					mon.setAllBA(EncodeUtils.byte2float(mes, 36) + "");
 					// C相总电流
-					mon.setAllCA(EncodeUtils.byte2float(mes, 36) + "");
+					mon.setAllCA(EncodeUtils.byte2float(mes, 40) + "");
 					// 湿度值
-					mon.setHumidity(EncodeUtils.byte2float(mes, 40) + "");
+					mon.setHumidity(EncodeUtils.byte2float(mes, 44) + "");
 					// 第一路电流
-					mon.setA1(EncodeUtils.byte2float(mes, 44) + "," + EncodeUtils.byte2float(mes, 48) + ","
-							+ EncodeUtils.byte2float(mes, 52) + "," + EncodeUtils.byte2float(mes, 116));
+					mon.setA1(EncodeUtils.byte2float(mes, 48) + "," + EncodeUtils.byte2float(mes, 52) + ","
+							+ EncodeUtils.byte2float(mes, 56) + "," + EncodeUtils.byte2float(mes, 120));
 					// 第二路电流
-					mon.setA2(EncodeUtils.byte2float(mes, 56) + "," + EncodeUtils.byte2float(mes, 60) + ","
-							+ EncodeUtils.byte2float(mes, 64) + "," + EncodeUtils.byte2float(mes, 120));
+					mon.setA2(EncodeUtils.byte2float(mes, 60) + "," + EncodeUtils.byte2float(mes, 64) + ","
+							+ EncodeUtils.byte2float(mes, 68) + "," + EncodeUtils.byte2float(mes, 124));
 					// 第三路电流
-					mon.setA3(EncodeUtils.byte2float(mes, 68) + "," + EncodeUtils.byte2float(mes, 72) + ","
-							+ EncodeUtils.byte2float(mes, 76) + "," + EncodeUtils.byte2float(mes, 124));
+					mon.setA3(EncodeUtils.byte2float(mes, 72) + "," + EncodeUtils.byte2float(mes, 76) + ","
+							+ EncodeUtils.byte2float(mes, 80) + "," + EncodeUtils.byte2float(mes, 128));
 					// 第四路电流
-					mon.setA4(EncodeUtils.byte2float(mes, 80) + "," + EncodeUtils.byte2float(mes, 84) + ","
-							+ EncodeUtils.byte2float(mes, 88) + "," + EncodeUtils.byte2float(mes, 128));
+					mon.setA4(EncodeUtils.byte2float(mes, 84) + "," + EncodeUtils.byte2float(mes, 88) + ","
+							+ EncodeUtils.byte2float(mes, 92) + "," + EncodeUtils.byte2float(mes, 132));
 					// 第五路电流
-					mon.setA5(EncodeUtils.byte2float(mes, 92) + "," + EncodeUtils.byte2float(mes, 96) + ","
-							+ EncodeUtils.byte2float(mes, 100) + "," + EncodeUtils.byte2float(mes, 132));
+					mon.setA5(EncodeUtils.byte2float(mes, 96) + "," + EncodeUtils.byte2float(mes, 100) + ","
+							+ EncodeUtils.byte2float(mes, 104) + "," + EncodeUtils.byte2float(mes, 136));
 					// 第六路电流
-					mon.setA6(EncodeUtils.byte2float(mes, 104) + "," + EncodeUtils.byte2float(mes, 108) + ","
-							+ EncodeUtils.byte2float(mes, 112) + "," + EncodeUtils.byte2float(mes, 136));
+					mon.setA6(EncodeUtils.byte2float(mes, 108) + "," + EncodeUtils.byte2float(mes, 112) + ","
+							+ EncodeUtils.byte2float(mes, 116) + "," + EncodeUtils.byte2float(mes, 140));
 				} else if (mes.length == 132) {
 					// 第七路电流
 					mon.setA7(EncodeUtils.byte2float(mes, 20) + "," + EncodeUtils.byte2float(mes, 24) + ","
@@ -201,32 +206,31 @@ public class AnalysisServiceImpl implements AnalysisService {
 			String T10 = "";
 			String T11 = "";
 			String T12 = "";
-			for (int i = 16; i < mes.length - 32; i = i + 8) {
+			for (int i = 16; i < mes.length - 16; i = i + 8) {
 				if (mes[i] == 1 && mes[i + 3] == 0) {
-					if (mes[i + 1] == 1) {
-
+					if (mes[i + 1] == 0) {		
 						T1 = T1 + pathT(mes[i + 2]) + EncodeUtils.byte2float(mes, i + 4) + ",";
-					} else if (mes[i + 1] == 2) {
+					} else if (mes[i + 1] == 1) {
 						T2 = T2 + pathT(mes[i + 2]) + EncodeUtils.byte2float(mes, i + 4) + ",";
-					} else if (mes[i + 1] == 3) {
+					} else if (mes[i + 1] == 2) {
 						T3 = T3 + pathT(mes[i + 2]) + EncodeUtils.byte2float(mes, i + 4) + ",";
-					} else if (mes[i + 1] == 4) {
+					} else if (mes[i + 1] == 3) {
 						T4 = T4 + pathT(mes[i + 2]) + EncodeUtils.byte2float(mes, i + 4) + ",";
-					} else if (mes[i + 1] == 5) {
+					} else if (mes[i + 1] == 4) {
 						T5 = T5 + pathT(mes[i + 2]) + EncodeUtils.byte2float(mes, i + 4) + ",";
-					} else if (mes[i + 1] == 6) {
+					} else if (mes[i + 1] == 5) {
 						T6 = T6 + pathT(mes[i + 2]) + EncodeUtils.byte2float(mes, i + 4) + ",";
-					} else if (mes[i + 1] == 7) {
+					} else if (mes[i + 1] == 6) {
 						T7 = T7 + pathT(mes[i + 2]) + EncodeUtils.byte2float(mes, i + 4) + ",";
-					} else if (mes[i + 1] == 8) {
+					} else if (mes[i + 1] == 7) {
 						T8 = T8 + pathT(mes[i + 2]) + EncodeUtils.byte2float(mes, i + 4) + ",";
-					} else if (mes[i + 1] == 9) {
+					} else if (mes[i + 1] == 8) {
 						T9 = T9 + pathT(mes[i + 2]) + EncodeUtils.byte2float(mes, i + 4) + ",";
-					} else if (mes[i + 1] == 10) {
+					} else if (mes[i + 1] == 9) {
 						T10 = T10 + pathT(mes[i + 2]) + EncodeUtils.byte2float(mes, i + 4) + ",";
-					} else if (mes[i + 1] == 11) {
+					} else if (mes[i + 1] == 10) {
 						T11 = T11 + pathT(mes[i + 2]) + EncodeUtils.byte2float(mes, i + 4) + ",";
-					} else if (mes[i + 1] == 12) {
+					} else if (mes[i + 1] == 11) {
 						T12 = T12 + pathT(mes[i + 2]) + EncodeUtils.byte2float(mes, i + 4) + ",";
 					}
 
@@ -255,7 +259,9 @@ public class AnalysisServiceImpl implements AnalysisService {
 
 		} else if (mes[8] == 30) {
 			MonAlarms monAlarms = analysisWarningHex(mes);
-
+			if(monAlarms.getMonAlarmsInfo()==null||"".equals(monAlarms.getMonAlarmsInfo())){
+				return;
+			}
 			monAlarms.setMonId(mon.getMonId());
 		
 			monAlarmsDao.addMonAlarms(monAlarms);
@@ -307,6 +313,7 @@ public class AnalysisServiceImpl implements AnalysisService {
 	 */
 	@Async
 	public MonAlarms analysisWarningHex(byte[] mes) {
+		DecimalFormat dFormat=new DecimalFormat("#.0");
 		MonAlarms mon = new MonAlarms();
 		try{
 		
@@ -317,7 +324,7 @@ public class AnalysisServiceImpl implements AnalysisService {
 		mon.setMonAlarmsType(Long.toHexString(EncodeUtils.getLong(mes, 12)));
 		// 主动上传温度告警信息
 		if (mes[12] == 16) {
-			mon.setMonAlarmsInfo("箱内温度过高告警,温度值为" + EncodeUtils.byte2float(mes, 56));
+			mon.setMonAlarmsInfo("箱内温度过高报警,报警值为" + dFormat.format(EncodeUtils.byte2float(mes, 56)));
 		} else if (mes[12] == 19) { // 电流过载信息
 			long monV = EncodeUtils.getLong(mes, 44);
 			long p = EncodeUtils.getLong(mes, 48);
@@ -335,8 +342,8 @@ public class AnalysisServiceImpl implements AnalysisService {
 			} else if (p == 18) {
 				pv = "C";
 			}
-			mon.setMonAlarmsInfo("通道" + (EncodeUtils.getLong(mes, 40)+1) + "主动上传电流过载报警,该路电压为" + mov + "," + pv + "相,电流值为"
-					+ EncodeUtils.byte2float(mes, 56));
+			mon.setMonAlarmsInfo("第" + (EncodeUtils.getLong(mes, 40)+1) + "回路"+pv + "相电流过载报警, 当前报警值为"
+					+dFormat.format( EncodeUtils.byte2float(mes, 56)));
 		} else if (mes[12] == 21) {
 			String pv = "";
 			long p = EncodeUtils.getLong(mes, 48);
@@ -347,7 +354,7 @@ public class AnalysisServiceImpl implements AnalysisService {
 			} else if (p == 18) {
 				pv = "C";
 			}
-			mon.setMonAlarmsInfo("主动上传总电压过高告警," + pv + "相,电压值为" + EncodeUtils.byte2float(mes, 56));
+			mon.setMonAlarmsInfo("总电压过高报警," + pv + "相,当前报警值 为" + dFormat.format(EncodeUtils.byte2float(mes, 56)));
 		} else if (mes[12] == 20) {
 			String pv = "";
 			long p = EncodeUtils.getLong(mes, 48);
@@ -358,7 +365,7 @@ public class AnalysisServiceImpl implements AnalysisService {
 			} else if (p == 18) {
 				pv = "C";
 			}
-			mon.setMonAlarmsInfo("主动上传总电流过载告警," + pv + "相,电流值为" + EncodeUtils.byte2float(mes, 56));
+			mon.setMonAlarmsInfo("总电流过载报警," + pv + "相,当前报警值为" + dFormat.format(EncodeUtils.byte2float(mes, 56)));
 		} else if (mes[12] == 22) {
 			String pv = "";
 			long p = EncodeUtils.getLong(mes, 48);
@@ -369,33 +376,20 @@ public class AnalysisServiceImpl implements AnalysisService {
 			} else if (p == 18) {
 				pv = "C";
 			}
-			mon.setMonAlarmsInfo("主动上传总电压过低告警," + pv + "相,电压值为" + EncodeUtils.byte2float(mes, 56));
+			mon.setMonAlarmsInfo("总电压欠压报警," + pv + "相,当前报警值为" + dFormat.format(EncodeUtils.byte2float(mes, 56)));
 		} else if (mes[12] == 24) {
-			mon.setMonAlarmsInfo("主动上传湿度过高告警,湿度值为" + EncodeUtils.byte2float(mes, 56));
+			mon.setMonAlarmsInfo("湿度过高报警,当前报警值为" + dFormat.format(EncodeUtils.byte2float(mes, 56)));
 		} else if (mes[12] == 49) {
-			mon.setMonAlarmsInfo("停电报警");
+			mon.setMonAlarmsInfo("设备停电报警");
 		} else if (mes[12] == 25) {
-			long monV = EncodeUtils.getLong(mes, 44);
-
-			String mov = "";
-			if (monV == 16) {
-				mov = "220V";
-			} else if (monV == 17) {
-				mov = "380V";
-			}
-
-			mon.setMonAlarmsInfo("通道" + (EncodeUtils.getLong(mes, 40)+1) + "主动上传单路漏电报警,该路电压为" + mov + ",漏电流值为"
-					+ EncodeUtils.byte2float(mes, 56));
+		
+			mon.setMonAlarmsInfo("第" + (EncodeUtils.getLong(mes, 40)+1) + "回路漏电跳闸报警,当前报警值为"
+					+ dFormat.format(EncodeUtils.byte2float(mes, 56)));
 		} else if (mes[12] == 32) {
-			long monV = EncodeUtils.getLong(mes, 44);
+//			long monV = EncodeUtils.getLong(mes, 44);
 			long p = EncodeUtils.getLong(mes, 48);
 			long mT = EncodeUtils.getLong(mes, 40)+1;
-			String mov = "";
-			if (monV == 16) {
-				mov = "单相";
-			} else if (monV == 17) {
-				mov = "三相";
-			}
+			
 			String pv = "";
 			if (p == 16) {
 				pv = "A相,";
@@ -410,76 +404,44 @@ public class AnalysisServiceImpl implements AnalysisService {
 			if (mT == 4294967295L) {
 				T = "输入线";
 			} else {
-				T = "通道" + mT;
+				T = "第" + mT;
 			}
 			mon.setMonAlarmsInfo(
-					"通道" + T + "主动上传线路上温度过高报警,该路为" + mov + "," + pv + "温度值为" + EncodeUtils.byte2float(mes, 56));
+					 T + "回路"  + pv + "温度过高报警,当前报警值为" + dFormat.format(EncodeUtils.byte2float(mes, 56)));
 		} else if (mes[12] == 33) {
-			long monV = EncodeUtils.getLong(mes, 44);
-			long p = EncodeUtils.getLong(mes, 48);
-			String mov = "";
-			if (monV == 16) {
-				mov = "220V";
-			} else if (monV == 17) {
-				mov = "380V";
-			}
-			String pv = "";
-			if (p == 16) {
-				pv = "A";
-			} else if (p == 17) {
-				pv = "B";
-			} else if (p == 18) {
-				pv = "C";
-			}
-			mon.setMonAlarmsInfo("通道" + (EncodeUtils.getLong(mes, 40)+1) + "打火报警,该路电压为" + mov + "," + pv + "相");
-		} else if (mes[12] == 34) {
-			long monV = EncodeUtils.getLong(mes, 44);
-			long p = EncodeUtils.getLong(mes, 48);
-			String mov = "";
-			if (monV == 16) {
-				mov = "220V";
-			} else if (monV == 17) {
-				mov = "380V";
-			}
-			String pv = "";
-			if (p == 16) {
-				pv = "A";
-			} else if (p == 17) {
-				pv = "B";
-			} else if (p == 18) {
-				pv = "C";
-			}
-			mon.setMonAlarmsInfo("通道" +(EncodeUtils.getLong(mes, 40)+1) + "单路电流过高报警,该路电压为" + mov + "," + pv + "相,电流值为"
-					+ EncodeUtils.byte2float(mes, 56));
 
-		} else if (mes[12] == 35) {
-			long monV = EncodeUtils.getLong(mes, 44);
 			long p = EncodeUtils.getLong(mes, 48);
-			long mT = EncodeUtils.getLong(mes, 40)+1;
-			String mov = "";
-			if (monV == 16) {
-				mov = "单相";
-			} else if (monV == 17) {
-				mov = "三相";
-			}
+		
 			String pv = "";
 			if (p == 16) {
-				pv = "A相,";
+				pv = "A";
 			} else if (p == 17) {
-				pv = "B相,";
+				pv = "B";
 			} else if (p == 18) {
-				pv = "C相,";
-			} else if (p == 19) {
-				pv = "零线,";
+				pv = "C";
 			}
-			String T = "";
-			if (mT == 4294967295L) {
-				T = "输入线";
-			} else {
-				T = "通道" + mT;
+			mon.setMonAlarmsInfo("第" + (EncodeUtils.getLong(mes, 40)+1) +"回路"+ pv + "相打火报警" );
+		} else if (mes[12] == 34) {
+//			long monV = EncodeUtils.getLong(mes, 44);
+			long p = EncodeUtils.getLong(mes, 48);
+//			String mov = "";
+//			if (monV == 16) {
+//				mov = "220V";
+//			} else if (monV == 17) {
+//				mov = "380V";
+//			}
+			String pv = "";
+			if (p == 16) {
+				pv = "A";
+			} else if (p == 17) {
+				pv = "B";
+			} else if (p == 18) {
+				pv = "C";
 			}
-			mon.setMonAlarmsInfo(T + "线路上温度过高报警,该路为" + mov + "," + pv + "温度值为" + EncodeUtils.byte2float(mes, 56));
-		}
+			mon.setMonAlarmsInfo("第" +(EncodeUtils.getLong(mes, 40)+1) + "回路"+ pv + "相电流值超过预警值报警,当前报警值为"
+					+ dFormat.format(EncodeUtils.byte2float(mes, 56)));
+
+		} 
 		// if(mon.getMonAlarmsInfo()!=null){
 		// JPushClientExample.jpush(mon.getMonAlarmsInfo());
 		// }

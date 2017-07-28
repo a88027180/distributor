@@ -24,8 +24,8 @@ public class UserChangeController {
 	
 	@RequestMapping("/change")
 	@ResponseBody
-	public NoteResult execute(String information,String userName,Integer userId,Integer orgId){
-		NoteResult note=userService.changeUserInfo(information, userName,userId,orgId);	
+	public NoteResult execute(String information,String userName,Integer userId){
+		NoteResult note=userService.changeUserInfo(information, userName,userId);	
 		return note;	
 	}
 

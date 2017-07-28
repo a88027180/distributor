@@ -44,9 +44,18 @@
  	select * from monitorview where monPlace=#{monPlace} 
  	</select>
  	
+ 	<select id="findMonByMonListAndUserId" resultMap="Monitor" >
+ 	select * from monitorview where monPlace=#{monPlace} and monId in (select monId from user_monitor where userId=#{userId})
+ 	</select>
+ 	
+ 	<!-- 查询指定状态下和用户下的设备 -->
+ 	<select id="findMonNumByStateAndUserId"  resultType="int">
+ 	select count(monId) from monitorview where monState=#{monState} and monId in (select monId from user_monitor where userId=#{userId})
+ 	</select>
+ 	
  	<!-- 查询指定状态下的设备 -->
- 	<select id="findMonNumByState" parameterType="int" resultType="int">
- 	select count(monId) from monitorview where monState=#{monState}
+ 	<select id="findMonNumByState"  resultType="int" parameterType="int">
+ 	select count(monId) from monitorview where monState=#{monState} 
  	</select>
  	
  	<!-- 根据制定id查询设备 -->
@@ -64,7 +73,7 @@
  	<!--添加设备  -->
  	<insert id="addMon" parameterType="zn.entity.Monitor" useGeneratedKeys="true" keyProperty="monId">
  	insert into monitor(monAlias,monInstall,monIP,monModel,monName,monNumber,monPlace,monType,monRoute,monPlaceName,monState) 
- 	value(#{monAlias},#{monInstall},#{monIP},#{monModel},#{monName},#{monNumber},#{monPlace},#{monType},#{monRoute},#{monPlaceName},#{monState});
+ 	values(#{monAlias},#{monInstall},#{monIP},#{monModel},#{monName},#{monNumber},#{monPlace},#{monType},#{monRoute},#{monPlaceName},#{monState});
  	</insert>
  	
  	
@@ -122,7 +131,7 @@
 	
 		<!-- 查询指定用户下的设备信息 -->
 	<select id="seleteMonByUserId" parameterType="int" resultMap="Monitor">
-    select b.* from user a,monitor b,user_monitor c where a.userId=c.userId 
+    select b.* from [user] a,monitor b,user_monitor c where a.userId=c.userId 
     and b.monId=c.monId and a.userId=#{userId}
 	</select>
 	
@@ -142,7 +151,7 @@
 	
 	<!-- 添加多个设备 -->
  	<insert id="addMoreMon"  >
- 		insert    into  monitor(monAlias,monInstall,monIP,monModel,monName,monNumber,monPlace,monType,monRoute,monPlaceName,monState) value
+ 		insert    into  monitor(monAlias,monInstall,monIP,monModel,monName,monNumber,monPlace,monType,monRoute,monPlaceName,monState) values
 	<foreach collection="list" separator="," index="index" item="item" >
 		(#{item.monAlias},#{item.monInstall},#{item.monIP},#{item.monModel},#{item.monName},#{item.monNumber},#{item.monPlace},#{item.monType},#{item.monRoute},#{item.monPlaceName},#{item.monState})	
 	</foreach>  
@@ -176,11 +185,20 @@
 	
 	<select id="selectMonIdByMonNumber" resultType="int">
 	select monId from monitor where monNumber in
-	  <foreach item="item" index="index" collection="list"
-      open="(" separator="," close=")">
+	  <foreach item="item" index="index" collection="list" open="(" separator="," close=")">
         #{item}
   </foreach>
 	</select>
+	
+	
+	<select id="selectMonByMonNumber" resultType="zn.entity.Monitor">
+	select * from monitor where monNumber in
+	  <foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+        #{item}
+  </foreach>
+	</select>
+	
+	
 	
 	
  </mapper>

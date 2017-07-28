@@ -30,7 +30,9 @@ public interface MonitorDao {
 	      public List<Monitor> seleteMonByUserId(int userId);
 	  	  public List<Monitor> findMonByState(int monState);
 	  	  public List<Monitor> findMonByList(@Param("monPlace")String monPlace,@Param("monPlaceLevel")int monPlaceLevel);
-	  	  public int findMonNumByState(int monState); 
+	  	  public int findMonNumByStateAndUserId(@Param("monState")int monState,@Param("userId")int userId);
+	  	  public int findMonNumByState(int monState);
+	  	  
 		  public   List<Map<String,Object>>  SeleteMonListByUserId(int userId);	  
 		  
 		  public int  addMoreMon(List<Monitor> list);
@@ -42,5 +44,7 @@ public interface MonitorDao {
 		  public List<Integer> selectMonIdByMonNumber(List<String> list);
 		  
 		  public List<Monitor> findMonByMonList(String monPlace);
+		  public List<Monitor> findMonByMonListAndUserId(@Param("monPlace")String monPlace,@Param("userId")int userId);
+		  public List<Monitor> selectMonByMonNumber(List<String> list);
  }
 

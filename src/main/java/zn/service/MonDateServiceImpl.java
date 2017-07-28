@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 import javax.annotation.Resource;
 
@@ -15,6 +16,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 
 import zn.dao.MonDateDao;
@@ -26,10 +28,13 @@ import zn.entity.MonSon;
 import zn.entity.MonT;
 import zn.entity.Monitor;
 import zn.entity.User;
+import zn.entity.XUser;
+import zn.entity.XmlMonSon;
 import zn.listener.AnalysisInfoListener;
 import zn.until.NoteResult;
 import zn.until.NoteUtil;
 import zn.until.UdpClientSocket;
+import zn.until.WebService;
 
 /**
  * @author hq
@@ -58,13 +63,27 @@ public class MonDateServiceImpl implements MonDateService {
 			MonDate mon = monDateDao.selectMonDateById(monId);
 			Monitor monitor = monitorDao.findMonById(monId);
 			MonShow monShow = new MonShow();
-			List<MonSon> monsonList = new ArrayList<MonSon>();
+			List<MonSon> monsonList = new CopyOnWriteArrayList<MonSon>();
+			List<MonSon> monsonListAll = new CopyOnWriteArrayList<MonSon>();
 			int monRoute = monitor.getMonRoute();
-
-			if (mon != null) {
-				monsonList = addMonSonList(monsonList, mon, monRoute);
+			String xmlListStr=new WebService().ITPCDeviceChannelInfoGetByIDForJson(monitor.getMonNumber());
+			 List<XmlMonSon> xmlMonList=(List<XmlMonSon>)JSONArray.parseArray(xmlListStr,XmlMonSon.class);
+			List<Integer> td=new ArrayList<Integer>(); 
+			 for(XmlMonSon xmlMonSon:xmlMonList){
+				td.add(xmlMonSon.getTDHM());
+			}
+	
+			 if (mon != null) {
+				 monsonList = addMonSonList(monsonList, mon, monRoute);
 
 			}
+			
+			for(MonSon monson33:monsonList){
+				if(td.contains(monson33.getWay())){
+					monsonListAll.add(monson33);
+				}
+			}
+			
 			monShow.setAllAA(mon.getAllAA());
 			monShow.setAllBA(mon.getAllBA());
 			monShow.setAllCA(mon.getAllCA());
@@ -72,7 +91,7 @@ public class MonDateServiceImpl implements MonDateService {
 			monShow.setAllBV(mon.getAllBV());
 			monShow.setAllCV(mon.getAllCV());
 			monShow.setHumidity(mon.getHumidity());
-			monShow.setList(monsonList);
+			monShow.setList(monsonListAll);
 			monShow.setMonAlias(monitor.getMonAlias());
 			monShow.setMonId(monitor.getMonId());
 			monShow.setMonInstall(monitor.getMonInstall());
@@ -332,12 +351,12 @@ public class MonDateServiceImpl implements MonDateService {
 	 */
 	public NoteResult setMonSwitch(String switchState, Integer way, String password, Integer monId, Integer userId) {
 		NoteResult note = new NoteResult();
-		User user = userDao.selectUserById(userId);
+		XUser user = userDao.selectUserById(userId);
 		if (monId == null || switchState == null || password == null || userId == null || way == null) {
 			note.setStatus(1);
 			note.setMsg("参数不能为空");
 			note.setData("");
-		} else if (!NoteUtil.md5(password).equals(user.getPassword())) {
+		} else if (!password.equals(user.getPassword())) {
 			note.setStatus(2);
 			note.setMsg("密码错误");
 			note.setData("");

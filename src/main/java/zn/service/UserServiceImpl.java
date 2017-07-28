@@ -18,8 +18,10 @@ import com.alibaba.fastjson.JSONException;
 import zn.dao.LoginDao;
 import zn.dao.UserDao;
 import zn.entity.User;
+import zn.entity.XUser;
 import zn.until.NoteResult;
 import zn.until.NoteUtil;
+import zn.until.WebService;
 
 @Service("userService")
 @Transactional
@@ -29,9 +31,6 @@ public class UserServiceImpl implements UserService{
 	private UserDao userDao;
 	
 
-	
-	
-	
 	@Resource
 	private LoginDao loginDao;
 	
@@ -41,38 +40,39 @@ public class UserServiceImpl implements UserService{
 	public Map<String,Object> checkLogin(String telephone,String password){
 		SimpleDateFormat format=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		Map<String,Object> map=new HashMap<String,Object>();
-		Date date=new Date((new Date()).getTime()-2*60*60*1000);
-		String agoTime=format.format(date);
-		loginDao.deleteOutModedCount(agoTime);//清楚超过2小时的登陆记录
+//		Date date=new Date((new Date()).getTime()-2*60*60*1000);
+//		Date date2=new Date(new Date().getTime());
+//		String nowTime=format.format(date2);
+//		String agoTime=format.format(date);
+//		loginDao.deleteOutModedCount(agoTime);//清楚超过2小时的登陆记录
 		NoteResult note=new NoteResult();
 		int state=userDao.checkTel(telephone);	
 		if(state==0){          					//检查用户的账号是否正确    
 		note.setStatus(1);
 		note.setMsg("账号错误");
 		note.setData("");
-		}else{
-			String pass=NoteUtil.md5(password);   //对密码加密
-			int userState=userDao.checkLogin(telephone, pass);  
+		}else{ 
+			int userState=userDao.checkLogin(telephone, password);  
 			int userId=userDao.selectIdByTel(telephone);
 			if(userState==0){
-				Integer loginState=loginDao.countIsExist(userId);
-				if(loginState==null){
-					loginDao.addCount(userId);
+//				Integer loginState=loginDao.countIsExist(userId);
+//				if(loginState==null){
+//					loginDao.addCount(userId);
 					note.setStatus(2);
 					note.setMsg("密码错误");
 					note.setData("");
-				}else if(loginState>=4){
-					note.setStatus(3);
-					note.setMsg("密码错误超过5次");
-					note.setData("");		
-				}else{
-					loginDao.autoAddCount(userId);
-				note.setStatus(2);
-				note.setMsg("密码错误");
-				note.setData("");	
-				}
+//				}else if(loginState>=4){
+//					note.setStatus(3);
+//					note.setMsg("密码错误超过5次");
+//					note.setData("");		
+//				}else{
+//				loginDao.autoAddCount(userId);
+//				note.setStatus(2);
+//				note.setMsg("密码错误");
+//				note.setData("");	
+//				}
 			}else{
-				loginDao.deleteCountByuserId(userId);
+//				loginDao.deleteCountByuserId(userId);
 				String lastLoadTime=format.format(new Date());
 				
 				userDao.changeUserState(userId,lastLoadTime);
@@ -117,13 +117,13 @@ public class UserServiceImpl implements UserService{
 	 */
 	public NoteResult creatUser(String userStr,Integer userId) {
 		NoteResult note=new NoteResult();
-	    Integer a= 	userDao.seleteUserLimitsById(userId);
+	    String a= 	userDao.seleteUserLimitsById(userId);
 		if(userId==null){
 			note.setStatus(5);
 			note.setMsg("参数为空");
 			note.setData("");
 			return note;
-		}else if(a!=1||a==null){
+		}else if(!a.equals("e142fa89-4a1f-48a6-9735-a065fee512dc")||a==null){
 			note.setStatus(6);
 			note.setMsg("权限不足");
 			note.setData("");
@@ -197,26 +197,34 @@ public class UserServiceImpl implements UserService{
 	/**
 	 * 更改用户信息.
 	 */
-	public NoteResult changeUserInfo( String information, String userName,Integer userId,Integer orgId) {
+	public NoteResult changeUserInfo( String information, String userName,Integer userId) {
 		NoteResult note=new NoteResult();
 		if(userName==null||userId==null){
 			note.setStatus(1);
 			note.setMsg("参数不能为空");
 			note.setData("");	
 		}else{
-		User user=new User();
-		user.setUserId(userId);
-		if(orgId!=null){
-		user.setOrgId(orgId);
-		userDao.deleteUserAndOrg(userId);
-		userDao.addUserAndOrg(user);
-		}
+//		User user=new User();
+//		user.setUserId(userId);
+//		if(orgId!=null){
+//		user.setOrgId(orgId);
+//		userDao.deleteUserAndOrg(userId);
+//		userDao.addUserAndOrg(user);
+//		}
 		
+		XUser  user=userDao.selectUserById(userId);
+		String result=new  WebService().ModifyUserName(user.getTelephone(),userName);
 		
+		if("true".equals(result)){
 		userDao.changeUserInfo(information, userName,userId);
 		note.setStatus(0);
 		note.setMsg("更改成功");
 		note.setData("");
+		}else {
+			note.setStatus(2);
+			note.setMsg("更改失败");
+			note.setData("");
+		}
 		}
 		return note;
 	}
@@ -232,7 +240,7 @@ public class UserServiceImpl implements UserService{
 			note.setMsg("参数不能为空");
 			note.setData("");	
 		}else{
-		List<User> list=userDao.selectUserByOrg(orgId);
+		List<XUser> list=userDao.selectUserByOrg(orgId);
 			note.setStatus(0);
 			note.setMsg("查询成功");
 			note.setData(list);	
@@ -242,7 +250,7 @@ public class UserServiceImpl implements UserService{
 	
 	public NoteResult selectAllUser(){
 		NoteResult note=new NoteResult();
-		List<User> list=userDao.selectAllUser();
+		List<XUser> list=userDao.selectAllUser();
 		note.setStatus(0);
 		note.setMsg("查询成功");
 		note.setData(list);	
@@ -260,7 +268,7 @@ public class UserServiceImpl implements UserService{
 			note.setMsg("参数不能为空");
 			note.setData("");	
 		}else{
-		User list=userDao.selectUserById(userId);
+			XUser list=userDao.selectUserById(userId);
 			note.setStatus(0);
 			note.setMsg("查询成功");
 			note.setData(list);	
@@ -274,23 +282,20 @@ public class UserServiceImpl implements UserService{
 	 */
 	public NoteResult changePassword(String oldPassword,String nowFirstPassword,String nowTwoPassword,Integer userId) {
 		NoteResult note=new NoteResult();
-		User  user=userDao.selectUserById(userId);
+		XUser  user=userDao.selectUserById(userId);
 		if(oldPassword==null||userId==null||nowFirstPassword==null||nowTwoPassword==null){
 				note.setStatus(1);
 				note.setMsg("参数不能为空");
 				note.setData("");	
-		}else if(user.getLimitsId()!=1){
+		}else if(!user.getUserNumber().equals("e142fa89-4a1f-48a6-9735-a065fee512dc")){
 			note.setStatus(6);
 			note.setMsg("权限不足");
 			note.setData("");
-		}else if(!user.getPassword().equals(NoteUtil.md5(oldPassword))){
+		}else if(!user.getPassword().equals(oldPassword)){
 			note.setStatus(3);
 			note.setMsg("原密码输入错误");
 			note.setData("");	
-		}else if((!nowFirstPassword.matches("^\\w{6,16}$"))||(!nowTwoPassword.matches("^\\w{6,16}$"))){
-			note.setStatus(2);
-			note.setMsg("密码格式不对,密码为大于6位小于16位的纯数字或字母");
-			note.setData("");
+		
 		}else if(!nowFirstPassword.equals(nowTwoPassword)){
 			note.setStatus(4);
 			note.setMsg("两次输入密码不一致");
@@ -301,10 +306,18 @@ public class UserServiceImpl implements UserService{
 			note.setData("");
 		}
 		else{
-			userDao.changePassword(NoteUtil.md5(nowFirstPassword), userId);
+			String result=new WebService().ModifyUserPass(user.getTelephone(),nowFirstPassword);
+			System.out.println(result);
+			if("true".equals(result)){
+			userDao.changePassword(nowFirstPassword, userId);
 			note.setStatus(0);
 			note.setMsg("更改密码成功");
 			note.setData("");
+			}else {
+				note.setStatus(2);
+				note.setMsg("更改密码失败");
+				note.setData("");	
+			}
 		}
 		return note;
 	}
@@ -322,7 +335,7 @@ public class UserServiceImpl implements UserService{
 			note.setData("");	
 			
 		}else {
-		userDao.changePassword(NoteUtil.md5(password), userId);
+		userDao.changePassword(password, userId);
 		note.setStatus(0);
 		note.setMsg("更改密码成功");
 		note.setData("");
@@ -417,6 +430,7 @@ public class UserServiceImpl implements UserService{
 			note.setData("");
 			
 		}else{
+			
 		List<User> list=userDao.seleteUserByMonId(monId);
 			note.setStatus(0);
 			note.setMsg("操作成功");

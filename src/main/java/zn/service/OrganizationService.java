@@ -10,9 +10,12 @@ import zn.until.NoteResult;
  *
  */
 public interface OrganizationService {
-		public NoteResult addOrg(String orgName);
-		public NoteResult changeOrgName(String oldOrgName,String nowOrgName);
-		public NoteResult deleteOrg(String orgName);
-		public NoteResult selectOrg();
-		
+	public NoteResult addOrg(String orgName);
+
+	public NoteResult changeOrgName(String oldOrgName, String nowOrgName);
+
+	public NoteResult deleteOrg(String orgName);
+
+	public NoteResult selectOrg();
+
 }

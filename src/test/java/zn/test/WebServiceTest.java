@@ -3,9 +3,12 @@
  */
 package zn.test;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.io.StringReader;
 import java.rmi.RemoteException;
 import java.util.Iterator;
+import java.util.Properties;
 
 import javax.xml.namespace.QName;
 import javax.xml.parsers.DocumentBuilder;
@@ -29,6 +32,8 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
 
+import zn.listener.AnalysisInfoListener;
+
 
 
 /**
@@ -37,8 +42,22 @@ import org.xml.sax.InputSource;
  */
 public class WebServiceTest {
 	
+	public static  String loadAddress(){
+		InputStream inStream = AnalysisInfoListener.class.getClassLoader().getResourceAsStream("./udp.properties");
+		Properties prop = new Properties();
+		try {
+			prop.load(inStream);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		String  address= prop.getProperty("WebService");
+		System.out.println(address);
+		return address;
+	}
+	
     private static EndpointReference targetEPR = new EndpointReference(
-            "http://192.168.1.100/WebAPI/SFBRWebS.asmx?WSDL");
+    		loadAddress());
 
 	public String te(){
 		String json="";
@@ -60,11 +79,11 @@ public class WebServiceTest {
 
     // 设定访问的接口方法
 
-    OMElement method = fac.createOMElement("ITPCDeviceChannelInfoGetByIDForJson", omNs);// 要调用的接口方法名称
+    OMElement method = fac.createOMElement("DeviceInfoGetForJsonResponse", omNs);// 要调用的接口方法名称
     
-    OMElement value1 = fac.createOMElement("strDeviceId", omNs);// 方法的第一个参数名称
-    value1.addChild(fac.createOMText(value1, "f0f690d6-7147-49fa-9bdb-8e037f1d5444"));// 设定参数的值
-    method.addChild(value1);// 方法设置参数
+//    OMElement value1 = fac.createOMElement("strDeviceId", omNs);// 方法的第一个参数名称
+//    value1.addChild(fac.createOMText(value1, "f0f690d6-7147-49fa-9bdb-8e037f1d5444"));// 设定参数的值
+//    method.addChild(value1);// 方法设置参数
     
 //    OMElement value2 = fac.createOMElement("CountryName", omNs);// 方法的第一个参数名称
 //    value2.addChild(fac.createOMText(value2, "China"));// 设定参数的值
@@ -117,7 +136,7 @@ public class WebServiceTest {
 	public static void main(String[] args) {
 		WebServiceTest t = new WebServiceTest();
 		System.out.println(t.te());
-		t.parse(t.te());
+//		t.parse(t.te());
 		
 		
 	}

@@ -20,10 +20,10 @@ public class GetDateTimer {
 	@Resource
 	private GetDateService getDateService;
 	
-	 @Scheduled(cron ="0 25 16 * * ?") //每天凌晨两点执行
+	 @Scheduled(cron ="0 0 2 * * ?") //每天凌晨两点执行
      public    void doSomethingWith(){
 		 try {
-			
+
 			 getDateService.getDate();
 			
 		} catch (Exception e) {

@@ -37,14 +37,14 @@ public class MonAlarmsServiceImpl implements MonAlarmsService {
 	 */
 	public NoteResult selectAllMonAlarms(Integer userId) {
 		NoteResult note=new NoteResult();
-		int userLimit=userDao.seleteUserLimitsById(userId);
+		String  userNumber=userDao.seleteUserLimitsById(userId);
 		 
-		if(userLimit==1){
+		if(userNumber.equals("e142fa89-4a1f-48a6-9735-a065fee512dc")){
 			List<Alarms>    list= monAlarmsDao.selectAllMonAlarms(userId);	
 			note.setStatus(0);
 			note.setMsg("查询成功");
 			note.setData(list);
-		}else if(userLimit==2){
+		}else{
 			List<Alarms>    list=monAlarmsDao.selectUserAllMonAlarms(userId);
 			note.setStatus(0);
 			note.setMsg("查询成功");

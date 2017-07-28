@@ -89,27 +89,30 @@ public class newTest {
 	
 	@Test
 	public void test(){
-		 ApplicationContext    ac = new ClassPathXmlApplicationContext("spring-mybatis.xml");  
-	     UserDao userDao = ac.getBean("userDao",UserDao.class);
-	     MonAlarmsDao monAlarmsDao = ac.getBean("monAlarmsDao",MonAlarmsDao.class);
-	     MonAlarms monAlarms=new MonAlarms();
-	     monAlarms.setMonAlarmsInfo("aaa");
-	     monAlarms.setMonAlarmsType("12");
-	     monAlarms.setMonId(3);
-		monAlarmsDao.addMonAlarms(monAlarms);
-		List<Integer> list=userDao.selectUserIdList(monAlarms.getMonId());
-		List<Map<String , Object>> mapList=new ArrayList<Map<String , Object>>();
-		for(Integer userId:list){
-			Map<String, Object> map=new HashMap<String,Object>();
-			map.put("userId", userId);
-			map.put("alarmsId", monAlarms.getAlarmsId());
-			
-			mapList.add(map);
-		}
-		System.out.println(mapList.toString());
-		monAlarmsDao.userAddAlarm(mapList);
+//		 ApplicationContext    ac = new ClassPathXmlApplicationContext("spring-mybatis.xml");  
+//	     UserDao userDao = ac.getBean("userDao",UserDao.class);
+//	     MonAlarmsDao monAlarmsDao = ac.getBean("monAlarmsDao",MonAlarmsDao.class);
+//	     MonAlarms monAlarms=new MonAlarms();
+//	     monAlarms.setMonAlarmsInfo("aaa");
+//	     monAlarms.setMonAlarmsType("12");
+//	     monAlarms.setMonId(3);
+//		monAlarmsDao.addMonAlarms(monAlarms);
+//		List<Integer> list=userDao.selectUserIdList(monAlarms.getMonId());
+//		List<Map<String , Object>> mapList=new ArrayList<Map<String , Object>>();
+//		for(Integer userId:list){
+//			Map<String, Object> map=new HashMap<String,Object>();
+//			map.put("userId", userId);
+//			map.put("alarmsId", monAlarms.getAlarmsId());
+//			
+//			mapList.add(map);
+//		}
+//		System.out.println(mapList.toString());
+//		monAlarmsDao.userAddAlarm(mapList);
 //		
-		
+		String a="aaa";
+		if(a.contains("a")){
+			System.out.println("aa");
+		}
 		
 	
 	}

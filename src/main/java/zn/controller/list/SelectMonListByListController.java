@@ -4,6 +4,7 @@
 package zn.controller.list;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,8 +25,11 @@ public class SelectMonListByListController {
 	
 	@RequestMapping("/selectMonListByList")
 	@ResponseBody
-	public NoteResult execute(String superiorListId){
-		NoteResult note= monListService.selectMonListByList(superiorListId);
+	public NoteResult execute(String superiorListId,HttpSession session){
+		String userId= (String) session.getAttribute("userId");
+		
+		int user=Integer.parseInt(userId);
+		NoteResult note= monListService.selectMonListByList(superiorListId,user);
 		return note;
 		
 	}

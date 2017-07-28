@@ -27,7 +27,7 @@ public class AddMonitorController {
 	@ResponseBody
 	public NoteResult execute(String monStr,HttpSession session){
 		int userId=Integer.parseInt((String)session.getAttribute("userId"));
-		System.out.println(userId+"EEEE");
+
 		NoteResult note=monitorService.addMon(monStr,userId);	
 	
 		return note;

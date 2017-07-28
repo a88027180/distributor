@@ -6,6 +6,7 @@ import java.util.Map;
 import org.apache.ibatis.annotations.Param;
 
 import zn.entity.User;
+import zn.entity.XUser;
 
 
 
@@ -20,13 +21,13 @@ public interface UserDao {
 	
 	public int  addUserAndOrg(User user);
 	
-	public    User selectUserById(Integer userId);
+	public    XUser selectUserById(Integer userId);
 	public int  deleteUser(Integer userId);
 	
 	public int changeUserInfo(@Param("information")String information,@Param("userName")String userName,@Param("userId")int userId);
 	
-	public List<User> selectUserByOrg(int orgId);
-	public List<User> selectAllUser();
+	public List<XUser> selectUserByOrg(int orgId);
+	public List<XUser> selectAllUser();
 	
 	
 	public int changePassword(@Param("password")String password,@Param("userId")int userId);
@@ -41,12 +42,20 @@ public interface UserDao {
 	
 	public int userAddLimits(@Param("limitsId")int limitsId,@Param("userId")int userId);
 	public int userDeleteLimits(int userId);
-	public int seleteUserLimitsById(Integer userId);
+	public String seleteUserLimitsById(Integer userId);
 	
 	public List<Map<String,Object>> seleteUserListByMonId(int monId);
 	
 	
 	public List<Integer> selectUserIdList(int  monId);
-
+	
+	
+	public List<String> seleteAllUserNumber();
+	public  int   addMoreUser(List<XUser> list  );
+	public int deleteMoreUser(List<String> list);
+	public int changeUser(XUser xUser);
+	public XUser selectXUserById(int userId);
+	
+	public int deleteUserMonitor();
 	
 }

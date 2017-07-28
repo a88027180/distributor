@@ -2,6 +2,7 @@ package zn.entity;
 
 public class User {
 	private int userId;
+	private String userNumber;
 	private String userName;
 	private String telephone;
 	private String password;
@@ -10,6 +11,14 @@ public class User {
 	private int orgId;
 	private String orgName;
 	private int   limitsId;
+	public String getUserNumber() {
+		return userNumber;
+	}
+
+	public void setUserNumber(String userNumber) {
+		this.userNumber = userNumber;
+	}
+
 	private String limitsName;
 	private String userPicUrl;
 	
