@@ -55,36 +55,33 @@ public class GetDateServiceImpl implements GetDateService {
 
 	@Resource // 注入
 	private MonListDao monListdDao;
-	
+
 	@Resource // 注入
 	private UserDao userDao;
 
 	/**
 	 * 同步数据 @Title: getDate @Description: TODO @return @throws
 	 */
-	public  synchronized NoteResult getDate() {
-		long time=System.currentTimeMillis();
+	public synchronized NoteResult getDate() {
+		long time = System.currentTimeMillis();
 		NoteResult note = new NoteResult();
 		DeviceInfoGetForJson();
 		RegionInfoGetForJson();
 		ITPCDeviceChannelInfoGetByIDForJson();
 		UserInfoGetForJson();
 		DeviceInfoGetByUserIdForJson();
-		long time2=System.currentTimeMillis();
-		System.out.println(time2-time);
+		long time2 = System.currentTimeMillis();
+		System.out.println(time2 - time);
 		note.setStatus(0);
 		note.setMsg("同步成功");
 		note.setData("");
 
 		return note;
 	}
-	
 
 	/**
-	 * 获取指定设备下所有通道信息
-	 * @Title: ITPCDeviceChannelInfoGetByIDForJson 
-	 * @Description: TODO   
-	 * @throws
+	 * 获取指定设备下所有通道信息 @Title: ITPCDeviceChannelInfoGetByIDForJson @Description:
+	 * TODO @throws
 	 */
 	public void ITPCDeviceChannelInfoGetByIDForJson() {
 		List<String> monNumberList = monitorDao.selectAllmonNumber();
@@ -96,7 +93,7 @@ public class GetDateServiceImpl implements GetDateService {
 		for (String monNumber : monNumberList) {
 
 			String xmlListStr = new WebService().ITPCDeviceChannelInfoGetByIDForJson(monNumber);
-		
+
 			if ("".equals(xmlListStr) || xmlListStr == null) {
 				break;
 			}
@@ -107,7 +104,6 @@ public class GetDateServiceImpl implements GetDateService {
 				for (XmlMonSon monSon : xmlMonList) {
 
 					monDate.setMonId(monitorDao.selectMonIdByNum(monNumber).getMonId());
-					
 
 					if (monSon.getTDHM() == 1) {
 						monDate.setName1(monSon.getTDMC());
@@ -237,15 +233,9 @@ public class GetDateServiceImpl implements GetDateService {
 			monitorDao.deleteMonByMonNumber(wen4);
 		}
 	}
-	
-	
-	
-	
+
 	/**
-	 * 获取所有用户信息
-	 * @Title: UserInfoGetForJson 
-	 * @Description: TODO   
-	 * @throws
+	 * 获取所有用户信息 @Title: UserInfoGetForJson @Description: TODO @throws
 	 */
 	public void UserInfoGetForJson() {
 		String xmlListStr = new WebService().UserInfoGetForJson();
@@ -278,8 +268,7 @@ public class GetDateServiceImpl implements GetDateService {
 				user.setUserNumber(xmlUser.getYHBH());
 				user.setTelephone(xmlUser.getYHBM());
 				user.setUserName(xmlUser.getYHMC());
-				
-				
+
 				userDao.changeUser(user);
 			}
 			if (wen2.contains(xmlUser.getYHBH())) {
@@ -292,54 +281,47 @@ public class GetDateServiceImpl implements GetDateService {
 				user.setUserNumber(xmlUser.getYHBH());
 				user.setTelephone(xmlUser.getYHBM());
 				user.setUserName(xmlUser.getYHMC());
-				
-				
-					list3.add(user);
-			
+
+				list3.add(user);
+
 			}
 		}
 		if (!list3.isEmpty()) {
 			userDao.addMoreUser(list3);
-			
+
 		}
 		if (!wen4.isEmpty()) {
 			userDao.deleteMoreUser(wen4);
 		}
 	}
-	
-	
+
 	/**
-	 * 获取人员和设备的关系
-	 * @Title: DeviceInfoGetByUserIdForJson 
-	 * @Description: TODO   
-	 * @throws
+	 * 获取人员和设备的关系 @Title: DeviceInfoGetByUserIdForJson @Description: TODO @throws
 	 */
-	public void DeviceInfoGetByUserIdForJson(){
-		List<XUser>  userlist=userDao.selectAllUser();
+	public void DeviceInfoGetByUserIdForJson() {
+		List<XUser> userlist = userDao.selectAllUser();
 		userDao.deleteUserMonitor();
-		for(XUser user:userlist){
-			if(!user.getUserNumber().equals("e142fa89-4a1f-48a6-9735-a065fee512dc")){
-			String xmlListStr = new WebService().DeviceInfoGetByUserIdForJson(user.getTelephone());
-			List<XmlMonitor> xmlList = (List<XmlMonitor>) JSONArray.parseArray(xmlListStr, XmlMonitor.class);
-			List<String> wen = new ArrayList<String>();
-			for (XmlMonitor x : xmlList) {
-				wen.add(x.getSBBH());
-			}
-			if(!wen.isEmpty()){
-			List<Integer> monIdList= monitorDao.selectMonIdByMonNumber(wen);
-			
-			Map<String, Object> map=new HashMap<String, Object>();
-			map.put("userId",user.getUserId());
-			map.put("monList",monIdList);
-			
-			userDao.userAddMon(map);
-			}
+		for (XUser user : userlist) {
+			if (!user.getUserNumber().equals("e142fa89-4a1f-48a6-9735-a065fee512dc")) {
+				String xmlListStr = new WebService().DeviceInfoGetByUserIdForJson(user.getTelephone());
+				List<XmlMonitor> xmlList = (List<XmlMonitor>) JSONArray.parseArray(xmlListStr, XmlMonitor.class);
+				List<String> wen = new ArrayList<String>();
+				for (XmlMonitor x : xmlList) {
+					wen.add(x.getSBBH());
+				}
+				if (!wen.isEmpty()) {
+					List<Integer> monIdList = monitorDao.selectMonIdByMonNumber(wen);
+					if (!monIdList.isEmpty()) {
+						Map<String, Object> map = new HashMap<String, Object>();
+						map.put("userId", user.getUserId());
+						map.put("monList", monIdList);
+
+						userDao.userAddMon(map);
+					}
+				}
 			}
 		}
 	}
-	
-	
-	
 
 	public int getMonState(String monState) {
 		if ("在线".equals(monState)) {

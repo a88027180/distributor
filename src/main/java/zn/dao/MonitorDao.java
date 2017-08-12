@@ -29,6 +29,7 @@ public interface MonitorDao {
 	      public Monitor selectMonIdByNum(String monNumber);
 	      public List<Monitor> seleteMonByUserId(int userId);
 	  	  public List<Monitor> findMonByState(int monState);
+	  	public List<Monitor> findMonByStateAndUserId(@Param("monState")int monState,@Param("userId")int userId);
 	  	  public List<Monitor> findMonByList(@Param("monPlace")String monPlace,@Param("monPlaceLevel")int monPlaceLevel);
 	  	  public int findMonNumByStateAndUserId(@Param("monState")int monState,@Param("userId")int userId);
 	  	  public int findMonNumByState(int monState);

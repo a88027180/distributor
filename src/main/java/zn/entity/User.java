@@ -120,12 +120,14 @@ public class User {
 		this.information = information;
 	}
 
+
 	@Override
 	public String toString() {
-		return "User [userId=" + userId + ", userName=" + userName + ", telephone=" + telephone + ", password="
-				+ password + ", lastLoadTime=" + lastLoadTime + ", loadState=" + loadState + ", orgId=" + orgId
-				+ ", orgName=" + orgName + ", limitsId=" + limitsId + ", limitsName=" + limitsName + ", userPicUrl="
-				+ userPicUrl + ", information=" + information + "]";
+		return "User [userId=" + userId + ", userNumber=" + userNumber + ", userName=" + userName + ", telephone="
+				+ telephone + ", password=" + password + ", lastLoadTime=" + lastLoadTime + ", loadState=" + loadState
+				+ ", orgId=" + orgId + ", orgName=" + orgName + ", limitsId=" + limitsId + ", deviceToken="
+			    + ", limitsName=" + limitsName + ", userPicUrl=" + userPicUrl + ", information="
+				+ information + "]";
 	}
 
 	

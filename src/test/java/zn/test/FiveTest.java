@@ -85,6 +85,7 @@ public class FiveTest {
 		String hex10="53 46 42 52  00 00 00 00  1e 00 00 00  21 00 00 00 df 07 00 00 07 00 00 00 0f 00 00 00 0b 00 00 00 1c 00 00 00 0a 00 00 00 01 00 00 00 11 00 00 00 12 00 00 00   01 00 00 003f221e162b304a5dad4825290a6c3f2c";
 		String hex11="53 46 42 52  00 00 00 00 1e 00 00 00  22 00 00 00 df 07 00 00 07 00 00 00 0f 00 00 00 0b 00 00 00 07 00 00 00 1a 00 00 00 01 00 00 00  11 00 00 00  12 00 00 00  00 00 00 00 00 b4 4c 41 309046f62050477c9e10f0f3ccb24b50";
 		String hex12="53 46 42 52  00 00 00 00 1e 00 00 00  23 00 00 00 df 07 00 00 07 00 00 00 0f 00 00 00 0b 00 00 00 07 00 00 00 1a 00 00 00 01 00 00 00 11 00 00 00  12 00 00 00  00 00 00 00  00 b4 4c 413f221e162b304a5dad4825290a6c3f2c";
+		//System.out.println(hex1.replaceAll("\\s", ""));
 		byte[] hex=EncodeUtils.hexDecode(hex1.replaceAll("\\s", ""));
 		UdpClientSocket client = new UdpClientSocket(); 
 	    String serverHost = "192.168.11.210";    

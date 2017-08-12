@@ -48,10 +48,16 @@
  	select * from monitorview where monPlace=#{monPlace} and monId in (select monId from user_monitor where userId=#{userId})
  	</select>
  	
- 	<!-- 查询指定状态下和用户下的设备 -->
+ 	<!-- 查询指定状态下和用户下的设备数量 -->
  	<select id="findMonNumByStateAndUserId"  resultType="int">
  	select count(monId) from monitorview where monState=#{monState} and monId in (select monId from user_monitor where userId=#{userId})
  	</select>
+ 	
+ 		<!-- 查询指定状态下和用户下的设备 -->
+ 	<select id="findMonByStateAndUserId"  resultMap="Monitor">
+ 	select * from monitorview where monState=#{monState} and monId in (select monId from user_monitor where userId=#{userId})
+ 	</select>
+ 	
  	
  	<!-- 查询指定状态下的设备 -->
  	<select id="findMonNumByState"  resultType="int" parameterType="int">

@@ -34,7 +34,6 @@ public class ThreeTest {
 				System.out.println(analysisHex(input4));
 //				System.out.println(analysisHex(input5));
 				byte[] mes=EncodeUtils.hexDecode(input4.replaceAll("\\s", ""));
-			
 			}
 		
 			

@@ -15,7 +15,7 @@
 		<result property="limitsId" column="limitsIde"/>
 		<result property="limitsName" column="limitsName"/>
 		<result property="userPicUrl" column="userPicUrl" />
-		
+		<result property="deviceToken" column="deviceToken" />
 	</resultMap> 
 
 	
@@ -137,6 +137,10 @@
 	</select>
 	
 	
+	<select id="selectDeviceTokenListByMonId"  parameterType="int" resultType="java.util.Map">
+	   select u.deviceToken, u.phoneType from [user] u join user_monitor um on u.userId=um.userId and um.monId=#{monId}
+	</select>
+	
 	<!-- 查询指定设备下的用户关联列表 -->
 	<select id="seleteUserListByMonId" parameterType="int" resultType="java.util.Map">
 	 select a.userId,a.userName,count(b.id) as relation from [user] a left join (select * from user_monitor where monId=#{monId}) b on a.userId=b.userId group by a.userId,a.userName
@@ -190,5 +194,8 @@
 	delete user_monitor
 	</delete>
 	
+	<update id="setUserDeviceToken">
+	   update [user] set deviceToken=#{deviceToken},phoneType=#{phoneType} where userId=#{userId}
+	</update>
 	
 </mapper>

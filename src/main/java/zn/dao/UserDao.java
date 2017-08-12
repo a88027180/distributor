@@ -48,7 +48,8 @@ public interface UserDao {
 	
 	
 	public List<Integer> selectUserIdList(int  monId);
-	
+	//获取App运行终端信息
+	public List<Map<String,Object>> selectDeviceTokenListByMonId(int monId);
 	
 	public List<String> seleteAllUserNumber();
 	public  int   addMoreUser(List<XUser> list  );
@@ -57,5 +58,7 @@ public interface UserDao {
 	public XUser selectXUserById(int userId);
 	
 	public int deleteUserMonitor();
+
+	public void setUserDeviceToken(@Param("userId")Integer userId,@Param("deviceToken") String deviceToken,@Param("phoneType")Integer phoneType);
 	
 }

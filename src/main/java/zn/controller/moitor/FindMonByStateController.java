@@ -4,6 +4,7 @@
 package zn.controller.moitor;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,8 +25,9 @@ public class FindMonByStateController {
 	
 	@RequestMapping("/findMonByState")
 	@ResponseBody
-	public NoteResult execute(Integer monState){
-		NoteResult note=monitorService.findMonByState(monState);	
+	public NoteResult execute(Integer monState,HttpSession session ){
+		String userId= (String) session.getAttribute("userId");
+		NoteResult note=monitorService.findMonByState(monState,Integer.valueOf(userId));	
 		return note;
 		
 	}

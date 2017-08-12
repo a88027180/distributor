@@ -264,7 +264,7 @@ public class MonitorServiceImpl implements MonitorService {
 	/**
 	 * 查询指定状态下的设备信息
 	 */
-	public NoteResult findMonByState(Integer monState) {
+	public NoteResult findMonByState(Integer monState,Integer  userId) {
 		NoteResult note = new NoteResult();
 		if (monState == null) {
 			note.setStatus(1);
@@ -272,7 +272,14 @@ public class MonitorServiceImpl implements MonitorService {
 			note.setData("");
 
 		} else {
-			List<Monitor> list = monitorDao.findMonByState(monState);
+			List<Monitor> list;
+			XUser user = userDao.selectXUserById(userId);
+			if ("e142fa89-4a1f-48a6-9735-a065fee512dc".equals(user.getUserNumber())) {
+				 list = monitorDao.findMonByState(monState);
+				}else{
+				 list = monitorDao.findMonByStateAndUserId(monState,userId);
+				}
+		
 			note.setStatus(0);
 			note.setMsg("操作成功");
 			note.setData(list);

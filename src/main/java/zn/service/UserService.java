@@ -31,5 +31,8 @@ public interface UserService {
 	public NoteResult seleteUserListByMonId(Integer monId);
 
 	public NoteResult changeOthersPassword(String password, Integer userId);
+	
+	//设置用户设备DeviceToken,用于消息推送    @author hl
+	public NoteResult setUserDeviceToken(Integer userId,String deviceToken, Integer phoneType);
 
 }

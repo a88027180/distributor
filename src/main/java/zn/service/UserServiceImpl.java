@@ -460,6 +460,22 @@ public class UserServiceImpl implements UserService{
 	
 
 	}
+
+
+	@Override
+	public NoteResult setUserDeviceToken(Integer userId, String deviceToken,Integer phoneType) {
+		NoteResult result=new NoteResult();
+		if(userId==null||phoneType==null||deviceToken==null||"".equals(deviceToken)) {
+		   result.setStatus(1);
+		   result.setMsg("参数错误");
+		   return result;
+		}else {
+		   userDao.setUserDeviceToken(userId,deviceToken,phoneType);
+		   result.setStatus(0);
+		   result.setMsg("设置用户终端信息成功");
+		}
+		return result;
+	}
 	
 	
 }
